@@ -8,9 +8,10 @@ def create
   p user_params
   @user = User.new(user_params)
   if @user.save
-    redirect_to 'new_user_pet'
+    session[:user_id] = @user.id
+    redirect_to(new_user_pet_path(@user))
   else
-    render 'new_user_path'
+    render 'new'
   end
 end
 
