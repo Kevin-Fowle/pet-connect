@@ -1,0 +1,30 @@
+<h2><%= @user.full_name %></h2>
+<div class="user-info">
+ <%= current_user.first_name %>
+</div>
+<div class="pet-list">
+  <ul class="collabsible" data-collapsible="accordian">
+    <% @pets.each do |pet| %>
+    <li>
+      <div class="collapsible-header">
+        <h3>
+          <%= link_to pet.name, user_pet_path(@user, pet) %>
+        </h3>
+        <%= image_tag pet.avatar.url(:thumb) %>
+      </div>
+      <div class="collapsible-body">
+        <p>
+          <%= pet.species %>
+        </p>
+        <p>
+          <%= pet.breed %>
+        </p>
+        <p>
+          <%= pet.description %>
+        </p>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <%= link_to 'add a pet', new_user_pet_path(@user) %>
+</div>

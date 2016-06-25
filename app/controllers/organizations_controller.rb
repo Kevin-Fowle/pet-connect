@@ -26,13 +26,19 @@ class OrganizationsController < ApplicationController
   end
 
   def create
+  end
 
+  def search
+    input = params[:search]
+    upcase_input = input.upcase
+    if request.xhr?
+      @organizations = Organization.where('name LIKE ?', "#{upcase_input}%").limit(10)
+    end
   end
 
   private
+
     def set_organization
-      p params
-      p "ZZZZZZZZZZ"
       @organization = Organization.find(params[:id])
     end
 

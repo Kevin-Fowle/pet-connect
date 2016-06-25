@@ -1,0 +1,39 @@
+<%= form_for :user, url: {action: "create"}, html: {id: "owner-form"} do |f| %>
+
+  <p>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %>
+  </p>
+  <p>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %>
+  </p>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :street_address %>
+    <%= f.text_field :street_address %>
+  </p>
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :zip_code %>
+    <%= f.text_field :zip_code %>
+  </p>
+  <p>
+    <%= f.label :state %>
+    <%= f.text_field :state %>
+  </p>
+  <p>
+    <%= f.submit :register %>
+  </p>
+
+<% end %>
