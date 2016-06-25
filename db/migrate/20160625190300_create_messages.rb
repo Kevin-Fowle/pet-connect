@@ -3,7 +3,8 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.string :subject
       t.text :body
-      t.references :pairing, index: true, foreign_key: true
+      t.references :user
+      t.references :pairing
 
       t.timestamps null: false
     end

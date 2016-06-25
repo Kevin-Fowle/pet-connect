@@ -1,6 +1,9 @@
-class User < ActiveRecord::Base
-  belongs_to :organization
+class User < ActiveRecord::Base]
   has_many :pets
+  has_many :pairings
+  has_many :messages
+  has_many :ratings, as: :ratable
+  belongs_to :organization
 
   has_secure_password
 
@@ -8,11 +11,34 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def organization_user?
+    !!organization
+  end
+
   def pet_owner?
     !!pets && pets.length > 0
   end
 
-  def organization_member?
-    !!organization
+  def title
+    if organization_user?
+      organization.name
+    else
+      full_name
+    end
+  end
+
+  def conversations
+    conversation_arr = []
+      self.try(:pairings).each do |pairing|
+        conversation = {}
+        if organization_user?
+          message_to = pairing.pet_owner.full_name
+        else
+          message_to = pairing.organization.name
+        end
+        conversation[message_to] = pairing.try(:messages)
+        conversation_arr << conversation
+      end
+    end
   end
 end
