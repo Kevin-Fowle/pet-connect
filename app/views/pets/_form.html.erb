@@ -1,0 +1,28 @@
+<%= form_for :pet, url: {action: "create"}, html: {class: "form"} do |f| %>
+
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :species %>
+    <%= f.text_field :species %>
+  </p>
+  <p>
+    <%= f.label :breed %>
+    <%= f.text_field :breed %>
+  </p>
+  <p>
+    <%= f.label :weight %>
+    <%= f.text_field :weight %>
+  </p>
+  <p>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </p>
+
+  <p>
+    <%= f.submit :register %>
+  </p>
+
+<% end %>
