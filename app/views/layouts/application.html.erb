@@ -6,6 +6,15 @@
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
+<header>
+ <% if logged_in? %>
+   <a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a>
+   <a class='index_login' href="/logout">Logout</a>
+ <% else %>
+   <a class='index_login' href="/users/new">Register</a>
+   <a class='index_login' href="/login">Login</a>
+ <% end %>
+</header>
 <body>
 
 <%= yield %>
