@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20160625191408) do
 
   create_table "events", force: :cascade do |t|
     t.integer  "pairing_id"
-    t.integer  "pettimeslot_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "timeslot_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "messages", force: :cascade do |t|

@@ -26,6 +26,7 @@ class OrganizationsController < ApplicationController
   end
 
   def create
+
   end
 
   def search
