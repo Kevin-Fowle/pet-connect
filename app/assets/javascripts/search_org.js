@@ -6,6 +6,12 @@ $(document).ready(function(event){
 
   })
 
+  $('.add-hospital-form').on("submit", function(event){
+    event.preventDefault();
+    var searchForm = $(this);
+
+  })
+
   $('#name').on("keyup", function(event) {
     var searchField = $(this)
     // console.log(searchField)
@@ -19,12 +25,13 @@ $(document).ready(function(event){
        })
 
        searchRequest.done(function(response) {
+         console.log(response);
         $("#search_results").html(response)
        })
      }
   })
 
-  $('#search_results').on('click', 'li', function(event){
+  $('#search_results').on('click', 'h5', function(event){
     event.preventDefault();
     var hospitalName = $(this).text();
     $('#name').val(hospitalName);

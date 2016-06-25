@@ -1,6 +1,6 @@
 
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show]
+  # before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
     p params
