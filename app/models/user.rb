@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base]
+class User < ActiveRecord::Base
   has_many :pets
   has_many :pairings
   has_many :messages
