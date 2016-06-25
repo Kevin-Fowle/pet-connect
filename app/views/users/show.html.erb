@@ -28,3 +28,18 @@
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
 </div>
+
+<div class= "add-hospital">
+  <%= form_tag(organizations_path, :method => "get", id: "search-bar") do %>
+  <%= text_field_tag :name%>
+  <%= submit_tag "Search", id: "submit_button" %>
+  <% end %>
+
+  <ul>
+    <% @organizations.each do |organization| %>
+      <li><%= organization.name %></li>
+      <li><%= organization.full_address %></li>
+    <% end %>
+  </ul>
+
+</div>
