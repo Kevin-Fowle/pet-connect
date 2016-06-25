@@ -1,6 +1,6 @@
-class CreatePetTimeslots < ActiveRecord::Migration
+class CreateTimeslots < ActiveRecord::Migration
   def change
-    create_table :pettimeslots do |t|
+    create_table :timeslots do |t|
       t.references :pet
       t.datetime :start_time
       t.datetime :end_time
