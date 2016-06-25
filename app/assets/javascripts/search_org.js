@@ -6,10 +6,23 @@ $(document).ready(function(event){
 
   })
 
-  $('#organization_name').on("keypress", function(event) {
+  $('#name').on("keyup", function(event) {
     var searchField = $(this)
-    console.log(searchField)
-    var data = searchField.val()
-    console.log(data);
+    // console.log(searchField)
+    var searchData = searchField.val()
+    // console.log(searchData)
+    if (searchData.length > 4){
+       var searchRequest = $.ajax({
+        url: '/organizations/search',
+        method: 'GET',
+        data: searchField.serialize()
+       })
+
+       searchRequest.done(function(response) {
+        console.log(response);
+        $("#search_results").html(response)
+        // console.log($(response).find($('ul')))
+       })
+     }
   })
 })

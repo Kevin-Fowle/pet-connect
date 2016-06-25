@@ -1,6 +1,7 @@
-<%= form_for @organization do |f|%>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
- 
-  <%= f.submit 'Search' %>
+
+
+
+<%= form_tag(search_organizations_path, :method => "get", id: "search-bar") do %>
+<%= text_field_tag :name%>
+<%= submit_tag "Search" %>
 <% end %>

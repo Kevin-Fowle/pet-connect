@@ -3,8 +3,8 @@ class Organization < ActiveRecord::Base
 
 
 
-  # def self.search(input)
-  #   Organization.where('name LIKE ?', "#{input}%").limit(5)
+  def self.search(search_input)
+    where('name LIKE ?', "%#{search_input}%")
 
-  # end
+  end
 end
