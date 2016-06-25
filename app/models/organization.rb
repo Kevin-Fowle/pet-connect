@@ -2,13 +2,14 @@ class Organization < ActiveRecord::Base
   has_one :representative, class_name: "User"
   has_many :pairings
 
-  # def self.search(input)
-  #   Organization.where('name LIKE ?', "#{input}%").limit(5)
+  def full_address
+    "#{self.street_address},  #{self.city}, #{self.state},  #{self.zip_code}"
+  end
 
-  # end
+  def self.search(search_input)
+    where('name LIKE ?', "%#{search_input}%")
 
-  #   Spin off into module (similar method as user)?
-  def conversations 
+  def conversations
     conversation_coll = []
     self.try(:pairings).each do |pairing|
       conversation = {}
