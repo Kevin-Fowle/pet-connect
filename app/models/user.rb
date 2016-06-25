@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  def pet_owner?
+    !!pets && pets.length > 0
+  end
+
+  def organization_member?
+    !!organization
+  end
 end
