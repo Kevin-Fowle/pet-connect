@@ -2,7 +2,7 @@ class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
       t.references :pairing
-      t.references :pettimeslot
+      t.references :timeslot
 
       t.timestamps null: false
     end
