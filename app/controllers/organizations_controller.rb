@@ -3,7 +3,9 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
-    input = params["name"]
+    p params
+    input = params['name']
+    # p input
     upcase_input = input.upcase
     p upcase_input
     if input
@@ -29,13 +31,13 @@ class OrganizationsController < ApplicationController
 
   end
 
-  def search
-    input = params[:search]
-    upcase_input = input.upcase
-    if request.xhr?
-      @organizations = Organization.where('name LIKE ?', "#{upcase_input}%").limit(10)
-    end
-  end
+  # def search
+  #   input = params[:search]
+  #   upcase_input = input.upcase
+  #   if request.xhr?
+  #     @organizations = Organization.where('name LIKE ?', "#{upcase_input}%").limit(10)
+  #   end
+  # end
 
   private
 
