@@ -38,16 +38,15 @@ class User < ActiveRecord::Base
 
   def conversations
     conversation_arr = []
-      self.try(:pairings).each do |pairing|
-        conversation = {}
-        if organization_user?
-          message_to = pairing.pet_owner.full_name
-        else
-          message_to = pairing.organization.name
-        end
-        conversation[message_to] = pairing.try(:messages)
-        conversation_arr << conversation
+    self.try(:pairings).each do |pairing|
+      conversation = {}
+      if organization_user?
+        message_to = pairing.pet_owner.full_name
+      else
+        message_to = pairing.organization.name
       end
+      conversation[message_to] = pairing.try(:messages)
+      conversation_arr << conversation
     end
   end
 end
