@@ -3,7 +3,9 @@ class OrganizationsController < ApplicationController
   before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
-    input = params["name"]
+    p params
+    input = params['name']
+    # p input
     upcase_input = input.upcase
     p upcase_input
     if input
