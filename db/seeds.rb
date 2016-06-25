@@ -11,7 +11,7 @@ require 'net/http'
 require 'json'
 
 
-resp = Net::HTTP.get_response(URI("https://data.medicare.gov/resource/rbry-mqwu.json"))
+resp = Net::HTTP.get_response(URI("https://data.medicare.gov/resource/rbry-mqwu.json?$limit=50000"))
 hospitals_json = JSON.parse(resp.body)
 
 hospitals_json.each do |hospital|
