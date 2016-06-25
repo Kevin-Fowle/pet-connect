@@ -8,6 +8,7 @@ class Organization < ActiveRecord::Base
 
   def self.search(search_input)
     where('name LIKE ?', "%#{search_input}%")
+  end
 
   def conversations
     conversation_coll = []
