@@ -7,7 +7,7 @@ class Organization < ActiveRecord::Base
   end
 
   def self.search(search_input)
-    where('name LIKE ?', "%#{search_input}%")
+    where('name LIKE ?', "%#{search_input}%").limit(10)
   end
 
   def conversations
