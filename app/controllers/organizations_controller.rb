@@ -13,6 +13,7 @@ class OrganizationsController < ApplicationController
     upcase_input = input.upcase
     if request.xhr?
       @organizations = Organization.where('name LIKE ?', "#{upcase_input}%").limit(10)
+    end
   end
 
   private
