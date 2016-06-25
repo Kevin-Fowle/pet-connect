@@ -19,10 +19,16 @@ $(document).ready(function(event){
        })
 
        searchRequest.done(function(response) {
-        console.log(response);
         $("#search_results").html(response)
-        // console.log($(response).find($('ul')))
        })
      }
+  })
+
+  $('#search_results').on('click', 'li', function(event){
+    event.preventDefault();
+    var hospitalName = $(this).text();
+    $('#name').val(hospitalName);
+    $('#submit_button').val('Create');
+
   })
 })

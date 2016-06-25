@@ -25,6 +25,9 @@ class OrganizationsController < ApplicationController
     @organization = Organization.new
   end
 
+  def create
+
+  end
 
   private
     def set_organization
