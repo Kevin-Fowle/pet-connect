@@ -1,0 +1,15 @@
+<%= form_for :message, url: {action: "create"}, html: {class: "form"} do |f| %>
+
+  <p>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </p>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+
+<% end %>
