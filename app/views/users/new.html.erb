@@ -2,3 +2,10 @@
 <button>Register As an Organization</button>
 
 <%= render "form" %>
+  <% if @errors %>
+    <div class="errors">
+    <% @errors.each do |error| %>
+    <p><%= error %></p>
+    <% end %>
+  <% end %>
+</div>

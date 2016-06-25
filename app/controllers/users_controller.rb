@@ -1,7 +1,6 @@
 class UsersController <  ApplicationController
 
 def new
-  @user = User.new
 end
 
 def create
@@ -11,12 +10,14 @@ def create
     session[:user_id] = @user.id
     redirect_to(new_user_pet_path(@user))
   else
+    @errors = @user.errors.full_messages
     render 'new'
   end
 end
 
 def show
   @user = User.find_by(id: params[:id])
+  @pets = @user.pets
 end
 
 private

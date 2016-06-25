@@ -26,6 +26,10 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'twitter-typeahead-rails'
 
+gem 'rails_12factor'
+
+gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
