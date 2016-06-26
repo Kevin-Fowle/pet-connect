@@ -1,10 +1,14 @@
 class PairingsController < ApplicationController
+  include ApplicationHelper
+  skip_before_filter :verify_authenticity_token
   def new
   end
 
   def create
-    @organization = Organization.find(params[:id])
-    @pairing = current_user.pairings.new(organization: @organization)
+    @organization = Organization.find(params[:organization_id])
+    @user = current_user
+    @pairing = Pairing.new(organization: @organization)
+    @pairing.user_id = current_user.id
      respond_to do |format|
       if @pairing.save
         format.html { redirect_to current_user, notice: 'Preferred hospital successfully added' }

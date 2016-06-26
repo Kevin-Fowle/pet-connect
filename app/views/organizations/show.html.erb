@@ -1,1 +1,25 @@
-Hello
+<div class="container">
+  <div class="organization-info">
+    <h1><%= @organization.name %></h1>
+    <!-- Organization photo? -->
+  </div>
+
+  <div class="pet-owner-list">
+    <ul class="pet-owners-approved">
+      <% @organization.try(:approved_pairings).try(:each) do |approved_pairing| %>
+        <li><%= approved_pairing.pet_owner.full_name %></li>
+      <% end %>
+    </ul>
+
+    <ul class="pet-owners-pending">
+      <% @organization.try(:pending_pairings).try(:each) do |pending_pairing| %>
+        <li><%= pending_pairing.pet_owner.full_name %>
+        <button></button></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="event-list">
+
+  </div>
+</div>

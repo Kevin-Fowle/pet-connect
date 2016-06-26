@@ -1,6 +1,5 @@
 
 class OrganizationsController < ApplicationController
-  # before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
     p params
@@ -10,16 +9,19 @@ class OrganizationsController < ApplicationController
     if input
       if request.xhr?
         @organizations = Organization.search(upcase_input)
-        if @organizations.length > 0
+        if (@organizations.length > 0 && logged_in?)
+          render partial: 'organizations/partial_user_search', :layout => false
+        elsif @organizations.length > 0
           render partial: 'organizations/partial_search_with_links', :layout => false
-        else
-          'WTF!?'
         end
       end
     end
   end
 
   def show
+    @organization = Organization.find(params[:id])
+    # @pending_pairings = Pairing.where(active: true, org_approved: false, organization_id: params[:id])
+    # p @pending_pairings
   end
 
   def new
@@ -32,7 +34,6 @@ class OrganizationsController < ApplicationController
   end
 
   private
-
     def set_organization
       @organization = Organization.find(params[:id])
     end

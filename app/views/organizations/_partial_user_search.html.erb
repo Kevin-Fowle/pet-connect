@@ -6,8 +6,10 @@
       <span>
         <form name="create_pairing", action="/organizations/<%= organization.id %>/pairings" method='post'>
           <input type='hidden' value="<%= organization.id %>" name="organization_id">
+          <input type="submit" value="Add">
         </form>
       </span>
     </li>
   <% end %>
 </ul>
+
