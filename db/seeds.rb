@@ -52,6 +52,7 @@ end
     zip_code: Faker::Address.zip,
     state: Faker::Address.state_abbr)
 
+  user.save
   
   (2..5).to_a.sample.times do |i|
     Pet.create(
@@ -67,6 +68,13 @@ end
     Pairing.create(
       pet_owner: user,
       organization: Organization.all.sample)
+  end
+
+  (2..5).to_a.sample.times do |i|
+    Event.create(
+      start_time: Faker::Time.forward(21, :afternoon),
+      end_time: Faker::Time.forward(21, :evening),
+      pet_owner: user)
   end
 end
 
