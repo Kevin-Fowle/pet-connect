@@ -3,7 +3,17 @@ class PairingsController < ApplicationController
   end
 
   def create
-    @pairing = Pairing.new(pairing_params)
+    @organization = Organization.find(params[:id])
+    @pairing = current_user.pairings.new(organization: @organization)
+     respond_to do |format|
+      if @pairing.save
+        format.html { redirect_to current_user, notice: 'Preferred hospital successfully added' }
+        format.json { render :index, status: :ok }
+      else
+        format.html { redirect_to current_user, notice: 'Preferred hospital not added' }
+        format.json { render json: @pairing.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private

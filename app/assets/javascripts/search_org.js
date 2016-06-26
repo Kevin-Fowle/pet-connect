@@ -17,7 +17,7 @@ $(document).ready(function(event){
     // console.log(searchField)
     var searchData = searchField.val()
     // console.log(searchData)
-    if (searchData.length > 4){
+    if (searchData.length > 4) {
        var searchRequest = $.ajax({
         url: '/organizations/search',
         method: 'GET',

@@ -12,7 +12,7 @@ class OrganizationsController < ApplicationController
       if request.xhr?
         @organizations = Organization.search(upcase_input)
         if @organizations.length > 0
-          render partial: 'organizations/partial_search', :layout => false
+          render partial: 'organizations/partial_search_with_links', :layout => false
         else
           'WTF!?'
         end
@@ -28,7 +28,6 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-
   end
 
   private
