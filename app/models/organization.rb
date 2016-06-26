@@ -19,6 +19,4 @@ class Organization < ActiveRecord::Base
     end
     conversation_arr
   end
-
-
 end
