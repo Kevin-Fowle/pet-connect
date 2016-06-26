@@ -19,4 +19,8 @@ class Organization < ActiveRecord::Base
     end
     conversation_arr
   end
+
+  def approved_users
+    approved_users = self.pairings.map { |pairing| pairing.active }
+  end
 end
