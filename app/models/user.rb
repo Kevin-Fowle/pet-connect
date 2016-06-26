@@ -66,4 +66,12 @@ class User < ActiveRecord::Base
       conversation_arr << conversation
     end
   end
+
+  def confirmed_events
+    events.where(accepted: true)#, user_id: current_user.id)
+  end
+
+  def offered_events
+    events.where("organization_id IS NULL")
+  end
 end
