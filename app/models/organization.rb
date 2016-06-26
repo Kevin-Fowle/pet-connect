@@ -52,4 +52,8 @@ class Organization < ActiveRecord::Base
     end
     conversation_arr
   end
+
+  def self.inactive
+    Organization.where(representative)
+  end
 end

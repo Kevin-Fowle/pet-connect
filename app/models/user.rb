@@ -66,4 +66,12 @@ class User < ActiveRecord::Base
       conversation_arr << conversation
     end
   end
+
+  def self.org_users 
+    where.not("organization_id IS NULL")
+  end
+
+  def self.pet_owners
+    where("organization_id IS NULL")
+  end
 end
