@@ -28,11 +28,19 @@ class Organization < ActiveRecord::Base
   end
 
   def approved_events
-    approved_pet_owners.events
+    approved_events_arr = []
+    approved_pet_owners.each do |approved_owner|
+      approved_events_arr += approved_owner.events
+    end
+    approved_events_arr
   end
 
   def pending_events
-    pending_pet_owners.events
+    pending_events_arr = []
+    pending_pet_owners.each do |pending_owner|
+      pending_events_arr += pending_owner.events
+    end
+    pending_events_arr
   end
 
   def conversations
