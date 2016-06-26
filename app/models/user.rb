@@ -67,6 +67,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.org_users 
+    where.not("organization_id IS NULL")
+  end
+
+  def self.pet_owners
+    where("organization_id IS NULL")
+  end
+
   def confirmed_events
     events.where(accepted: true)#, user_id: current_user.id)
   end
