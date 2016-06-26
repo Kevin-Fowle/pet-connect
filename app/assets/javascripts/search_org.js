@@ -24,7 +24,7 @@ $(document).ready(function(event){
      }
   })
 
-  $('#search_results').on('click', 'li', function(event){
+  $('#search_results').on('click', 'h5', function(event){
     event.preventDefault();
     var hospitalName = $(this).text();
     $('#name').val(hospitalName);

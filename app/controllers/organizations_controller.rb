@@ -5,7 +5,6 @@ class OrganizationsController < ApplicationController
     @organizations = Organization.all
     p params
     input = params['name']
-    # p input
     upcase_input = input.upcase
     p upcase_input
     if input
@@ -24,20 +23,17 @@ class OrganizationsController < ApplicationController
   end
 
   def new
-    @organization = Organization.new
+    # @organization = Organization.new
   end
 
   def create
-
+    @organization = Organization.find_by(name: params['name'])
+    p @organization
+    render partial: 'new_org_user'
+    # redirect_to "/users/new?organization_id=#{@organization.id}"
   end
 
-  # def search
-  #   input = params[:search]
-  #   upcase_input = input.upcase
-  #   if request.xhr?
-  #     @organizations = Organization.where('name LIKE ?', "#{upcase_input}%").limit(10)
-  #   end
-  # end
+
 
   private
 
