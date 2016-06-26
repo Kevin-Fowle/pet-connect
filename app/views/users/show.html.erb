@@ -2,6 +2,7 @@
 <div class="user-info">
  <%= current_user.first_name %>
 </div>
+
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
     <% @pets.each do |pet| %>
@@ -28,4 +29,24 @@
     <% end %>
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
+</div>
+
+<div class= "add-hospital">
+  <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
+    <%= text_field_tag :name%>
+    <%= submit_tag "Search", id: "submit_button" %>
+  <% end %>
+</div>
+
+<div id="search_results">
+</div>
+
+<div class="user-parings">
+  <% if @user.try(:pairings).length > 0 %>
+    <h3>preferred hospitals</h3>
+  <% end %>
+
+  <% @organizations.each do |org| %>
+    <p><%= org.name %></p>
+  <% end %>
 </div>
