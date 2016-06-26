@@ -53,7 +53,7 @@ class Organization < ActiveRecord::Base
     conversation_arr
   end
 
-  def approved_users
-    approved_users = self.pairings.map { |pairing| pairing.active }
+  def self.inactive
+    Organization.where(representative)
   end
 end

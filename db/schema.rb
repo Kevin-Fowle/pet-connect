@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20160625191231) do
     t.string   "end_time"
     t.boolean  "accepted"
     t.integer  "user_id"
-    t.integer  "orgnization_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "messages", force: :cascade do |t|
