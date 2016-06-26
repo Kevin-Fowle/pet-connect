@@ -74,4 +74,12 @@ class User < ActiveRecord::Base
   def self.pet_owners
     where("organization_id IS NULL")
   end
+
+  def confirmed_events
+    events.where(accepted: true)#, user_id: current_user.id)
+  end
+
+  def offered_events
+    events.where("organization_id IS NULL")
+  end
 end

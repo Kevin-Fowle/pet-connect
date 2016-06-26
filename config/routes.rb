@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :organizations do
     resources :pairings, except: [:show]
   end
+
+  resources :events
   # Example resource route with options:
   #   resources :products do
   #     member do
