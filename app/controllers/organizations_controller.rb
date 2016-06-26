@@ -2,10 +2,8 @@
 class OrganizationsController < ApplicationController
   def search
     @organizations = Organization.all
-    p params
     input = params['name']
     upcase_input = input.upcase
-    p upcase_input
     if input
       if request.xhr?
         @organizations = Organization.search(upcase_input)
