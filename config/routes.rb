@@ -1,9 +1,27 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
 
-  resources :users, except:[:index] do
-    resources :pets, except:[:index]
-    resources :messages, except: [:show, :index, :edit, :update, :destroy]
+
+  resources :users do
+    resources :pets
+    resources :events
+    resources :pairings do
+      resources :messages
+    end
   end
+
+
+
+  get "/organizations/search" => "organizations#search", :as => :search_organizations
+
+  resources :organizations do
+    resources :pairings do
+      resources :messages
+    end
+  end
+
+
+
   resources :sessions, except: [:index, :edit, :update, :show, :new, :delete]
   get '/login' => "sessions#new", :as => :new_session
   get '/logout' => "sessions#destroy", :as => :destroy_session
@@ -13,7 +31,6 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -23,12 +40,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-  get "/organizations/search" => "organizations#search", :as => :search_organizations
-  resources :organizations do
-    resources :pairings, except: [:show]
-  end
 
-  resources :events
   # Example resource route with options:
   #   resources :products do
   #     member do

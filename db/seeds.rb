@@ -15,7 +15,13 @@ resp = Net::HTTP.get_response(URI("https://data.medicare.gov/resource/rbry-mqwu.
 hospitals_json = JSON.parse(resp.body)
 
 hospitals_json.each do |hospital|
-  Organization.create(name: hospital['hospital_name'], street_address: hospital['location_address'], city: hospital['location_city'], zip_code: hospital['location_zip'], state: hospital['location_state'], phone: hospital['phone_number'] )
+  Organization.create(
+    name: hospital['hospital_name'],
+    street_address: hospital['location_address'],
+    city: hospital['location_city'],
+    zip_code: hospital['location_zip'],
+    state: hospital['location_state'],
+    phone: hospital['phone_number'])
 end
 
 

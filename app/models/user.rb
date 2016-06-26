@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :pets
   has_many :pairings
-  has_many :messages
+  has_many :messages, as: :messageable
   has_many :events
   has_many :ratings, as: :ratable
   belongs_to :organization
