@@ -38,12 +38,18 @@ class User < ActiveRecord::Base
 
   def approved_pairings
     pairings.where(org_approved: true)
-    # pairings.select { |pairing| pairing.org_approved }
   end
 
   def pending_pairings
     pairings.where(org_approved: false)
-    # pairings.reject { |pairing| pairing.org_approved }
+  end
+
+  def approved_organizations
+    approved_pairings.map { |pairing| pairing.organization }
+  end
+
+  def pending_organizations
+    pending_pairings.map { |pairing| pairing.organization }
   end
 
   def conversations
