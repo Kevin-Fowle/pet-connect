@@ -4,7 +4,6 @@ def new
 end
 
 def create
-  p user_params
   @user = User.new(user_params)
   if params['organization_id']
     @organization = Organization.find(params['organization_id'])
@@ -26,6 +25,11 @@ end
 def show
   @user = User.find_by(id: params[:id])
   @pets = @user.pets
+  @pairings = @user.pairings
+  @organizations = []
+  @pairings.each do |pair|
+    @organizations << Organization.find(pair.organization_id)
+  end
 end
 
 private

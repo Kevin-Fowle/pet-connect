@@ -36,6 +36,22 @@ class User < ActiveRecord::Base
     end
   end
 
+  def approved_pairings
+    pairings.where(org_approved: true)
+  end
+
+  def pending_pairings
+    pairings.where(org_approved: false)
+  end
+
+  def approved_organizations
+    approved_pairings.map { |pairing| pairing.organization }
+  end
+
+  def pending_organizations
+    pending_pairings.map { |pairing| pairing.organization }
+  end
+
   def conversations
     conversation_arr = []
     self.try(:pairings).each do |pairing|
