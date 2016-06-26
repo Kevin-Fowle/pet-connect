@@ -7,4 +7,8 @@ $(function() {
     $ownerForm.show();
   });
 
+  $(".pet-list").on("click", ".pet-header", function(event) {
+    event.preventDefault();
+  });
+
 });

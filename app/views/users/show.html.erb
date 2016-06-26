@@ -3,23 +3,24 @@
  <%= current_user.first_name %>
 </div>
 <div class="pet-list">
-  <ul class="collabsible" data-collapsible="accordian">
+  <ul class="collapsible" data-collapsible="accordion">
     <% @pets.each do |pet| %>
     <li>
-      <div class="collapsible-header">
-        <h3>
-          <%= link_to pet.name, user_pet_path(@user, pet) %>
+      <div class="collapsible-header clear">
+        <h3 class="left">
+          <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
         </h3>
-        <%= image_tag pet.avatar.url(:thumb) %>
+          <%= image_tag pet.avatar.url(:thumb), class: "right" %>
+
       </div>
       <div class="collapsible-body">
-        <p>
+        <p class="pet-detail">
           <%= pet.species %>
         </p>
-        <p>
+        <p class="pet-detail">
           <%= pet.breed %>
         </p>
-        <p>
+        <p class="pet-detail">
           <%= pet.description %>
         </p>
       </div>

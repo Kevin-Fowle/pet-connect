@@ -1,0 +1,5 @@
+:Pet:
+  :avatar:
+  - :thumb
+  - :croppable
+  - :medium
