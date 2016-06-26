@@ -10,10 +10,10 @@ class OrganizationsController < ApplicationController
     if input
       if request.xhr?
         @organizations = Organization.search(upcase_input)
-        if @organizations.length > 0
+        if (@organizations.length > 0 && logged_in?)
+          render partial: 'organizations/partial_user_search', :layout => false
+        elsif @organizations.length > 0
           render partial: 'organizations/partial_search_with_links', :layout => false
-        else
-          'WTF!?'
         end
       end
     end
