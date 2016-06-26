@@ -1,8 +1,8 @@
-
-  <ul>
-    <% @organizations.each do |organization| %>
-      <li><%= organization.name %></li>
-      <li><%= organization.full_address %></li>
-    <% end %>
-  </ul>
-
+<ul>
+  <% @organizations.each do |organization| %>
+    <li>
+      <h5><%= organization.name %></h5>
+      <span><%= organization.full_address %></span>
+    </li>
+  <% end %>
+</ul>
