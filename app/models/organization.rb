@@ -1,9 +1,10 @@
 class Organization < ActiveRecord::Base
   has_one :representative, class_name: "User"
   has_many :pairings
+  has_many :events
 
   def full_address
-    "#{self.street_address},  #{self.city}, #{self.state},  #{self.zip_code}"
+    "#{self.street_address}, #{self.city}, #{self.state},  #{self.zip_code}"
   end
 
   def self.search(search_input)

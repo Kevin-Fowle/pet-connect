@@ -1,5 +1,5 @@
 class Pet < ActiveRecord::Base
-  belongs_to :pet_owner, class_name: "User"
+  belongs_to :owner, class_name: "User", foreign_key: :user_id
   has_many :ratings, as: :ratable
 
 
