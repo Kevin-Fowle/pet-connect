@@ -38,3 +38,9 @@
 <div id="search_results">
 
 </div>
+
+<div class="user-parings">
+  <% @organizations.each do |org| %>
+  <p><%= org.name %></p>
+  <% end %>
+</div>

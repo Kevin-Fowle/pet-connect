@@ -26,6 +26,11 @@ end
 def show
   @user = User.find_by(id: params[:id])
   @pets = @user.pets
+  @pairings = @user.pairings
+  @organizations = []
+  @pairings.each do |pair|
+    @organizations << Organization.find(pair.organization_id)
+  end
 end
 
 private
