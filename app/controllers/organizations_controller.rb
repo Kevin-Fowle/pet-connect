@@ -1,6 +1,6 @@
 
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: [:show]
+  # before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
     p params
@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
       if request.xhr?
         @organizations = Organization.search(upcase_input)
         if @organizations.length > 0
-          render partial: 'organizations/partial_search', :layout => false
+          render partial: 'organizations/partial_search_with_links', :layout => false
         else
           'WTF!?'
         end
@@ -27,13 +27,13 @@ class OrganizationsController < ApplicationController
   end
 
   def create
+
     @organization = Organization.find_by(name: params['name'])
     p @organization
     render partial: 'new_org_user'
     # redirect_to "/users/new?organization_id=#{@organization.id}"
+
   end
-
-
 
   private
 

@@ -11,16 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625191408) do
+ActiveRecord::Schema.define(version: 20160625191231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.integer  "pairing_id"
-    t.integer  "timeslot_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean  "accepted"
+    t.integer  "user_id"
+    t.integer  "orgnization_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -74,14 +77,6 @@ ActiveRecord::Schema.define(version: 20160625191408) do
     t.string   "ratable_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-  end
-
-  create_table "timeslots", force: :cascade do |t|
-    t.integer  "pet_id"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

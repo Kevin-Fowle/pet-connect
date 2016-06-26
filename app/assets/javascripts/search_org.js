@@ -6,12 +6,18 @@ $(document).ready(function(event){
 
   })
 
+  $('.add-hospital-form').on("submit", function(event){
+    event.preventDefault();
+    var searchForm = $(this);
+
+  })
+
   $('#name').on("keyup", function(event) {
     var searchField = $(this)
     // console.log(searchField)
     var searchData = searchField.val()
     // console.log(searchData)
-    if (searchData.length > 4){
+    if (searchData.length > 4) {
        var searchRequest = $.ajax({
         url: '/organizations/search',
         method: 'GET',
@@ -19,6 +25,7 @@ $(document).ready(function(event){
        })
 
        searchRequest.done(function(response) {
+         console.log(response);
         $("#search_results").html(response)
        })
      }
