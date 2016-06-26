@@ -4,7 +4,6 @@ def new
 end
 
 def create
-  p user_params
   @user = User.new(user_params)
   if params['organization_id']
     @organization = Organization.find(params['organization_id'])

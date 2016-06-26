@@ -6,8 +6,6 @@ class PairingsController < ApplicationController
 
   def create
     @organization = Organization.find(params[:organization_id])
-    p session[:user_id]
-    p current_user
     @user = current_user
     @pairing = Pairing.new(organization: @organization)
     @pairing.user_id = current_user.id
