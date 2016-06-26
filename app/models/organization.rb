@@ -10,6 +10,30 @@ class Organization < ActiveRecord::Base
     where('name LIKE ?', "%#{search_input}%").limit(10)
   end
 
+  def approved_pairings
+    pairings.where(org_approved: true)
+  end
+
+  def pending_pairings
+    pairings.where(org_approved: false)
+  end
+
+  def approved_pet_owners
+    approved_pairings.map { |pairing| pairing.pet_owner }
+  end
+
+  def pending_pet_owners
+    pending_pairings.map { |pairing| pairing.pet_owner }
+  end
+
+  def approved_events
+    approved_pet_owners.events
+  end
+
+  def pending_events
+    pending_pet_owners.events
+  end
+
   def conversations
     conversation_coll = []
     self.try(:pairings).each do |pairing|
@@ -19,6 +43,4 @@ class Organization < ActiveRecord::Base
     end
     conversation_arr
   end
-
-
 end
