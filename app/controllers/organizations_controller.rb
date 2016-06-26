@@ -27,12 +27,8 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-
     @organization = Organization.find_by(name: params['name'])
-    p @organization
     render partial: 'new_org_user'
-    # redirect_to "/users/new?organization_id=#{@organization.id}"
-
   end
 
   private
