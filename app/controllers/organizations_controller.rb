@@ -1,6 +1,5 @@
 
 class OrganizationsController < ApplicationController
-  # before_action :set_organization, only: [:show]
   def search
     @organizations = Organization.all
     p params
@@ -20,6 +19,9 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+    @organization = Organization.find(params[:id])
+    # @pending_pairings = Pairing.where(active: true, org_approved: false, organization_id: params[:id])
+    # p @pending_pairings
   end
 
   def new
@@ -27,16 +29,11 @@ class OrganizationsController < ApplicationController
   end
 
   def create
-
     @organization = Organization.find_by(name: params['name'])
-    p @organization
     render partial: 'new_org_user'
-    # redirect_to "/users/new?organization_id=#{@organization.id}"
-
   end
 
   private
-
     def set_organization
       @organization = Organization.find(params[:id])
     end
