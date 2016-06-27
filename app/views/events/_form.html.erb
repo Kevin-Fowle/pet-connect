@@ -1,0 +1,18 @@
+<%= form_for [@user, @event] do |f| %>
+  <p>
+    <%= f.label :date %>
+    <%= date_select :event, :date %>  
+  </p>
+  <p>
+    <%= f.label :start_time %>:
+    <%= time_select :event, :start_time %>
+  </p>
+
+  <p>
+    <%= f.label :end_time %>:
+    <%= time_select :event, :end_time %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>

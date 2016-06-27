@@ -1,0 +1,27 @@
+<div class="container">
+  <h1><%= @user.name %> events</h3>
+  <div class="user-event-list">
+    <% if @user.try(:events).try(:length) > 0 %>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Time available</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @user.events.each do |event| %>
+            <tr>
+              <td><%= event.date %></td>
+              <td><%= event.start_time %> - <%= event.end_time %></td>
+              <td><%= event.pet_owner.full_name %></td>
+              <td><%= link_to 'Show', user_event_path(@user, event) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

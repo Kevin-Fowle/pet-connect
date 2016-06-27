@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @event.date %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @event.start_time.to_s %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @event.end_time.to_s %>
+</p>
+
+<%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
+<%= link_to 'Back', user_events_path(@user) %>

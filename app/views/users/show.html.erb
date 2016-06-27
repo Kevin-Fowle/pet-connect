@@ -22,24 +22,25 @@
       </div>
         </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
+        </div>
 
-      </div>
-      <div class="collapsible-body">
-        <p class="pet-detail">
-          <%= pet.species %>
-        </p>
-        <p class="pet-detail">
-          <%= pet.breed %>
-        </p>
-        <p class="pet-detail">
-          <%= pet.description %>
-        </p>
-        <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
-      </div>
-    </li>
+        <div class="collapsible-body">
+          <p class="pet-detail">
+            <%= pet.species %>
+          </p>
+          <p class="pet-detail">
+            <%= pet.breed %>
+          </p>
+          <p class="pet-detail">
+            <%= pet.description %>
+          </p>
+          <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
+        </div>
+      </li>
     <% end %>
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
+  <%= link_to 'add an event', new_user_event_path(@user) %>
 </div>
 
 <div>
@@ -47,16 +48,8 @@
 </div>
 
 <% if logged_in? %>
-  <div>
-    <p>confirmed events</p>
-    <ul>
-      <% current_user.confirmed_events.each do |event| %>
-      <li><%= event.start_time %></li>
-      <% end %>
-    </ul>
-  </div>
 
-  <div>
+  <div class="user-confirmed-events">
     <p>confirmed events</p>
     <% if @user.confirmed_events %>
       <ul>
@@ -67,7 +60,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="user-offered-events">
     <p>offered events</p>
       <% if @user.offered_events %>
         <ul>
@@ -100,17 +93,16 @@
       <% end %>
     </div>
 
-
     <div class="pending-pairings">
       <h5>pending hospitals</h5>
 
-        <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
-          <ul>
-            <% @user.pending_organizations.each do |org| %>
-              <li> <%= org.name %> </li>
-            <% end %>
-          </ul>
-        <% end %>
+      <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+        <ul>
+          <% @user.pending_organizations.each do |org| %>
+            <li> <%= org.name %> </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 <% end %>
