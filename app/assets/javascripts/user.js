@@ -11,6 +11,8 @@ $(function() {
     event.preventDefault();
   });
 
+  $(".button-collapse").sideNav();
+
    // $("#organization-button").on("click", function(event) {
    //  event.preventDefault();
    //  console.log('aaa');
