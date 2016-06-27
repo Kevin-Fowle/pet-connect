@@ -80,7 +80,7 @@ class User < ActiveRecord::Base
     conversation_arr = []
     self.try(:pairings).each do |pairing|
       conversation = {}
-      conversation[pairing.pair(current_user)] = pairing.try(:messages)
+      conversation[pairing.pair(current_user).name] = pairing.try(:messages)
       conversation_arr << conversation
     end
     conversation_arr
