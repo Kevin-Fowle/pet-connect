@@ -4,6 +4,7 @@
     <!-- Organization photo? -->
   </div>
 
+  <span><%= link_to 'Inbox', organization_messages_path(@organization) %></span>
 
   <div class="pet-owner-list">
     <h3>approved pet owners</h3>
@@ -30,9 +31,9 @@
         <table>
           <thead>
             <tr>
-              <th>Start</th>
-              <th>End</th>
-              <th>Pet-owner</th>
+              <th>Day</th>
+              <th>Time available</th>
+              <th>Pet owner</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -40,11 +41,10 @@
           <tbody>
             <% @organization.approved_events.each do |approved_event| %>
               <tr>
-                <% @event = approved_event %>
-                <td><%= approved_event.start_time %></td>
-                <td><%= approved_event.end_time %></td>
+                <td><%= approved_event.date.to_s %></td>
+                <td><%= approved_event.start_time.to_s %> - <%= approved_event.end_time.to_s %></td>
                 <td><%= approved_event.pet_owner.full_name %></td>
-                <td><%= link_to 'Show', user_event_path(approved_event.pet_owner.id, approved_event) %></td>
+                <td><%= link_to 'Show', event_path(approved_event) %></td>
               </tr>
             <% end %>
           </tbody>
@@ -58,9 +58,9 @@
         <table>
           <thead>
             <tr>
-              <th>Start</th>
-              <th>End</th>
-              <th>Pet-owner</th>
+              <th>Day</th>
+              <th>Time available</th>
+              <th>Pet owner</th>
               <th colspan="3"></th>
             </tr>
           </thead>
@@ -68,10 +68,10 @@
           <tbody>
             <% @organization.pending_events.each do |pending_event| %>
               <tr>
-                <td><%= pending_event.start_time %></td>
-                <td><%= pending_event.end_time %></td>
-                <td><%= pending_event.pet_owner.full_name %></td>
-                <td><%= link_to 'Show', pending_event %></td>
+                <td><%= pending_event.date.to_s %></td>
+                <td><%= pending_event.start_time.to_s %> - <%= pending_event.end_time %></td>
+                <td><%= pending_event.pet_owner.full_name.to_s %></td>
+                <td><%= link_to 'Show', event_path(pending_event) %></td>
               </tr>
             <% end %>
           </tbody>
