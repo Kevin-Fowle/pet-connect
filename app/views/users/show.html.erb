@@ -1,4 +1,5 @@
 <h2><%= @user.full_name %></h2>
+
 <div class="user-info">
  <%= current_user.first_name %>
 </div>
@@ -30,9 +31,11 @@
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
 </div>
+
 <div>
   <!-- new_event link -->
 </div>
+
 <div>
   <p>confirmed events</p>
   <ul>
@@ -41,14 +44,16 @@
     <% end %>
   </ul>
 </div>
+
 <div>
   <p>offered events</p>
     <ul>
-    <% current_user.offered_events.each do |event| %>
-    <li><%= event.start_time %></li>
-  </ul>
+      <% current_user.offered_events.each do |event| %>
+        <li><%= event.start_time %></li>
+      </ul>
+    <% end %>
 </div>
-  <% end %>
+
 <div class= "add-hospital">
   <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
     <%= text_field_tag :name%>

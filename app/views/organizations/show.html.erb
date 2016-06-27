@@ -4,6 +4,8 @@
     <!-- Organization photo? -->
   </div>
 
+  <span><%= link_to 'Inbox', organization_messages_path %></span>
+
   <div class="pet-owner-list">
     <ul class="pet-owners-approved">
       <% @organization.try(:approved_pairings).try(:each) do |approved_pairing| %>

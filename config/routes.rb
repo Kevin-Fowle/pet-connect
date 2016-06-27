@@ -1,15 +1,18 @@
 Rails.application.routes.draw do
   root 'welcome#index'
   
-  resources :organizations
+  resources :organizations do
+    resources :messages, only: [:index]
+  end
 
   resources :users do
+    resources :messages, only: [:index]
     resources :pets
     resources :events
   end
 
   resources :pairings do
-    resources :messages
+    resources :messages, except: [:index]
   end
 
 
