@@ -10,12 +10,12 @@ def create
     @user.organization_id = params['organization_id']
   end
 
-  if @user.save && @user.organization_id
+  if @user.organization_user? && @user.save
     session[:user_id] = @user.id
-    redirect_to(organization_path(@organization))
-  elsif
+    redirect_to organization_path(@organization)
+  elsif @user.save
     session[:user_id] = @user.id
-    redirect_to(new_user_pet_path(@user))
+    redirect_to new_user_pet_path(@user)
   else
     @errors = @user.errors.full_messages
     render 'new'
