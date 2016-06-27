@@ -47,7 +47,6 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  get "/organizations/search" => "organizations#search", :as => :search_organizations
   resources :organizations do
     resources :pairings, except: [:show]
     resources :reviews, only:[:new, :create]
