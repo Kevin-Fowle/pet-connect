@@ -38,3 +38,12 @@ $(document).ready(function(event){
 
   });
 });
+
+$(document).ready(function(event){
+
+  $('#approve_pet_owner').on("click", function(event){
+    event.preventDefault();
+
+  })
+
+})

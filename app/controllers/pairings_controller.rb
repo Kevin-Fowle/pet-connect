@@ -20,6 +20,16 @@ class PairingsController < ApplicationController
     end
   end
 
+  def edit
+    @pairing =Pairing.find(params[:id])
+    p @pairing
+    @organization = Organization.find(params[:organization_id])
+    p @organization
+    p @pairing.org_approved
+    @pairing.org_approved = true
+    redirect_to @organization if @pairing.save
+  end
+
   private
 
   def pairing_params

@@ -5,6 +5,7 @@
   </div>
 
   <div class="pet-owner-list">
+    <h3>approved pet owners</h3>
     <ul class="pet-owners-approved">
       <% @organization.try(:approved_pairings).try(:each) do |approved_pairing| %>
         <li><%= approved_pairing.pet_owner.full_name %></li>
@@ -12,15 +13,16 @@
     </ul>
 
     <ul class="pet-owners-pending">
+      <h3>pending pet owners</h3>
       <% @organization.try(:pending_pairings).try(:each) do |pending_pairing| %>
         <li><%= pending_pairing.pet_owner.full_name %>
-        <button></button></li>
+        <button id='approve_pet_owner' onclick="location.href='http://localhost:3000/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
       <% end %>
     </ul>
   </div>
 
   <div class="event-list">
-    <h2>available events</h2>
+    <h3>available events</h3>
     <div class="approved-events">
       <% if @organization.try(:approved_events).try(:length) > 0 %>
         <h3>from approved pet-owners</h3>
@@ -49,8 +51,8 @@
     </div>
 
     <div class="pending-events">
+      <h3>from pet-owners pending approval</h3>
       <% if @organization.try(:pending_events).try(:length) > 0 %>
-        <h3>from pet-owners pending approval</h3>
         <table>
           <thead>
             <tr>
