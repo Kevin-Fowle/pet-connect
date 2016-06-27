@@ -1,7 +1,10 @@
 class Organization < ActiveRecord::Base
+  include UserHelper
+  
   has_one :representative, class_name: "User"
   has_many :pairings
   has_many :events
+  has_many :messages, as: :messageable
 
   def full_address
     "#{self.street_address}, #{self.city}, #{self.state},  #{self.zip_code}"
