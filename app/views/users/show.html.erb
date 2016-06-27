@@ -30,7 +30,25 @@
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
 </div>
-
+<div>
+  <%= link_to 'new event', new_event_path %>
+</div>
+<div>
+  <p>confirmed events</p>
+  <ul>
+    <% current_user.confirmed_events.each do |event| %>
+    <li><%= event.start_time %></li>
+    <% end %>
+  </ul>
+</div>
+<div>
+  <p>offered events</p>
+    <ul>
+    <% current_user.offered_events.each do |event| %>
+    <li><%= event.start_time %></li>
+  </ul>
+</div>
+  <% end %>
 <div class= "add-hospital">
   <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
     <%= text_field_tag :name%>

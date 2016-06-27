@@ -47,12 +47,11 @@ ActiveRecord::Schema.define(version: 20160625191231) do
   end
 
   create_table "pairings", force: :cascade do |t|
-    t.boolean  "org_approved",    default: false
-    t.boolean  "active",          default: true
+    t.boolean  "approved"
     t.integer  "user_id"
     t.integer  "organization_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "pets", force: :cascade do |t|

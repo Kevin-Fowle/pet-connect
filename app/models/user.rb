@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :pets
   has_many :pairings
   has_many :messages
+  has_many :events
   has_many :ratings, as: :ratable
   belongs_to :organization
 
@@ -64,5 +65,21 @@ class User < ActiveRecord::Base
       conversation[message_to] = pairing.try(:messages)
       conversation_arr << conversation
     end
+  end
+
+  def self.org_users 
+    where.not("organization_id IS NULL")
+  end
+
+  def self.pet_owners
+    where("organization_id IS NULL")
+  end
+
+  def confirmed_events
+    events.where(accepted: true)#, user_id: current_user.id)
+  end
+
+  def offered_events
+    events.where("organization_id IS NULL")
   end
 end
