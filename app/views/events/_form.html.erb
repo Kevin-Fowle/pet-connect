@@ -1,4 +1,4 @@
-<%= form_for @event do |f| %>
+<%= form_for [@user, @event] do |f| %>
   <p>
     <%= f.label :date %>
     <%= date_select :event, :date %>  
