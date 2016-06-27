@@ -14,4 +14,13 @@ class Pet < ActiveRecord::Base
 
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>", croppable: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  def average_rating
+   ratings = self.ratings
+   if ratings.length > 0
+   ratings.reduce(:+) / ratings.length
+   else
+     0
+   end
+ end
 end

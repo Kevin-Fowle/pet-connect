@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   end
 
 
-  def self.org_users 
+  def self.org_users
     where.not("organization_id IS NULL")
   end
 
@@ -67,12 +67,35 @@ class User < ActiveRecord::Base
   end
 
 
+  def self.org_users
+    where.not("organization_id IS NULL")
+  end
+
+  def self.pet_owners
+    where("organization_id IS NULL")
+  end
+
+
   def confirmed_events
     events.where(accepted: true)
   end
 
   def offered_events
     events.where("organization_id IS NULL")
+  end
+
+
+  def full_address
+    "#{self.street_address},  #{self.city}, #{self.state},  #{self.zip_code}"
+  end
+
+  def user_rating
+    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
+    if pet_rating.length > 0
+      pet_rating.reduce(:+) / pet_rating.length
+    else
+      0
+    end
   end
 
 
