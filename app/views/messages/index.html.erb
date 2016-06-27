@@ -1,0 +1,19 @@
+<% if logged_in? %>
+  <div class="container">
+    <h1>Inbox -- <%= current_user.behalf_of.name %></h1>
+
+    <% if @conversations && @conversations.length > 0 %>
+      <ul class="conversation-messages-list">
+        <% @conversations.each do |recipient, messages| %>
+          <% message = messages.last %>
+          <li>
+            <h2>recipient</h2>
+            <p><strong><%= message.subject %></strong></p>
+            <p><%= message.body %></p>
+            <p><%= message.author(current_user).name %></p>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>

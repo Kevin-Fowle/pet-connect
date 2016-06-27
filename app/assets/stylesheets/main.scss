@@ -56,3 +56,6 @@
   background: linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#3CA2A2',GradientType=1 ); /* ie6-9 */
 }
+form select {
+  display: inline-block;
+}

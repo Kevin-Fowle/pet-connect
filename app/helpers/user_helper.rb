@@ -11,5 +11,4 @@ module UserHelper
   def authenticate!
     redirect '/login' unless logged_in?
   end
-
 end

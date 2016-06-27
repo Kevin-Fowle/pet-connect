@@ -1,7 +1,25 @@
 <h2><%= @user.full_name %></h2>
+<<<<<<< HEAD
+
+<% if logged_in? && @user == current_user %>
+  <span><%= link_to 'Inbox', user_messages_path(@user) %></span>
+<% end %>
+
 <div class="user-info">
- <%= current_user.first_name %>
+ <%= @user.name %>
 </div>
+
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <%= render 'ratings/review_form' %>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div>
+
+<p class="user-rating"><%= @user.user_rating %></p>
+
 
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
@@ -10,6 +28,9 @@
       <div class="collapsible-header clear">
         <h3 class="left">
           <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+          <div class="rating right">
+        <span><%= pet.average_rating %></span>
+      </div>
         </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
 
@@ -24,47 +45,82 @@
         <p class="pet-detail">
           <%= pet.description %>
         </p>
+        <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
       </div>
     </li>
     <% end %>
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
 </div>
+
 <div>
-  <%= link_to 'new event', new_event_path %>
+  <!-- new_event link -->
 </div>
-<div>
-  <p>confirmed events</p>
-  <ul>
-    <% current_user.confirmed_events.each do |event| %>
-    <li><%= event.start_time %></li>
-    <% end %>
-  </ul>
-</div>
-<div>
-  <p>offered events</p>
+
+<% if logged_in? %>
+  <div>
+    <p>confirmed events</p>
     <ul>
-    <% current_user.offered_events.each do |event| %>
-    <li><%= event.start_time %></li>
-  </ul>
-</div>
-  <% end %>
-<div class= "add-hospital">
-  <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
-    <%= text_field_tag :name%>
-    <%= submit_tag "Search", id: "submit_button" %>
-  <% end %>
-</div>
+      <% current_user.confirmed_events.each do |event| %>
+      <li><%= event.start_time %></li>
+      <% end %>
+    </ul>
+  </div>
 
-<div id="search_results">
-</div>
+  <div>
+    <p>confirmed events</p>
+    <% if @user.confirmed_events %>
+      <ul>
+        <% @user.confirmed_events.each do |event| %>
+          <li><%= event.start_time %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
 
-<div class="user-parings">
-  <% if @user.try(:pairings).length > 0 %>
-    <h3>preferred hospitals</h3>
-  <% end %>
+  <div>
+    <p>offered events</p>
+      <% if @user.offered_events %>
+      <ul>
+      <% @user.offered_events.each do |event| %>
+        <li><%= event.start_time %></li>
+      <% end %>
+      </ul>
+  </div>
 
-  <% @organizations.each do |org| %>
-    <p><%= org.name %></p>
-  <% end %>
-</div>
+  <div class= "add-hospital">
+    <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
+      <%= text_field_tag :name%>
+      <%= submit_tag "Search", id: "submit_button" %>
+    <% end %>
+  </div>
+
+  <div id="search_results">
+  </div>
+
+  <div class="user-parings">
+    <div class="approved-pairings">
+      <h5>approved hospitals</h5>
+      <% if @user.try(:pairings).length > 0 &&  @user.approved_pairings.length > 0%>
+        <ul>
+          <% @user.approved_organizations.each do |org| %>
+            <li> <%= org.name %> </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+
+    <div class="pending-pairings">
+      <h5>pending hospitals</h5>
+
+        <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+          <ul>
+            <% @user.pending_organizations.each do |org| %>
+              <li> <%= org.name %> </li>
+            <% end %>
+          </ul>
+        <% end %>
+    </div>
+  </div>
+<% end %>
