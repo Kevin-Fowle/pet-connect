@@ -3,6 +3,10 @@ class EventsController < ApplicationController
     @event = Event.new()
   end
 
+  def Show
+    @event = Event.find(params[:id])
+  end
+
   def create
     # start_time = Chronic.parse(params[:event]['start_time'])
     # p start_time

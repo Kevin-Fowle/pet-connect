@@ -39,10 +39,11 @@
           <tbody>
             <% @organization.approved_events.each do |approved_event| %>
               <tr>
+                <% @event = approved_event %>
                 <td><%= approved_event.start_time %></td>
                 <td><%= approved_event.end_time %></td>
                 <td><%= approved_event.pet_owner.full_name %></td>
-                <td><%= link_to 'Show', approved_event %></td>
+                <td><%= link_to 'Show', user_event_path(approved_event.pet_owner.id, approved_event) %></td>
               </tr>
             <% end %>
           </tbody>
