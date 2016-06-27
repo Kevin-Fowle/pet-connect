@@ -4,6 +4,7 @@
   <title>T</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,7 +12,17 @@
 
     <nav class="header">
       <div class="nav-wrapper">
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+         <% if logged_in? %>
+           <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a></li>
+           <li><a class='index_login' href="/logout">Logout</a></li>
+         <% else %>
+           <li><a class='index_login' href="/users/new">Register</a></li>
+           <li><a class='index_login' href="/login">Login</a></li>
+         <% end %>
+        </ul>
+        <ul class="side-nav" id="mobile-demo">
          <% if logged_in? %>
            <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a></li>
            <li><a class='index_login' href="/logout">Logout</a></li>
