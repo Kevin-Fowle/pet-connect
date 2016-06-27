@@ -1,10 +1,9 @@
 class CreateEvents < ActiveRecord::Migration
   def change
     create_table :events do |t|
-      # t.datetime :start_time
-      # t.datetime :end_time
-      t.string :start_time
-      t.string :end_time
+      t.date :date
+      t.time :start_time
+      t.time :end_time
       t.boolean :accepted
       t.references :user
       t.references :organization
