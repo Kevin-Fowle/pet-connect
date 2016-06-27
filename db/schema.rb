@@ -17,13 +17,13 @@ ActiveRecord::Schema.define(version: 20160625191231) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string   "start_time"
-    t.string   "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.boolean  "accepted"
     t.integer  "user_id"
-    t.integer  "organization_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "orgnization_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "messages", force: :cascade do |t|
@@ -48,12 +48,11 @@ ActiveRecord::Schema.define(version: 20160625191231) do
   end
 
   create_table "pairings", force: :cascade do |t|
-    t.boolean  "org_approved",    default: false
-    t.boolean  "active",          default: true
+    t.boolean  "approved"
     t.integer  "user_id"
     t.integer  "organization_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "pets", force: :cascade do |t|
