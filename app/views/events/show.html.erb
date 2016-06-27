@@ -2,17 +2,17 @@
 
 <p>
   <strong>Date:</strong>
-  <%= @event.date %>
+  <%= @event.date.strftime("%D") %>
 </p>
 
 <p>
   <strong>Start time:</strong>
-  <%= @event.start_time.to_s %>
+  <%= @event.start_time.strftime("%r") %>
 </p>
 
 <p>
   <strong>End time:</strong>
-  <%= @event.end_time.to_s %>
+  <%= @event.end_time.strftime("%r") %>
 </p>
 
 <%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
