@@ -14,9 +14,8 @@
         <tbody>
           <% @user.events.each do |event| %>
             <tr>
-              <td><%= event.date %></td>
-              <td><%= event.start_time %> - <%= event.end_time %></td>
-              <td><%= event.pet_owner.full_name %></td>
+              <td><%= event.date.strftime("%D") %></td>
+              <td><%= event.start_time.strftime('%I:%M %p') %> - <%= event.end_time.strftime('%I:%M %p') %></td>
               <td><%= link_to 'Show', user_event_path(@user, event) %></td>
             </tr>
           <% end %>
