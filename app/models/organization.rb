@@ -56,4 +56,22 @@ class Organization < ActiveRecord::Base
   def self.inactive
     Organization.where(representative)
   end
+
+  def average_rating
+    ratings = self.ratings
+    if ratings.length > 0
+    ratings.reduce(:+) / ratings.length
+    else
+      0
+    end
+  end
+
+   def user_rating
+    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
+    if pet_rating.length > 0
+      pet_rating.reduce(:+) / pet_rating.length
+    else
+      0
+    end
+  end
 end

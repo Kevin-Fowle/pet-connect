@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
   resources :users, except:[:index] do
-    resources :pets, except:[:index]
+    resources :pets, except:[:index] do
+    resources :reviews, only:[:new, :create]
+  end
     resources :messages, except: [:show, :index, :edit, :update, :destroy]
   end
   resources :sessions, except: [:index, :edit, :update, :show, :new, :delete]
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   get "/organizations/search" => "organizations#search", :as => :search_organizations
   resources :organizations do
     resources :pairings, except: [:show]
+    resources :reviews, only:[:new, :create]
   end
 
   resources :events
