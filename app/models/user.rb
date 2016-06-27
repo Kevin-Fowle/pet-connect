@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def full_address
+    "#{self.street_address},  #{self.city}, #{self.state},  #{self.zip_code}"
+  end
+
   def organization_user?
     !!organization
   end
@@ -65,4 +69,14 @@ class User < ActiveRecord::Base
       conversation_arr << conversation
     end
   end
+
+  def user_rating
+    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
+    if pet_rating.length > 0
+      pet_rating.reduce(:+) / pet_rating.length
+    else
+      0
+    end
+  end
+
 end

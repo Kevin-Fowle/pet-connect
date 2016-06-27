@@ -1,6 +1,8 @@
+<%= render 'ratings/review_form' %>
 <h2><%= @user.full_name %></h2>
 <div class="user-info">
- <%= current_user.first_name %>
+  <p class="user-rating"><%= @user.user_rating %></p>
+ <%= current_user.full_address %>
 </div>
 
 <div class="pet-list">
@@ -10,6 +12,10 @@
       <div class="collapsible-header clear">
         <h3 class="left">
           <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+
+          <div class="rating right">
+        <span><%= pet.average_rating %></span>
+      </div>
         </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
 
@@ -24,6 +30,7 @@
         <p class="pet-detail">
           <%= pet.description %>
         </p>
+      <button id="<%= pet.id %>" class="pet-review-button">Review</button>
       </div>
     </li>
     <% end %>

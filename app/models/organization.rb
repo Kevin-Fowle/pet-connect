@@ -43,4 +43,13 @@ class Organization < ActiveRecord::Base
     end
     conversation_arr
   end
+
+  def average_rating
+    ratings = self.ratings
+    if ratings.length > 0
+    ratings.reduce(:+) / ratings.length
+    else
+      0
+    end
+  end
 end
