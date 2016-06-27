@@ -96,6 +96,7 @@ class User < ActiveRecord::Base
     else
       0
     end
+  end
 
 
   def conversations(current_user) ## Module method?
