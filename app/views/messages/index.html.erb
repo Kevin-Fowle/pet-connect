@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Conversation -- <%= @pairing.pair(current_user).name %></h1>
+
+  <% if @messages && @messages.length > 0 %>
+    <ul class="conversation-messages-list">
+      <% @messages.each do |message| %>
+        <li>
+          <p><strong><%= message.subject %></strong></p>
+          <p><%= message.body %></p>
+          <p><%= message.author(current_user).name %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

@@ -15,7 +15,13 @@ resp = Net::HTTP.get_response(URI("https://data.medicare.gov/resource/rbry-mqwu.
 hospitals_json = JSON.parse(resp.body)
 
 hospitals_json.each do |hospital|
-  Organization.create(name: hospital['hospital_name'], street_address: hospital['location_address'], city: hospital['location_city'], zip_code: hospital['location_zip'], state: hospital['location_state'], phone: hospital['phone_number'] )
+  Organization.create(
+    name: hospital['hospital_name'],
+    street_address: hospital['location_address'],
+    city: hospital['location_city'],
+    zip_code: hospital['location_zip'],
+    state: hospital['location_state'],
+    phone: hospital['phone_number'])
 end
 
 
@@ -34,7 +40,7 @@ end
     city: Faker::Address.city,
     zip_code: Faker::Address.zip,
     state: Faker::Address.state_abbr,
-    organization_id: Organization.find(i + 1))
+    organization: Organization.find(i + 1))
 
   user.save
 end
@@ -65,9 +71,16 @@ end
   end
 
   (2..5).to_a.sample.times do |i|
-    Pairing.create(
+    organization = Organization.all.sample
+    pairing = Pairing.create(
       pet_owner: user,
-      organization: Organization.all.sample)
+      organization: organization)
+      (2..5).to_a.sample.times do |i|
+        Message.create(
+          subject: Faker::Hipster.sentence,
+          body: Faker::Hipster.paragraph,
+          messageable: [user, organization].sample)
+      end
   end
 
   (2..5).to_a.sample.times do |i|

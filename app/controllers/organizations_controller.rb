@@ -1,4 +1,3 @@
-
 class OrganizationsController < ApplicationController
   def search
     @organizations = Organization.all

@@ -3,7 +3,7 @@ class CreateMessages < ActiveRecord::Migration
     create_table :messages do |t|
       t.string :subject
       t.text :body
-      t.references :user
+      t.references :messageable, polymorphic: true
       t.references :pairing
 
       t.timestamps null: false
