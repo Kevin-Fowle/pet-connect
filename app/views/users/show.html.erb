@@ -50,6 +50,7 @@
     <% end %>
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
+  <%= link_to 'add an event', new_user_event_path(@user) %>
 </div>
 
 <div>
@@ -57,14 +58,6 @@
 </div>
 
 <% if logged_in? %>
-  <div>
-    <p>confirmed events</p>
-    <ul>
-      <% current_user.confirmed_events.each do |event| %>
-        <li><%= event.start_time %></li>
-      <% end %>
-    </ul>
-  </div>
 
   <div class="user-confirmed-events">
     <p>confirmed events</p>
@@ -122,4 +115,5 @@
       <% end %>
     </div>
   </div>
+<% end %>
 <% end %>

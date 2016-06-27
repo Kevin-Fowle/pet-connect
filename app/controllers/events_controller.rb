@@ -23,6 +23,10 @@ class EventsController < ApplicationController
   def edit
   end
 
+  def Show
+    @event = Event.find(params[:id])
+  end
+
   def create
     if @user.pet_owner?
       @event = @user.events.new(event_params)
