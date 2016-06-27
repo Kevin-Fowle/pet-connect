@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
 
-  get "/organizations/search" => "organizations#search", :as => :search_organizations
 
 
   resources :users do
