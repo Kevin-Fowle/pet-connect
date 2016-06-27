@@ -1,4 +1,6 @@
 class Organization < ActiveRecord::Base
+  include UserHelper
+  
   has_one :representative, class_name: "User"
   has_many :pairings
   has_many :events

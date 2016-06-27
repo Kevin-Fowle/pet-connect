@@ -1,3 +1,5 @@
+include UserHelper
+
 class User < ActiveRecord::Base
   has_many :pets
   has_many :pairings
@@ -20,6 +22,8 @@ class User < ActiveRecord::Base
   def full_name
     "#{self.first_name} #{self.last_name}"
   end
+
+  alias_method :name, :full_name
 
 
   def pet_owner?
@@ -72,11 +76,11 @@ class User < ActiveRecord::Base
   end
 
 
-  def conversations ## Module method?
+  def conversations(current_user) ## Module method?
     conversation_arr = []
     self.try(:pairings).each do |pairing|
       conversation = {}
-      conversation[pairing.pair] = pairing.try(:messages)
+      conversation[pairing.pair(current_user)] = pairing.try(:messages)
       conversation_arr << conversation
     end
     conversation_arr

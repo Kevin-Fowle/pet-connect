@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-
+  
+  resources :organizations
 
   resources :users do
     resources :pets
@@ -8,13 +9,12 @@ Rails.application.routes.draw do
   end
 
   resources :pairings do
-      resources :messages
+    resources :messages
   end
+
 
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
-  resources :organizations do
-  end
 
 
 

@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
   before_action :set_pairing
 
   def index
-    @messages = @pairing.messages
+    @messages = @pairing.try(:messages)
+    # redirect_to current_user.behalf_of show if @messages.try(:length) < 1
   end
 
   def show
@@ -17,18 +18,18 @@ class MessagesController < ApplicationController
   end
 
   def create
-    parent = User.find(params[:user_id]).behalf_of
+    parent = User.find_by(id: current_user.id).behalf_of
 
-    @message = Message.new(message_params)
+    @message = @pairing.messages.new(message_params)
     @message.messageable = parent
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
-        format.json { render :show, status: :created, location: @Message }
+        format.html { redirect_to pairing_messages_path, notice: 'Message was successfully created.' }
+        format.json { render :index, status: :created, location: @message }
       else
         format.html { render :new }
-        format.json { render json: @Message.errors, status: :unprocessable_entity }
+        format.json { render json: @message.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -36,8 +37,8 @@ class MessagesController < ApplicationController
   def update
     respond_to do |format|
       if @message.update(message_params)
-        format.html { redirect_to @message, notice: 'Message was successfully updated.' }
-        format.json { render :show, status: :ok, location: @message }
+        format.html { redirect_to @messages, notice: 'Message was successfully updated.' }
+        format.json { render :index, status: :ok, location: @messages }
       else
         format.html { render :edit }
         format.json { render json: @message.errors, status: :unprocessable_entity }

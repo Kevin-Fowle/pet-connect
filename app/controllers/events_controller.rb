@@ -1,6 +1,4 @@
-class EventsController < ActionController::Base
-  include UserHelper
-
+class EventsController < ApplicationController
   def new
     @event = Event.new()
   end
