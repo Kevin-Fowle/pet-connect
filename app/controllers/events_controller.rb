@@ -18,6 +18,7 @@ class EventsController < ActionController::Base
     end
   end
 
+  private
   def event_params
     params.require(:event).permit(:start_time, :end_time, :acepted, :user, :organization)
   end

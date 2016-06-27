@@ -5,19 +5,15 @@ Rails.application.routes.draw do
   resources :users do
     resources :pets
     resources :events
-    resources :pairings do
-      resources :messages
-    end
   end
 
-
+  resources :pairings do
+      resources :messages
+  end
 
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
   resources :organizations do
-    resources :pairings do
-      resources :messages
-    end
   end
 
 

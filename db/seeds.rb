@@ -40,7 +40,7 @@ end
     city: Faker::Address.city,
     zip_code: Faker::Address.zip,
     state: Faker::Address.state_abbr,
-    organization_id: Organization.find(i + 1))
+    organization: Organization.find(i + 1))
 
   user.save
 end
@@ -71,9 +71,16 @@ end
   end
 
   (2..5).to_a.sample.times do |i|
-    Pairing.create(
+    organization = Organization.all.sample
+    pairing = Pairing.create(
       pet_owner: user,
-      organization: Organization.all.sample)
+      organization: organization)
+      (2..5).to_a.sample.times do |i|
+        Message.create(
+          subject: Faker::Hipster.sentence,
+          body: Faker::Hipster.paragraph,
+          messageable: [user, organization].sample)
+      end
   end
 
   (2..5).to_a.sample.times do |i|
