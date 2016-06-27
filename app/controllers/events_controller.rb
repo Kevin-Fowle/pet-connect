@@ -25,7 +25,7 @@ class EventsController < ApplicationController
 
   def create
     if @user.pet_owner?
-      @user.events.new(event_params)
+      @event = @user.events.new(event_params)
 
       respond_to do |format|
         if @event.save
