@@ -14,5 +14,4 @@ module ApplicationHelper
   # def authenticate!
   #   redirect '/login' unless logged_in?
   # end
-
 end

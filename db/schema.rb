@@ -29,10 +29,11 @@ ActiveRecord::Schema.define(version: 20160627151234) do
   create_table "messages", force: :cascade do |t|
     t.string   "subject"
     t.text     "body"
-    t.integer  "user_id"
+    t.integer  "messageable_id"
+    t.string   "messageable_type"
     t.integer  "pairing_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "organizations", force: :cascade do |t|

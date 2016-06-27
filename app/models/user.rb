@@ -1,7 +1,9 @@
+include UserHelper
+
 class User < ActiveRecord::Base
   has_many :pets
   has_many :pairings
-  has_many :messages
+  has_many :messages, as: :messageable
   has_many :events
   has_many :ratings, as: :ratable
   belongs_to :organization
@@ -21,51 +23,22 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
-  def organization_user?
-    !!organization
-  end
+  alias_method :name, :full_name
+
 
   def pet_owner?
     !!pets && pets.length > 0
   end
 
-  def title
-    if organization_user?
-      organization.name
-    else
-      full_name
-    end
+  def organization_user?
+    !!organization
   end
 
-  def approved_pairings
-    pairings.where(org_approved: true)
+  def behalf_of
+    return organization if organization_user?
+    self
   end
 
-  def pending_pairings
-    pairings.where(org_approved: false)
-  end
-
-  def approved_organizations
-    approved_pairings.map { |pairing| pairing.organization }
-  end
-
-  def pending_organizations
-    pending_pairings.map { |pairing| pairing.organization }
-  end
-
-  def conversations
-    conversation_arr = []
-    self.try(:pairings).each do |pairing|
-      conversation = {}
-      if organization_user?
-        message_to = pairing.pet_owner.full_name
-      else
-        message_to = pairing.organization.name
-      end
-      conversation[message_to] = pairing.try(:messages)
-      conversation_arr << conversation
-    end
-  end
 
   def self.org_users
     where.not("organization_id IS NULL")
@@ -75,13 +48,42 @@ class User < ActiveRecord::Base
     where("organization_id IS NULL")
   end
 
+
+  def approved_pairings
+    pairings.where(org_approved: true)
+  end
+
+  def pending_pairings
+    pairings.where(org_approved: false)
+  end
+
+
+  def approved_organizations
+    approved_pairings.map { |pairing| pairing.organization }
+  end
+
+  def pending_organizations
+    pending_pairings.map { |pairing| pairing.organization }
+  end
+
+
+  def self.org_users
+    where.not("organization_id IS NULL")
+  end
+
+  def self.pet_owners
+    where("organization_id IS NULL")
+  end
+
+
   def confirmed_events
-    events.where(accepted: true)#, user_id: current_user.id)
+    events.where(accepted: true)
   end
 
   def offered_events
     events.where("organization_id IS NULL")
   end
+
 
   def full_address
     "#{self.street_address},  #{self.city}, #{self.state},  #{self.zip_code}"
@@ -94,5 +96,15 @@ class User < ActiveRecord::Base
     else
       0
     end
+
+
+  def conversations(current_user) ## Module method?
+    conversation_arr = []
+    self.try(:pairings).each do |pairing|
+      conversation = {}
+      conversation[pairing.pair(current_user)] = pairing.try(:messages)
+      conversation_arr << conversation
+    end
+    conversation_arr
   end
 end
