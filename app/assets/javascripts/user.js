@@ -17,10 +17,18 @@ $(function() {
 
   $(".pet-list").on("click", ".pet-review-button", function(event) {
    event.preventDefault();
-   var pet_id = $(this).attr("id");
-   console.log(pet_id);
-   $("input[name='pet_id']").val(pet_id);
+   var petId = $(this).attr("id");
+   var petSubmitId = $("input[name='pet_id']").val(petId);
   });
+
+  $(".pet-list").on("submit", "#rating-form", function(event) {
+    event.preventDefault();
+    var petId = $(".pet-review-button").attr("id");
+    console.log(petId);
+
+  });
+
+
 
 
    // $("#organization-button").on("click", function(event) {

@@ -25,6 +25,7 @@ end
 def show
   @user = User.find_by(id: params[:id])
   @pets = @user.try(:pets)
+  # @pet = Pet.find()
   @pairings = @user.try(:pairings)
   @organizations = []
   @pairings.try(:each) do |pair|

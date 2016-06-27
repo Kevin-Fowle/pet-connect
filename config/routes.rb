@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  get "/organizations/search" => "organizations#search", :as => :search_organizations
 
   resources :organizations do
     resources :messages, only: [:index]
@@ -14,8 +15,8 @@ Rails.application.routes.draw do
 
   resources :users, except:[:index] do
     resources :pets, except:[:index] do
-    resources :reviews, only:[:new, :create]
-  end
+      resources :ratings, only:[:new, :create]
+    end
   end
 
 
@@ -23,7 +24,6 @@ Rails.application.routes.draw do
     resources :messages, except: [:index]
   end
 
-  get "/organizations/search" => "organizations#search", :as => :search_organizations
 
 
 
