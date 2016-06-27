@@ -3,7 +3,9 @@ class MessagesController < ApplicationController
   before_action :set_pairing, except: [:index]
 
   def index
-    @messages = current_user.behalf_of.try(:messages)
+    if logged_in?
+      @messages = current_user.behalf_of.try(:messages)
+    end
     if !!@messages
       @conversations = current_user.behalf_of.conversations(current_user)
     end
