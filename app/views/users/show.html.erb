@@ -60,11 +60,28 @@
 </div>
 
 <div class="user-parings">
-  <% if @user.try(:pairings).length > 0 %>
-    <h3>preferred hospitals</h3>
-  <% end %>
+  <div class="approved-pairings">
+    <h5>approved hospitals</h5>
+      <% if @user.try(:pairings).length > 0 &&  @user.approved_pairings.length > 0%>
+        <ul>
+        <% @user.approved_organizations.each do |org| %>
+          <li> <%= org.name %> </li>
+        </ul>
+        <% end %>
+      <% end %>
 
-  <% @organizations.each do |org| %>
-    <p><%= link_to 'org.name', org %></p>
-  <% end %>
+  </div>
+
+  <div class="pending-pairings">
+    <h5>pending hospitals</h5>
+
+      <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+        <ul>
+          <% @user.pending_organizations.each do |org| %>
+          <li> <%= org.name %> </li>
+        </ul>
+        <% end %>
+      <% end %>
+
+  </div>
 </div>
