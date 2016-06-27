@@ -17,8 +17,9 @@ ActiveRecord::Schema.define(version: 20160627151234) do
   enable_extension "plpgsql"
 
   create_table "events", force: :cascade do |t|
-    t.string   "start_time"
-    t.string   "end_time"
+    t.date     "date"
+    t.time     "start_time"
+    t.time     "end_time"
     t.boolean  "accepted"
     t.integer  "user_id"
     t.integer  "organization_id"
