@@ -46,11 +46,11 @@ class Organization < ActiveRecord::Base
     pending_events_arr
   end
 
-  def conversations
+  def conversations(current_user)
     conversation_coll = []
     self.try(:pairings).each do |pairing|
       conversation = {}
-      conversation[pairing.pet_owner.full_name] = pairing.try(:messages)
+      conversation[pairing.pet_owner.name] = pairing.try(:messages)
       conversation_arr << conversation
     end
     conversation_arr

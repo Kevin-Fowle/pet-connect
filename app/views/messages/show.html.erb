@@ -1,12 +1,10 @@
 <div class="container">
-  <h1>Inbox -- <%= current_user.behalf_of.name %></h1>
+  <h1>Conversation -- <%= @pairing.pair(current_user).name %></h1>
 
-  <% if @conversations && @conversations.length > 0 %>
+  <% if @messages && @messages.length > 0 %>
     <ul class="conversation-messages-list">
-      <% @conversations.each do |recipient, messages| %>
-        <% message = messages.last %>
+      <% @messages.each do |message| %>
         <li>
-          <h2>recipient</h2>
           <p><strong><%= message.subject %></strong></p>
           <p><%= message.body %></p>
           <p><%= message.author(current_user).name %></p>

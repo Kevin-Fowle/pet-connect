@@ -1,5 +1,4 @@
 <h2><%= @user.full_name %></h2>
-
 <div id="modal1" class="modal">
   <div class="modal-content">
     <%= render 'ratings/review_form' %>
@@ -41,9 +40,11 @@
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
 </div>
+
 <div>
   <!-- new_event link -->
 </div>
+
 <div>
   <p>confirmed events</p>
   <% if @user.confirmed_events %>
@@ -54,6 +55,7 @@
   </ul>
   <% end %>
 </div>
+
 <div>
   <p>offered events</p>
     <% if @user.offered_events %>
