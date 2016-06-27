@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
 
   resources :pairings do
-    resources :messages except: [:index]
+    resources :messages, except: [:index]
 
   end
 
