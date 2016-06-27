@@ -85,6 +85,7 @@ end
 
   (2..5).to_a.sample.times do |i|
     Event.create(
+      date: Faker::Date.forward(23),
       start_time: Faker::Time.forward(21, :afternoon),
       end_time: Faker::Time.forward(21, :evening),
       pet_owner: user)
