@@ -1,5 +1,4 @@
 <h2><%= @user.full_name %></h2>
-<<<<<<< HEAD
 
 <% if logged_in? && @user == current_user %>
   <span><%= link_to 'Inbox', user_messages_path(@user) %></span>
@@ -24,30 +23,30 @@
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
     <% @pets.each do |pet| %>
-    <li>
-      <div class="collapsible-header clear">
-        <h3 class="left">
-          <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
-          <div class="rating right">
-        <span><%= pet.average_rating %></span>
-      </div>
-        </h3>
-          <%= image_tag pet.avatar.url(:thumb), class: "right" %>
+      <li>
+        <div class="collapsible-header clear">
+          <h3 class="left">
+            <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+            <div class="rating right">
+              <span><%= pet.average_rating %></span>
+          </h3>
 
-      </div>
-      <div class="collapsible-body">
-        <p class="pet-detail">
-          <%= pet.species %>
-        </p>
-        <p class="pet-detail">
-          <%= pet.breed %>
-        </p>
-        <p class="pet-detail">
-          <%= pet.description %>
-        </p>
-        <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
-      </div>
-    </li>
+          <%= image_tag pet.avatar.url(:thumb), class: "right" %>
+        </div>
+
+        <div class="collapsible-body">
+          <p class="pet-detail">
+            <%= pet.species %>
+          </p>
+          <p class="pet-detail">
+            <%= pet.breed %>
+          </p>
+          <p class="pet-detail">
+            <%= pet.description %>
+          </p>
+          <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
+        </div>
+      </li>
     <% end %>
   </ul>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
@@ -62,12 +61,12 @@
     <p>confirmed events</p>
     <ul>
       <% current_user.confirmed_events.each do |event| %>
-      <li><%= event.start_time %></li>
+        <li><%= event.start_time %></li>
       <% end %>
     </ul>
   </div>
 
-  <div>
+  <div class="user-confirmed-events">
     <p>confirmed events</p>
     <% if @user.confirmed_events %>
       <ul>
@@ -78,14 +77,15 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="user-offered-events">
     <p>offered events</p>
       <% if @user.offered_events %>
-      <ul>
-      <% @user.offered_events.each do |event| %>
-        <li><%= event.start_time %></li>
+        <ul>
+          <% @user.offered_events.each do |event| %>
+            <li><%= event.start_time %></li>
+          <% end %>
+        </ul>
       <% end %>
-      </ul>
   </div>
 
   <div class= "add-hospital">
@@ -110,17 +110,16 @@
       <% end %>
     </div>
 
-
     <div class="pending-pairings">
       <h5>pending hospitals</h5>
 
-        <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
-          <ul>
-            <% @user.pending_organizations.each do |org| %>
-              <li> <%= org.name %> </li>
-            <% end %>
-          </ul>
-        <% end %>
+      <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+        <ul>
+          <% @user.pending_organizations.each do |org| %>
+            <li> <%= org.name %> </li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
 <% end %>
