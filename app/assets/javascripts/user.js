@@ -11,6 +11,15 @@ $(function() {
     event.preventDefault();
   });
 
+  $('.modal-trigger').leanModal();
+
+  $(".pet-list").on("click", ".pet-review-button", function(event) {
+   event.preventDefault();
+   var pet_id = $(this).attr("id");
+   console.log(pet_id);
+   $("input[name='pet_id']").val(pet_id);
+  });
+
    // $("#organization-button").on("click", function(event) {
    //  event.preventDefault();
    //  console.log('aaa');

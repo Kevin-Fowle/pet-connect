@@ -1,8 +1,13 @@
 <h2><%= @user.full_name %></h2>
-
-<div class="user-info">
- <%= current_user.first_name %>
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <%= render 'ratings/review_form' %>
+  </div>
+  <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
 </div>
+<p class="user-rating"><%= @user.user_rating %></p>
 
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
@@ -11,6 +16,9 @@
       <div class="collapsible-header clear">
         <h3 class="left">
           <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+          <div class="rating right">
+        <span><%= pet.average_rating %></span>
+      </div>
         </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
 
@@ -25,6 +33,7 @@
         <p class="pet-detail">
           <%= pet.description %>
         </p>
+        <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
       </div>
     </li>
     <% end %>
@@ -38,22 +47,25 @@
 
 <div>
   <p>confirmed events</p>
+  <% if @user.confirmed_events %>
   <ul>
-    <% current_user.confirmed_events.each do |event| %>
+    <% @user.confirmed_events.each do |event| %>
     <li><%= event.start_time %></li>
     <% end %>
   </ul>
+  <% end %>
 </div>
 
 <div>
   <p>offered events</p>
+    <% if @user.offered_events %>
     <ul>
-      <% current_user.offered_events.each do |event| %>
-        <li><%= event.start_time %></li>
-      </ul>
-    <% end %>
+    <% @user.offered_events.each do |event| %>
+    <li><%= event.start_time %></li>
+  </ul>
 </div>
-
+  <% end %>
+  <% end %>
 <div class= "add-hospital">
   <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
     <%= text_field_tag :name%>
