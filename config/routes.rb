@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :pets, except:[:index] do
     resources :reviews, only:[:new, :create]
   end
+  end
 
 
   resources :pairings do
@@ -44,14 +45,12 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
-<<<<<<< HEAD
+
   get "/organizations/search" => "organizations#search", :as => :search_organizations
   resources :organizations do
     resources :pairings, except: [:show]
     resources :reviews, only:[:new, :create]
   end
-=======
->>>>>>> master
 
   # Example resource route with options:
   #   resources :products do
