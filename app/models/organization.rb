@@ -46,11 +46,11 @@ class Organization < ActiveRecord::Base
     pending_events_arr
   end
 
-  def conversations
+  def conversations(current_user)
     conversation_coll = []
     self.try(:pairings).each do |pairing|
       conversation = {}
-      conversation[pairing.pet_owner.full_name] = pairing.try(:messages)
+      conversation[pairing.pet_owner.name] = pairing.try(:messages)
       conversation_arr << conversation
     end
     conversation_arr
@@ -58,5 +58,23 @@ class Organization < ActiveRecord::Base
 
   def self.inactive
     Organization.where(representative)
+  end
+
+  def average_rating
+    ratings = self.ratings
+    if ratings.length > 0
+    ratings.reduce(:+) / ratings.length
+    else
+      0
+    end
+  end
+
+   def user_rating
+    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
+    if pet_rating.length > 0
+      pet_rating.reduce(:+) / pet_rating.length
+    else
+      0
+    end
   end
 end

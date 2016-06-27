@@ -1,17 +1,27 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-  
-  resources :organizations
+
+  resources :organizations do
+    resources :messages, only: [:index]
+  end
 
   resources :users do
+    resources :messages, only: [:index]
     resources :pets
     resources :events
   end
 
-  resources :pairings do
-    resources :messages
+
+  resources :users, except:[:index] do
+    resources :pets, except:[:index] do
+    resources :reviews, only:[:new, :create]
+  end
   end
 
+
+  resources :pairings do
+    resources :messages, except: [:index]
+  end
 
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
@@ -36,6 +46,11 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+  resources :organizations do
+    resources :pairings, except: [:show]
+    resources :reviews, only:[:new, :create]
+  end
 
   # Example resource route with options:
   #   resources :products do

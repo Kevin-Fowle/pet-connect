@@ -1,13 +1,19 @@
 class MessagesController < ApplicationController 
-  before_action :set_message, only: [:show, :edit, :update, :destroy]
-  before_action :set_pairing
+  before_action :set_message, only: [:edit, :update, :destroy]
+  before_action :set_pairing, except: [:index]
 
   def index
-    @messages = @pairing.try(:messages)
+    if logged_in?
+      @messages = current_user.behalf_of.try(:messages)
+    end
+    if !!@messages
+      @conversations = current_user.behalf_of.conversations(current_user)
+    end
     # redirect_to current_user.behalf_of show if @messages.try(:length) < 1
   end
 
   def show
+    @messages = @pairing.try(:messages)
   end
 
   def new
@@ -55,15 +61,15 @@ class MessagesController < ApplicationController
   end
 
   private
-    def set_message
-      @message = Message.find(params[:id])
-    end
+  def set_message
+    @message = Message.find(params[:id])
+  end
 
-    def set_pairing
-      @pairing = Pairing.find(params[:pairing_id])
-    end
+  def set_pairing
+    @pairing = Pairing.find(params[:pairing_id])
+  end
 
-    def message_params
-      params.require(:message).permit(:subject, :body)
-    end
+  def message_params
+    params.require(:message).permit(:subject, :body)
+  end
 end
