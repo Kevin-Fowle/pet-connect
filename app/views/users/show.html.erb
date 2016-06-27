@@ -4,18 +4,6 @@
   <span><%= link_to 'Inbox', user_messages_path(@user) %></span>
 <% end %>
 
-<div class="user-info">
- <%= @user.name %>
-</div>
-
-<div id="modal1" class="modal">
-  <div class="modal-content">
-    <%= render 'ratings/review_form' %>
-  </div>
-  <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div>
-</div>
 
 <p class="user-rating"><%= @user.user_rating %></p>
 
@@ -23,14 +11,16 @@
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
     <% @pets.each do |pet| %>
-      <li>
-        <div class="collapsible-header clear">
-          <h3 class="left">
-            <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
-            <div class="rating right">
-              <span><%= pet.average_rating %></span>
-          </h3>
-
+    <% @pet = pet %>
+    <%= render 'ratings/review_form' %>
+    <li>
+      <div class="collapsible-header clear">
+        <h3 class="left">
+          <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+          <div class="rating right">
+        <span><%= pet.average_rating %></span>
+      </div>
+        </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
         </div>
 
@@ -74,9 +64,9 @@
     <p>offered events</p>
       <% if @user.offered_events %>
         <ul>
-          <% @user.offered_events.each do |event| %>
-            <li><%= event.start_time %></li>
-          <% end %>
+        <% @user.offered_events.each do |event| %>
+          <li><%= event.start_time %></li>
+        <% end %>
         </ul>
       <% end %>
   </div>

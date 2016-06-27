@@ -8,9 +8,11 @@ class RatingsController < ApplicationController
     elsif params[:organization_id]
       rating = Rating.create(org_rating_params)
     end
+  end
 
   private
 
   def pet_rating_params
-    params.require(:pet).permit(:)
+    params.require(:rating).permit(:stars, :rating_id, :rating_type)
+  end
 end

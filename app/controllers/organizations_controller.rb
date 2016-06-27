@@ -3,6 +3,7 @@ class OrganizationsController < ApplicationController
     @organizations = Organization.all
     input = params['name']
     upcase_input = input.upcase
+    p params
     if input
       if request.xhr?
         @organizations = Organization.search(upcase_input)
