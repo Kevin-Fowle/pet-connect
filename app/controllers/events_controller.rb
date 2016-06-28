@@ -1,4 +1,4 @@
-class EventsController < ApplicationController 
+class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   before_action :set_user
 
@@ -49,11 +49,11 @@ class EventsController < ApplicationController
     if logged_in?
       respond_to do |format|
         if @event.update(event_params)
-          if @user.pet_owner?
-            format.html { redirect_to @events, notice: 'Event was successfully updated.' }
+          if current_user.pet_owner?
+            format.html { redirect_to @user, notice: 'Event was successfully updated.' }
             format.json { render :index, status: :ok, location: @events }
           else
-            format.html { redirect_to @user, notice: 'Event was successfully updated.' }
+            format.html { redirect_to current_user.organization, notice: 'Event was successfully updated.' }
             format.json { render :show, status: :ok, location: @user }
           end
         else
