@@ -11,4 +11,13 @@ module UserHelper
   def authenticate!
     redirect '/login' unless logged_in?
   end
+
+  def authorized?
+    (@user.id == current_user.id)
+  end
+
+  def org_admin?
+    current_user.id == @organization.representative.id
+  end
+
 end

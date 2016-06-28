@@ -1,5 +1,9 @@
 <h2><%= @user.full_name %></h2>
 
+<% if logged_in? && authorized? %>
+  <span><%= link_to 'Inbox', user_messages_path(current_user) %></span>
+<% end %>
+
 
 <p class="user-rating"><%= @user.user_rating %></p>
 
@@ -41,15 +45,18 @@
       </li>
     <% end %>
   </ul>
+
+  <% if authorized? %>
   <%= link_to 'add a pet', new_user_pet_path(@user) %>
   <%= link_to 'add an event', new_user_event_path(@user) %>
+  <% end %>
 </div>
 
 <div>
   <!-- new_event link -->
 </div>
 
-<% if logged_in? %>
+<% if logged_in? && authorized?%>
 
   <div class="user-confirmed-events">
     <p>confirmed events</p>
@@ -87,7 +94,7 @@
   <div class= "add-hospital">
     <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
       <%= text_field_tag :name%>
-      <%= submit_tag "Search", id: "submit_button" %>
+      <!-- <%= submit_tag "Search", id: "submit_button" %> -->
     <% end %>
   </div>
 
