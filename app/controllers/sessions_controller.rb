@@ -1,11 +1,11 @@
 class SessionsController <  ApplicationController
   def new
-
+    render :template => "sessions/new", :layout => false
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user
     else

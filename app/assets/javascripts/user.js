@@ -1,11 +1,4 @@
 $(function() {
-  var $ownerForm = $("#owner-form");
-  $ownerForm.hide();
-
-  $("#owner-button").on("click", function(event) {
-    event.preventDefault();
-    $ownerForm.show();
-  });
 
   $(".pet-list").on("click", ".pet-header", function(event) {
     event.preventDefault();
@@ -14,6 +7,10 @@ $(function() {
   $(".button-collapse").sideNav();
 
   $('.modal-trigger').leanModal();
+
+  $(".modal-trigger").on("click", function(event) {
+    event.preventDefault();
+  });
 
   $(".pet-list").on("click", ".pet-review-button", function(event) {
    event.preventDefault();
@@ -25,10 +22,7 @@ $(function() {
     event.preventDefault();
     var petId = $(".pet-review-button").attr("id");
     console.log(petId);
-
   });
-
-
 
 
    // $("#organization-button").on("click", function(event) {
