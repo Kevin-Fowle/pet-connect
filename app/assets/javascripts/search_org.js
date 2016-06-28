@@ -9,7 +9,7 @@ $(document).ready(function(event){
   $('.add-hospital-form').on("submit", function(event){
     event.preventDefault();
     var searchForm = $(this);
-
+ 
   })
 
   $('#name').on("keyup", function(event) {

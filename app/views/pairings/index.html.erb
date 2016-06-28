@@ -1,29 +1,34 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-  <table>
-    <thead>
-      <tr>
-        <th>conversation</th>
-        <th>last message</th>
-        <th>messages</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+<h1>inbox</h1>
+  <% if !!current_user.messages && current_user.messages.count > 0 %>
+    <table>
+      <thead>
+        <tr>
+          <th>conversation</th>
+          <th>last message</th>
+          <th>messages</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-    <% if !!@pairings and @pairings.length > 0 %>
-      <tbody>
-        <% @pairings.each do |pairing| %>
-          <% if !!pairing.messages && pairing.messages.length > 0 %>
-            <tr>
-              <td><%= pairing.pair(current_user).name %></td>
-              <td><%= pairing.messages.last.created_at %></td>
-              <td><%= pairing.messages.count %></td>
-              <td><%= link_to 'Show', pairing_messages_path(pairing) %></td>
-            </tr>
+      <% if !!@pairings and @pairings.length > 0 %>
+        <tbody>
+          <% @pairings.each do |pairing| %>
+            <% if !!pairing.messages && pairing.messages.length > 0 %>
+              <tr>
+                <td><%= pairing.pair(current_user).name %></td>
+                <td><%= pairing.messages.last.created_at %></td>
+                <td><%= pairing.messages.count %></td>
+                <td><%= link_to 'Show', pairing_messages_path(pairing) %></td>
+              </tr>
+            <% end %>
           <% end %>
-        <% end %>
-      </tbody>
-    <% end %>
-  </table>
+        </tbody>
+      <% end %>
+    </table>
+  <% else %>
+    <p>Your inbox is empty</p>
+  <% end %>
 </div>
