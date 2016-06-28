@@ -76,11 +76,15 @@ class User < ActiveRecord::Base
   end
 
   def confirmed_events
-    events.where(accepted: true)
+    self.events.where(accepted: true)
   end
 
   def offered_events
-    events.where("organization_id IS NULL")
+    self.events.where("organization_id IS NULL")
+  end
+
+  def requested_events
+    self.events.where("organization_id IS NOT NULL and accepted IS NULL")
   end
 
   def declined_events

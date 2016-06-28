@@ -61,6 +61,17 @@
   </div>
 
   <div class="user-offered-events">
+    <p>requested events</p>
+      <% if @user.requested_events %>
+        <ul>
+        <% @user.requested_events.each do |event| %>
+          <li><%= link_to "#{event.start_time}", user_event_path(@user, event)%></li>
+        <% end %>
+        </ul>
+      <% end %>
+  </div>
+
+  <div class="user-offered-events">
     <p>offered events</p>
       <% if @user.offered_events %>
         <ul>
