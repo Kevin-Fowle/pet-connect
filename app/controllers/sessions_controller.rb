@@ -1,4 +1,5 @@
 class SessionsController <  ApplicationController
+  skip_before_action :require_login, only: [:new, :create, :destroy]
   def new
     render :template => "sessions/new", :layout => false
   end

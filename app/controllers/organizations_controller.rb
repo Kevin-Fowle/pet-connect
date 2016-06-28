@@ -1,4 +1,5 @@
 class OrganizationsController < ApplicationController
+  skip_before_action :require_login, only: [:search, :new, :show, :create]
   def search
     @organizations = Organization.all
     input = params['name']

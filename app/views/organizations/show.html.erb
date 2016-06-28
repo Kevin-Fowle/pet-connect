@@ -5,11 +5,16 @@
     <!-- Organization photo? -->
   </div>
 
+  <% if logged_in? && org_admin? %>
+    <span><%= link_to 'Inbox', organization_messages_path(@organization) %></span>
+
+
   <!-- Account for non-pairing? -->
   <% if current_user.pet_owner? && current_user.paired?(@organization) %>
     <% pairing = current_user.find_pairing(@organization) %>
     <%= link_to "Message #{@organization.name}", new_pairing_message_path(pairing) %>
   <% end %>
+
 
     <div class="pet-owner-list">
       <% if @organization.try(:approved_pairings).try(:length) > 0 %>
@@ -26,6 +31,9 @@
           <% @organization.pending_pairings.each do |pending_pairing| %>
             <li><%= pending_pairing.pet_owner.full_name %>
             <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+            <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
+              <%= submit_tag 'Reject Owner' %>
+            <% end %>
           <% end %>
         <% end %>
       </ul>
@@ -147,5 +155,5 @@
         <% end %>
       </div>
     </div>
-
+    <% end %>
 </div>

@@ -13,6 +13,7 @@ class Organization < ActiveRecord::Base
     where('name LIKE ? ', "%#{search_input}%").limit(10)
   end
 
+
   def has_representative?
     !!self.representative
   end
@@ -28,7 +29,6 @@ class Organization < ActiveRecord::Base
   def pending_pairings
     pairings.where(org_approved: false)
   end
-
 
   def approved_pet_owners
     approved_pairings.map { |pairing| pairing.pet_owner }

@@ -1,6 +1,10 @@
 class PairingsController < ApplicationController
   before_action :set_pairing, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token
+
+  def new
+
+  end
   
   def index
     if logged_in?
@@ -11,6 +15,7 @@ class PairingsController < ApplicationController
   end
 
   def show
+>>>>>>> master
   end
 
   def create
@@ -37,6 +42,15 @@ class PairingsController < ApplicationController
     p @pairing.org_approved
     @pairing.org_approved = true
     redirect_to @organization if @pairing.save
+  end
+
+  def destroy
+    p params
+    @pairing = Pairing.find(params[:id])
+    @organization = Organization.find(params[:organization_id])
+    @pairing.destroy
+    redirect_to @organization
+
   end
 
   private
