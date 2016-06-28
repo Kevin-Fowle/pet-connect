@@ -1,6 +1,4 @@
 class Organization < ActiveRecord::Base
-  include UserHelper
-  
   has_one :representative, class_name: "User"
   has_many :pairings
   has_many :events
@@ -14,6 +12,7 @@ class Organization < ActiveRecord::Base
     where('name LIKE ?', "%#{search_input}%").limit(10)
   end
 
+
   def approved_pairings
     pairings.where(org_approved: true)
   end
@@ -21,6 +20,7 @@ class Organization < ActiveRecord::Base
   def pending_pairings
     pairings.where(org_approved: false)
   end
+
 
   def approved_pet_owners
     approved_pairings.map { |pairing| pairing.pet_owner }
@@ -30,10 +30,15 @@ class Organization < ActiveRecord::Base
     pending_pairings.map { |pairing| pairing.pet_owner }
   end
 
+  def all_connected_owners
+    approved_pet_owners + pending_pet_owners
+  end
+
+
   def approved_events
     approved_events_arr = []
     approved_pet_owners.each do |approved_owner|
-      approved_events_arr += approved_owner.events
+      approved_events_arr += approved_owner.offered_events
     end
     approved_events_arr
   end
@@ -41,23 +46,38 @@ class Organization < ActiveRecord::Base
   def pending_events
     pending_events_arr = []
     pending_pet_owners.each do |pending_owner|
-      pending_events_arr += pending_owner.events
+      pending_events_arr += pending_owner.offered_events
     end
     pending_events_arr
   end
 
-  def conversations(current_user)
-    conversation_coll = []
+  def all_available_events
+    approved_events + pending_events
+  end
+
+  def requested_events
+    events.where("accepted IS NULL")
+  end
+
+  def scheduled_events
+    events.where(accepted: true)
+  end
+
+
+  def conversations(*current_user)
+    conversation_arr = []
     self.try(:pairings).each do |pairing|
-      conversation = {}
-      conversation[pairing.pet_owner.name] = pairing.try(:messages)
-      conversation_arr << conversation
+      if pairing.messages && pairing.messages.length > 0
+        conversation = {}
+        conversation[pairing.pet_owner.name] = pairing.messages
+        conversation_arr << conversation
+      end
     end
     conversation_arr
   end
 
-  def self.inactive
-    Organization.where(representative)
+  def inactive?
+    self.representative == nil
   end
 
   def average_rating

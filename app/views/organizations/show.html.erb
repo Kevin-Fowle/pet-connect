@@ -7,24 +7,86 @@
   <span><%= link_to 'Inbox', organization_messages_path(@organization) %></span>
 
   <div class="pet-owner-list">
-    <h3>approved pet owners</h3>
-    <ul class="pet-owners-approved">
-      <% @organization.try(:approved_pairings).try(:each) do |approved_pairing| %>
-        <li><%= approved_pairing.pet_owner.full_name %></li>
-      <% end %>
-    </ul>
+    <% if @organization.try(:approved_pairings).try(:length) > 0 %>
+      <h3>approved pet owners</h3>
+      <ul class="pet-owners-approved">
+        <% @organization.approved_pairings.each do |approved_pairing| %>
+          <li><%= approved_pairing.pet_owner.full_name %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
     <ul class="pet-owners-pending">
-      <h3>pending pet owners</h3>
-      <% @organization.try(:pending_pairings).try(:each) do |pending_pairing| %>
-        <li><%= pending_pairing.pet_owner.full_name %>
-        <button id='approve_pet_owner' onclick="location.href='http://localhost:3000/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+      <% if @organization.try(:pending_pairings).try(:length) > 0 %>
+        <h3>pending pet owners</h3>
+        <% @organization.pending_pairings.each do |pending_pairing| %>
+          <li><%= pending_pairing.pet_owner.full_name %>
+          <button id='approve_pet_owner' onclick="location.href='http://localhost:3000/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+        <% end %>
       <% end %>
     </ul>
   </div>
 
+<!-- Partial these similar event lists if time allows: -->
   <div class="event-list">
-    <h3>available events</h3>
+    <div class="scheduled events">
+      <% if @organization.try(:scheduled_events).try(:length) > 0 %>
+        <h3>scheduled</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Pet owner</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @organization.scheduled_events.each do |requested_event| %>
+              <tr>
+                <td><%= scheduled_event.date.to_s %></td>
+                <td><%= scheduled_event.start_time.to_s %> - <%= scheduled_event.end_time.to_s %></td>
+                <td><%= scheduled_event.pet_owner.full_name %></td>
+                <td><%= link_to 'Show', user_event_path(scheduled_event.pet_owner.id, scheduled_event) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+
+    <div class="requested-events">
+      <% if @organization.try(:requested_events).try(:length) > 0 %>
+        <h3>requested</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Time</th>
+              <th>Pet owner</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @organization.requested_events.each do |requested_event| %>
+              <tr>
+                <td><%= requested_event.date.to_s %></td>
+                <td><%= requested_event.start_time.to_s %> - <%= requested_event.end_time.to_s %></td>
+                <td><%= requested_event.pet_owner.full_name %></td>
+                <td><%= link_to 'Show', user_event_path(requested_event.pet_owner.id, requested_event) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+    
+    <% if @organization.all_available_events.length > 0 %>
+      <h3>available events</h3>
+    <% end %>
+
     <div class="approved-events">
       <% if @organization.try(:approved_events).try(:length) > 0 %>
         <h3>from approved pet-owners</h3>
@@ -53,8 +115,8 @@
     </div>
 
     <div class="pending-events">
-      <h3>from pet-owners pending approval</h3>
       <% if @organization.try(:pending_events).try(:length) > 0 %>
+        <h3>from pet-owners pending approval</h3>
         <table>
           <thead>
             <tr>

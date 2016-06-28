@@ -17,9 +17,9 @@
          <% if logged_in? %>
           <% if current_user.organization_user? %>
             <% organization = current_user.behalf_of %>
-            <%= link_to "Hello, #{current_user.email}", organization %>
+            <%= link_to "Hello, #{current_user.name}", organization %>
           <% else %>
-           <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a></li>
+           <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.name %></a></li>
           <% end %>
            <li><a class='index_login' href="/logout">Logout</a></li>
          <% else %>

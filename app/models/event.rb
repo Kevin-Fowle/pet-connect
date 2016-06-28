@@ -5,4 +5,12 @@ class Event < ActiveRecord::Base
   def self.open
     where("organization_id IS NULL")
   end
+
+  def self.requested
+    where.not("organization_id IS NULL")
+  end
+
+  def self.scheduled
+    self.requested.where(accepted: true)
+  end
 end

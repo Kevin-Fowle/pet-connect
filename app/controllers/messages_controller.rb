@@ -4,9 +4,6 @@ class MessagesController < ApplicationController
 
   def index
     if logged_in?
-      @messages = current_user.behalf_of.try(:messages)
-    end
-    if !!@messages
       @conversations = current_user.behalf_of.conversations(current_user)
     end
     # redirect_to current_user.behalf_of show if @messages.try(:length) < 1
