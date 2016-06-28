@@ -1,7 +1,7 @@
 class PairingsController < ApplicationController
   include ApplicationHelper
   skip_before_filter :verify_authenticity_token
-  
+
   def new
   end
 
@@ -29,6 +29,15 @@ class PairingsController < ApplicationController
     p @pairing.org_approved
     @pairing.org_approved = true
     redirect_to @organization if @pairing.save
+  end
+
+  def destroy
+    p params
+    @pairing = Pairing.find(params[:id])
+    @organization = Organization.find(params[:organization_id])
+    @pairing.destroy
+    redirect_to @organization
+
   end
 
   private
