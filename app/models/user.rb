@@ -40,19 +40,26 @@ class User < ActiveRecord::Base
   end
 
   def paired?(partner)
-    self.behalf_of.pairings.exists?(parter.behalf_of.id)
+    if self.pet_owner?
+      self.pairings.exists?(organization: partner.id)
+    else
+      self.behalf_of.pairings.exists?(pet_owner: partner.id)
+    end
   end
 
-  def find_pairing(pairing)
-    self.behalf_of.pairings.find(pairing.behalf_of.id)
+  def find_pairing(partner)
+    if self.pet_owner?
+      self.pairings.find_by(organization: partner.id)
+    else
+      self.behalf_of.pairings.find_by(pet_owner: partner.id)
+    end
   end
 
   def find_partner(pairing)
-    pairing = find_pairing(pairing)
-    if self.organization_user?
-      return pairing.pet_owner
-    else
+    if self.pet_owner?
       return pairing.organization
+    else
+      return pairing.pet_owner
     end
   end
 

@@ -1,23 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>subject:</strong>
+<h3>
   <%= @message.subject %>
-</p>
+</h3>
 
+<br>
+  
 <p>
-  <strong>Body:</strong>
   <%= @message.body %>
 </p>
 
-<p>
-  <strong>Published:</strong>
-  <%= @message.created_at %>
-</p>
-<p>
-  <strong>Author:</strong>
-  <%= @message.author %>
-</p>
+<br>
+
+<div class="message-details">
+  <p>
+    <%= @message.created_at.strftime("%m/%d/%Y, %I:%M%p") %>
+  </p>
+  <p>by <%= @message.author.name %></p>
+</div>
+
+<br>
 
 <% if current_user.behalf_of == @message.author %>
   <%= link_to 'Back', pairing_messages_path(@pairing) %>

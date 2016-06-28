@@ -3,6 +3,6 @@ class Message < ActiveRecord::Base
   belongs_to :messageable, polymorphic: true
 
   def author
-    pairing.messageable
+    messageable
   end
 end

@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @pairing.pair(current_user) %> conversation</h1>
-
+<h2><%= @pairing.pair(current_user).name.downcase %> conversation</h1>
+<br>
 <% if !!@messages && @messages.length > 0 %>
+  <h3>messages</h3>
   <table>
     <thead>
       <tr>
@@ -18,7 +19,7 @@
         <tr>
           <td><%= message.subject %></td>
           <td><%= message.body %></td>
-          <td><%= message.created_at %></td>
+          <td><%= message.created_at.strftime("%m/%d/%Y, %I:%M%p") %></td>
           <td><%= link_to 'Show', pairing_message_path(@pairing, message) %></td>
         </tr>
       <% end %>
