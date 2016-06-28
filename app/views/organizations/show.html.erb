@@ -21,6 +21,9 @@
           <% @organization.pending_pairings.each do |pending_pairing| %>
             <li><%= pending_pairing.pet_owner.full_name %>
             <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+            <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
+              <%= submit_tag 'Reject Owner' %>
+            <% end %>
           <% end %>
         <% end %>
       </ul>
