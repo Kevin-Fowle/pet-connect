@@ -90,9 +90,11 @@ class User < ActiveRecord::Base
   end
 
   def user_rating
-    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
-    if pet_rating.length > 0
-      pet_rating.reduce(:+) / pet_rating.length
+    pet_ratings = self.pets.map{|pet| pet.ratings}.flatten
+    pet_stars = pet_ratings.map{|rating| rating.stars}.flatten
+
+    if pet_stars.length > 0
+      pet_stars.reduce(:+) / pet_stars.length
     else
       0
     end
