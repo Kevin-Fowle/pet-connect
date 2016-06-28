@@ -21,8 +21,10 @@
           <% if current_user.organization_user? %>
             <% organization = current_user.behalf_of %>
             <%= link_to "Hello, #{current_user.name}", organization %>
+            <span class="organization-inbox"><%= link_to 'Inbox', organization_messages_path(current_user.behalf_of) %></span>
           <% else %>
            <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.name %></a></li>
+           <span class="pet-owner-inbox"><%= link_to 'Inbox', user_messages_path(current_user.behalf_of) %></span>
           <% end %>
            <li><a class='index_login' href="/logout">Logout</a></li>
          <% else %>

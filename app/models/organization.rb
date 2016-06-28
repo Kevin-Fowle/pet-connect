@@ -18,7 +18,9 @@ class Organization < ActiveRecord::Base
     !!self.representative
   end
 
-  
+  def behalf_of
+    self
+  end
 
   def approved_pairings
     pairings.where(org_approved: true)
@@ -27,7 +29,6 @@ class Organization < ActiveRecord::Base
   def pending_pairings
     pairings.where(org_approved: false)
   end
-
 
   def approved_pet_owners
     approved_pairings.map { |pairing| pairing.pet_owner }

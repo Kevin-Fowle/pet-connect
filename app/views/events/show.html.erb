@@ -38,4 +38,11 @@
     <%= f.hidden_field :organization_id, value: current_user.behalf_of.id %>
     <%= f.submit "Request" %>
   <% end %>
+
+  <% if current_user.organization_user? && current_user.paired?(@user) %>
+    <% pairing = current_user.find_pairing(@user) %>
+    <div>
+      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>  
+    </div>
+  <% end %>
 <% end %>

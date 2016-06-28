@@ -1,10 +1,20 @@
 <div class="container">
   <div class="organization-info">
     <h1><%= @organization.name %></h1>
+    <!-- Org. address? -->
     <!-- Organization photo? -->
   </div>
+
   <% if logged_in? && org_admin? %>
     <span><%= link_to 'Inbox', organization_messages_path(@organization) %></span>
+
+
+  <!-- Account for non-pairing? -->
+  <% if current_user.pet_owner? && current_user.paired?(@organization) %>
+    <% pairing = current_user.find_pairing(@organization) %>
+    <%= link_to "Message #{@organization.name}", new_pairing_message_path(pairing) %>
+  <% end %>
+
 
     <div class="pet-owner-list">
       <% if @organization.try(:approved_pairings).try(:length) > 0 %>

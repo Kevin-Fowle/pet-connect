@@ -1,8 +1,21 @@
 class PairingsController < ApplicationController
-  include ApplicationHelper
+  before_action :set_pairing, only: [:show, :edit, :update, :destroy]
   skip_before_filter :verify_authenticity_token
 
   def new
+
+  end
+  
+  def index
+    if logged_in?
+      @pairings = current_user.behalf_of.try(:pairings)
+    else
+      redirect_to '/login'
+    end
+  end
+
+  def show
+>>>>>>> master
   end
 
   def create
@@ -41,6 +54,10 @@ class PairingsController < ApplicationController
   end
 
   private
+
+  def set_pairing
+    @pairing = Pairing.find(params[:id])
+  end
 
   def pairing_params
     params.require(:user).permit(:first_name, :last_name, :email, :password, :street_address, :city, :zip_code, :state)
