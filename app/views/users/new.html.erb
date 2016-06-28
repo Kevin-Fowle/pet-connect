@@ -1,11 +1,23 @@
+<div class="center-content">
+  <div class="reg-buttons">
+    <p>
+      Register as a...
+    </p>
+    <button id="owner-button" class="waves-effect waves-light btn">Pet Owner</button>
+    <p>
+      or an
+    </p>
+    <button id="organization-button" class="waves-effect waves-light btn" onclick="location.href='http://localhost:3000/organizations/new';">Organization</button>
+  </div>
 <button id="owner-button">Register As a Pet Owner</button>
-<button id="organization-button" onclick="location.href='http://localhost:3000/organizations/new';">Register As an Organization</button>
+<button id="organization-button" onclick="location.href='/organizations/new';">Register As an Organization</button>
 
-<%= render "form" %>
-  <% if @errors %>
-    <div class="errors">
-    <% @errors.each do |error| %>
-    <p><%= error %></p>
+  <%= render "form" %>
+    <% if @errors %>
+      <div class="errors">
+      <% @errors.each do |error| %>
+      <p><%= error %></p>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

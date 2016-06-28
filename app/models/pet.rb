@@ -16,7 +16,8 @@ class Pet < ActiveRecord::Base
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   def average_rating
-   ratings = self.ratings
+   pet_ratings = self.ratings
+   ratings = pet_ratings.map{|rating| rating.stars}
    if ratings.length > 0
    ratings.reduce(:+) / ratings.length
    else

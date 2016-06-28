@@ -1,0 +1,14 @@
+
+<div id="modal1" class="modal">
+  <%= form_tag(sessions_path, method: "post") do %>
+    <div class="modal-content">
+      <%= label_tag :email %>
+      <%= text_field_tag :email %>
+      <%= label_tag :password %>
+      <%= password_field_tag :password %>
+    </div>
+    <div class="modal-footer">
+      <%= submit_tag "login", class: "modal-action modal-close waves-effect waves-light btn" %>
+    </div>
+  <% end %>
+</div>
