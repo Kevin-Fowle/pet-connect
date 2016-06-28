@@ -17,6 +17,10 @@ class Organization < ActiveRecord::Base
     !!self.representative
   end
 
+  def behalf_of
+    self
+  end
+
   def approved_pairings
     pairings.where(org_approved: true)
   end

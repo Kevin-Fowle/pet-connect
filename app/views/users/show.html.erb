@@ -8,6 +8,11 @@
 <p class="user-rating"><%= @user.user_rating %></p>
 
 
+<% if current_user.organization_user? && current_user.paired?(@user) %>
+  <% pairing = current_user.find_pairing(@user) %>
+  <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
+<% end %>
+
 <div class="pet-list">
   <ul class="collapsible" data-collapsible="accordion">
     <% @pets.each do |pet| %>

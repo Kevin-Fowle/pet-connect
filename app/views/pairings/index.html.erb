@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<% if logged_in? %>
+  <div class="container">
+    <h1>Inbox -- <%= current_user.behalf_of.name %></h1>
+
+    <% if !!@pairings %>
+      <ul class="conversation-messages-list">
+        <% @pairings.each do |pairing| %>
+          <% message = pairing.messages.last %>
+          <li>
+            <h2>pairing.pair(current_user)</h2>
+            <p><strong><%= message.subject %></strong></p>
+            <p><%= message.body %></p>
+            <p>by: <%= message.author(current_user).name %></p>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
