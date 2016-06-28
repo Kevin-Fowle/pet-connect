@@ -21,7 +21,9 @@
           <h3>pending pet owners</h3>
           <% @organization.pending_pairings.each do |pending_pairing| %>
             <li><%= pending_pairing.pet_owner.full_name %>
-            <button id='approve_pet_owner' onclick="location.href='http://localhost:3000/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+            <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+            <button id='reject_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
+
           <% end %>
         <% end %>
       </ul>
