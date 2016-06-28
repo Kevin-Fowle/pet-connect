@@ -1,4 +1,5 @@
 .container {
+  width: 100%;
 }
 .header {
   color: white;
@@ -21,12 +22,7 @@
   display: table;
   clear: both;
 }
-.collapsible-header {
-  padding: 15px;
-}
-.collabsible-body p {
-  padding: 5px inherit;
-}
+
 .splash {
   background: url("therapydog2.jpg") no-repeat;
   width: 100%;
@@ -47,6 +43,27 @@
   padding-top: 7%;
   padding-right: 2%
 }
+.center-content {
+  margin: 10% auto 0;
+  text-align: center;
+}
+.mar-top-5 {
+  margin-top: 5%;
+}
+.site-header {
+  font-weight: 200;
+  margin-left: 2%;
+}
+
+
+// Override Materialize
+
+form select {
+  display: inline-block;
+}
+form label {
+  font-size: 1em;
+}
 .side-nav {
   background: -moz-linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* ff3.6+ */
   background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(60,162,162,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
@@ -56,6 +73,22 @@
   background: linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#3CA2A2',GradientType=1 ); /* ie6-9 */
 }
-form select {
-  display: inline-block;
+.collapsible-header {
+  padding: 15px;
+}
+.collabsible-body p {
+  padding: 5px inherit;
+}
+.button-collapse {
+  margin-right: 2%;
+}
+.side-nav {
+  width: 150px;
+}
+
+@media only screen and (min-width: 960px) {
+  .container {
+    width: 70%;
+
+  }
 }
