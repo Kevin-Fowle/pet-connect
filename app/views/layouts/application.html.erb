@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>T</title>
+  <title>Patient Pets</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -18,7 +18,12 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a class="index_login" href="/">Home</a></li>
          <% if logged_in? %>
-           <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a></li>
+          <% if current_user.organization_user? %>
+            <% organization = current_user.behalf_of %>
+            <%= link_to "Hello, #{current_user.name}", organization %>
+          <% else %>
+           <li><a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.name %></a></li>
+          <% end %>
            <li><a class='index_login' href="/logout">Logout</a></li>
          <% else %>
            <li><a class='index_login' href="/users/new">Register</a></li>

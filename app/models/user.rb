@@ -75,13 +75,20 @@ class User < ActiveRecord::Base
     where("organization_id IS NULL")
   end
 
-
   def confirmed_events
-    events.where(accepted: true)
+    self.events.where(accepted: true)
   end
 
   def offered_events
-    events.where("organization_id IS NULL")
+    self.events.where("organization_id IS NULL")
+  end
+
+  def requested_events
+    self.events.where("organization_id IS NOT NULL and accepted IS NULL")
+  end
+
+  def declined_events
+    events.where(accepted: false)
   end
 
 
@@ -90,9 +97,11 @@ class User < ActiveRecord::Base
   end
 
   def user_rating
-    pet_rating = self.pets.map{|pet| pet.ratings}.flatten
-    if pet_rating.length > 0
-      pet_rating.reduce(:+) / pet_rating.length
+    pet_ratings = self.pets.map{|pet| pet.ratings}.flatten
+    pet_stars = pet_ratings.map{|rating| rating.stars}.flatten
+
+    if pet_stars.length > 0
+      pet_stars.reduce(:+) / pet_stars.length
     else
       0
     end
@@ -102,9 +111,12 @@ class User < ActiveRecord::Base
   def conversations(current_user) ## Module method?
     conversation_arr = []
     self.try(:pairings).each do |pairing|
-      conversation = {}
-      conversation[pairing.pair(current_user).name] = pairing.try(:messages)
-      conversation_arr << conversation
+      if pairing.messages && pairing.messages.length > 0
+          conversation = {}
+
+        conversation[pairing.pair(current_user).name] = pairing.messages
+        conversation_arr << conversation
+      end
     end
     conversation_arr
   end
