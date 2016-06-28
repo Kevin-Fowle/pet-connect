@@ -1,16 +1,17 @@
 class MessagesController < ApplicationController 
-  before_action :set_message, only: [:edit, :update, :destroy]
-  before_action :set_pairing, except: [:index]
+  before_action :set_message, only: [:show, :edit, :update, :destroy]
+  before_action :set_pairing
 
   def index
     if logged_in?
-      @conversations = current_user.behalf_of.conversations(current_user)
+      @messages = @pairing.try(:messages)
+    else
+      redirect_to '/login'
     end
     # redirect_to current_user.behalf_of show if @messages.try(:length) < 1
   end
 
   def show
-    @messages = @pairing.try(:messages)
   end
 
   def new
@@ -28,8 +29,8 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        format.html { redirect_to pairing_messages_path, notice: 'Message was successfully created.' }
-        format.json { render :index, status: :created, location: @message }
+        format.html { redirect_to pairing_messages_path(@pairing), notice: 'Message was successfully created.' }
+        format.json { render :index, status: :created, location: pairing_messages_path(@pairing) }
       else
         format.html { render :new }
         format.json { render json: @message.errors, status: :unprocessable_entity }

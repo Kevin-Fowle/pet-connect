@@ -39,6 +39,23 @@ class User < ActiveRecord::Base
     self
   end
 
+  def paired?(partner)
+    self.behalf_of.pairings.exists?(parter.behalf_of.id)
+  end
+
+  def find_pairing(pairing)
+    self.behalf_of.pairings.find(pairing.behalf_of.id)
+  end
+
+  def find_partner(pairing)
+    pairing = find_pairing(pairing)
+    if self.organization_user?
+      return pairing.pet_owner
+    else
+      return pairing.organization
+    end
+  end
+
 
   def self.org_users
     where.not("organization_id IS NULL")

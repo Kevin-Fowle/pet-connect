@@ -13,3 +13,10 @@
   </p>
 
 <% end %>
+
+<br>
+
+<% if current_user.behalf_of == @message.author %>
+  <%= link_to 'Edit', edit_pairing_message_path(@pairing, @message) %> |
+  <%= link_to 'Back', pairing_messages_path(@pairing) %>
+<% end %>

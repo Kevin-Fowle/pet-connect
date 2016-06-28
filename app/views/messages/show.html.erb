@@ -1,15 +1,24 @@
-<div class="container">
-  <h1>Conversation -- <%= @pairing.pair(current_user).name %></h1>
+<p id="notice"><%= notice %></p>
 
-  <% if @messages && @messages.length > 0 %>
-    <ul class="conversation-messages-list">
-      <% @messages.each do |message| %>
-        <li>
-          <p><strong><%= message.subject %></strong></p>
-          <p><%= message.body %></p>
-          <p><%= message.author(current_user).name %></p>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+<p>
+  <strong>subject:</strong>
+  <%= @message.subject %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @message.body %>
+</p>
+
+<p>
+  <strong>Published:</strong>
+  <%= @message.created_at %>
+</p>
+<p>
+  <strong>Author:</strong>
+  <%= @message.author %>
+</p>
+
+<% if current_user.behalf_of == @message.author %>
+  <%= link_to 'Back', pairing_messages_path(@pairing) %>
+<% end %>
