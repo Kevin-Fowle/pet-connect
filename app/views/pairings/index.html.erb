@@ -1,21 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<% if logged_in? %>
-  <div class="container">
-    <h1>Inbox -- <%= current_user.behalf_of.name %></h1>
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>conversation</th>
+        <th>last message</th>
+        <th>messages</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-    <% if !!@pairings %>
-      <ul class="conversation-messages-list">
+    <% if !!@pairings and @pairings.length > 0 %>
+      <tbody>
         <% @pairings.each do |pairing| %>
-          <% message = pairing.messages.last %>
-          <li>
-            <h2>pairing.pair(current_user)</h2>
-            <p><strong><%= message.subject %></strong></p>
-            <p><%= message.body %></p>
-            <p>by: <%= message.author(current_user).name %></p>
-          </li>
+          <% if !!pairing.messages && pairing.messages.length > 0 %>
+            <tr>
+              <td><%= pairing.pair(current_user).name %></td>
+              <td><%= pairing.messages.last.created_at %></td>
+              <td><%= pairing.messages.count %></td>
+              <td><%= link_to 'Show', pairing_messages_path(pairing) %></td>
+            </tr>
+          <% end %>
         <% end %>
-      </ul>
+      </tbody>
     <% end %>
-  </div>
-<% end %>
+  </table>
+</div>

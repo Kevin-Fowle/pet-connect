@@ -3,24 +3,25 @@ Rails.application.routes.draw do
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
   resources :organizations do
-    resources :messages, only: [:index]
     resources :pairings, except: [:show]
     resources :reviews, only:[:new, :create]
   end
 
   resources :users, except:[:index] do
-    resources :messages, only: [:index]
     resources :events
     resources :pets, except:[:index] do
       resources :ratings, only:[:new, :create]
     end
   end
 
-  resources :pairings
+  resources :pairings do
+    resources :messages
+  end
 
 
   resources :sessions, except: [:index, :edit, :update, :show, :new, :delete]
 
+  get '/inbox' => "pairings#index", :as => :inbox
   get '/login' => "sessions#new", :as => :new_session
   get '/logout' => "sessions#destroy", :as => :destroy_session
 

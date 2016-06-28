@@ -15,7 +15,6 @@ class PairingsController < ApplicationController
   end
 
   def show
->>>>>>> master
   end
 
   def create
