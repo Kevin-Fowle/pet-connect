@@ -75,13 +75,20 @@ class User < ActiveRecord::Base
     where("organization_id IS NULL")
   end
 
-
   def confirmed_events
-    events.where(accepted: true)
+    self.events.where(accepted: true)
   end
 
   def offered_events
-    events.where("organization_id IS NULL")
+    self.events.where("organization_id IS NULL")
+  end
+
+  def requested_events
+    self.events.where("organization_id IS NOT NULL and accepted IS NULL")
+  end
+
+  def declined_events
+    events.where(accepted: false)
   end
 
 
@@ -104,9 +111,12 @@ class User < ActiveRecord::Base
   def conversations(current_user) ## Module method?
     conversation_arr = []
     self.try(:pairings).each do |pairing|
-      conversation = {}
-      conversation[pairing.pair(current_user).name] = pairing.try(:messages)
-      conversation_arr << conversation
+      if pairing.messages && pairing.messages.length > 0
+          conversation = {}
+
+        conversation[pairing.pair(current_user).name] = pairing.messages
+        conversation_arr << conversation
+      end
     end
     conversation_arr
   end
