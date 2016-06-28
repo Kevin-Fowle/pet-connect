@@ -26,6 +26,7 @@ class UsersController <  ApplicationController
     @user = User.find_by(id: params[:id])
     @pets = @user.try(:pets)
     # @pet = Pet.find()
+    @rating = Rating.new
     @pairings = @user.try(:pairings)
     @organizations = []
     @pairings.try(:each) do |pair|

@@ -25,6 +25,19 @@ $(function() {
     event.preventDefault();
     var petId = $(".pet-review-button").attr("id");
     console.log(petId);
+    var url = $(this).attr('action')
+    var data = $(this).serialize() + "&ratable_id=" + petId + "&ratable_type=Pet"
+
+
+    var request = $.ajax({
+      url: url,
+      method: 'post',
+      data: data
+    })
+
+    request.done(function(response){
+      console.log(response)
+    })
 
   });
 
