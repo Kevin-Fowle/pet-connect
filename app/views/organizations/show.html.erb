@@ -5,9 +5,10 @@
     <!-- Organization photo? -->
   </div>
 
-  <% if current_user.paired?(@organization.representative) %>
-    <% pairing = current_user.find_pairing(@user) %>
-    <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
+  <!-- Account for non-pairing? -->
+  <% if current_user.pet_owner? && current_user.paired?(@organization) %>
+    <% pairing = current_user.find_pairing(@organization) %>
+    <%= link_to "Message #{@organization.name}", new_pairing_message_path(pairing) %>
   <% end %>
 
     <div class="pet-owner-list">
