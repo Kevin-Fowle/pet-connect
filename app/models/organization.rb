@@ -13,9 +13,12 @@ class Organization < ActiveRecord::Base
     where('name LIKE ? ', "%#{search_input}%").limit(10)
   end
 
+
   def has_representative?
     !!self.representative
   end
+
+  
 
   def approved_pairings
     pairings.where(org_approved: true)

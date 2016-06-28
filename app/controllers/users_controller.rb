@@ -1,6 +1,8 @@
 class UsersController <  ApplicationController
-
+  include UserHelper
+  skip_before_action :require_login, only: [:new, :create, :show]
   def new
+    @user = User.find_by(id: params[:id])
   end
 
   def create
@@ -24,8 +26,8 @@ class UsersController <  ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    redirect_to '/organizations/#{@user.organization_id}' if @user.organization_id
     @pets = @user.try(:pets)
-    # @pet = Pet.find()
     @rating = Rating.new
     @pairings = @user.try(:pairings)
     @organizations = []
