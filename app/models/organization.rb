@@ -9,9 +9,13 @@ class Organization < ActiveRecord::Base
   end
 
   def self.search(search_input)
-    where('name LIKE ?', "%#{search_input}%").limit(10)
+    #is there user with this id
+    where('name LIKE ? ', "%#{search_input}%").limit(10)
   end
 
+  def has_representative?
+    !!self.representative
+  end
 
   def approved_pairings
     pairings.where(org_approved: true)
