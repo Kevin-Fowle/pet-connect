@@ -24,7 +24,7 @@
       <% end %>
     </p>
     <p>
-      <%= form_for [@user, @event], method: :patch, html: { class: "reject_request"} do |f| %>
+      <%= form_for [@user, @event], method: :delete, html: { class: "reject_request"} do |f| %>
         <%= f.hidden_field :accepted, value: false %>
         <%= f.submit "Reject" %>
       <% end %>

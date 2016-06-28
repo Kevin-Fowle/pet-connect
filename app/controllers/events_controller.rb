@@ -46,7 +46,12 @@ class EventsController < ApplicationController
   end
 
   def update
+    p params['event']['accepted']
     if logged_in?
+      if params['event']['accepted']
+          @event.accepted = true
+          @event.save
+      end
       respond_to do |format|
         if @event.update(event_params)
           if current_user.pet_owner?
@@ -68,7 +73,7 @@ class EventsController < ApplicationController
     if logged_in? && current_user = @user
       @event.destroy
       respond_to do |format|
-        format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
+        format.html { redirect_to @user, notice: 'Event was successfully destroyed.' }
         format.json { head :no_content }
       end
     end

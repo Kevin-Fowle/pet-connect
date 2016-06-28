@@ -43,13 +43,16 @@
             </thead>
 
             <tbody>
-              <% @organization.scheduled_events.each do |requested_event| %>
-                <tr>
-                  <td><%= scheduled_event.date.to_s %></td>
-                  <td><%= scheduled_event.start_time.to_s %> - <%= scheduled_event.end_time.to_s %></td>
-                  <td><%= scheduled_event.pet_owner.full_name %></td>
-                  <td><%= link_to 'Show', user_event_path(scheduled_event.pet_owner.id, scheduled_event) %></td>
-                </tr>
+              <% if @organization.try(:requested_event)%>
+
+                <% @organization.requested_event.each do |requested_event| %>
+                  <tr>
+                    <td><%= requested_event.date.to_s %></td>
+                    <td><%= requested_event.start_time.to_s %> - <%= requested_event.end_time.to_s %></td>
+                    <td><%= requested_event.pet_owner.full_name %></td>
+                    <td><%= link_to 'Show', user_event_path(requested_event.pet_owner.id, scheduled_event) %></td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>
