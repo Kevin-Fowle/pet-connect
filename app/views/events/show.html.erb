@@ -16,9 +16,24 @@
 </p>
 
 <% if logged_in? && current_user == @user %>
+  <% if @event.accepted == nil %>
+    <p>
+      <%= form_for [@user, @event], method: :patch, html: { class: "approve_request"} do |f| %>
+        <%= f.hidden_field :accepted, value: true %>
+        <%= f.submit "Approve" %>
+      <% end %>
+    </p>
+    <p>
+      <%= form_for [@user, @event], method: :patch, html: { class: "reject_request"} do |f| %>
+        <%= f.hidden_field :accepted, value: false %>
+        <%= f.submit "Reject" %>
+      <% end %>
+    </p>
+  <% end %>
+
   <%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
   <%= link_to 'Back', user_events_path(@user) %>
-<% elsif logged_in? && current_user.organization_user? %>
+<% elsif logged_in? && current_user.organization_user? && @event.organization_id == nil %>
   <%= form_for [@user, @event], method: :patch, html: { class: "request_timeslot"} do |f| %>
     <%= f.hidden_field :organization_id, value: current_user.behalf_of.id %>
     <%= f.submit "Request" %>
