@@ -1,8 +1,10 @@
 $(document).ready(function(event){
 
-  $('#new_organization').on("submit", function(event){
+  $('#search-bar').on("submit", function(event){
     event.preventDefault();
-    var searchForm = $(this);
+    $("#owner-form").show();
+    $(this).hide();
+    $('#search_results').hide();
 
   });
 

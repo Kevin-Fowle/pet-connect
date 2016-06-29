@@ -10,6 +10,7 @@ class UsersController <  ApplicationController
     if params['organization_id']
       @organization = Organization.find(params['organization_id'])
       @user.organization_id = params['organization_id']
+      redirect_to organization_path(@organization)
     end
 
     respond_to do |format|

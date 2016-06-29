@@ -26,12 +26,12 @@ class OrganizationsController < ApplicationController
   end
 
   def new
-    # @organization = Organization.new
+    @organization = Organization.new
   end
 
   def create
     @organization = Organization.find_by(name: params['name'])
-    render 'new_org_user'
+    render partial: 'users/form'
   end
 
   private
