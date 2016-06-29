@@ -1,6 +1,6 @@
 <ul class="collection">
   <% @organizations.each do |organization| %>
-    <li class="collection-item">
+    <a href="#" class="collection-item"><li >
       <% if !organization.has_representative? %>
         <h5><%= organization.name %></h5>
         <span><%= organization.full_address %></span>
@@ -9,7 +9,7 @@
           <input type='hidden' value="<%= organization.id %>" name="organization_id">
         </form>
       </span>
-    </li>
+    </li></a>
     <% end %>
   <% end %>
 </ul>

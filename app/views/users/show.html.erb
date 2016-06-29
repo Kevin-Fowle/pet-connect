@@ -125,7 +125,6 @@
   <div class= "add-hospital modal-content">
     <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
     <%= text_field_tag :name, "", autofocus: true, placeholder: "search for a hospital" %>
-    <!-- <%= submit_tag "Search", id: "submit_button" %> -->
     <% end %>
   </div>
   <div id="search_results"></div>

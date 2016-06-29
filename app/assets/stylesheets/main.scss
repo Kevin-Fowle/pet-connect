@@ -90,6 +90,9 @@ form label {
 .side-nav {
   width: 150px;
 }
+p.pet-detail {
+  padding: .5rem 1rem;
+}
 .rating-paw {
   width: 25px;
   margin-right: 3px;
@@ -112,7 +115,6 @@ form label {
 @media only screen and (min-width: 960px) {
   .container {
     width: 70%;
-
   }
 }
 .rating right > span.pet-rating{
