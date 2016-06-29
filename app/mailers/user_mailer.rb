@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
   default from: 'pet.connect@outlook.com'
- 
+
   def welcome_email(user)
     @user = user
     # @url  = 'http://example.com/login'
@@ -15,10 +15,10 @@ class UserMailer < ApplicationMailer
   end
 
   def scheduled_email(pet_owner, org_user)
-    @user = user
+    @user = pet_owner
     @org_user = org_user
     # @url  = 'http://example.com/login'
-    mail(to: [@pet_owner.email, @org_user.email], subject: 'Pet connect scheduled')
+    mail(to: [@user.email, @org_user.email], subject: 'Pet connect scheduled')
   end
 
 
