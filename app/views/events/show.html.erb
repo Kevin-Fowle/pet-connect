@@ -46,9 +46,7 @@
   <% if current_user.organization_user? && current_user.paired?(@user) %>
     <% pairing = current_user.find_pairing(@user) %>
     <div>
-      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>  
+      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
     </div>
-
-  <% elsif current_user == @event.pet_owner && %>
   <% end %>
 <% end %>
