@@ -59,7 +59,7 @@
 
                 <% @organization.scheduled_events.each do |scheduled_events| %>
                   <tr>
-                    <td><%= scheduled_events.date.strftime("%D")
+                    <td><%= scheduled_events.date.strftime("%D") %></td>
                     <td><%= scheduled_events.start_time.strftime('%I:%M %p') %> - <%= scheduled_events.end_time.strftime('%I:%M %p') %></td>
                     <td><%= scheduled_events.pet_owner.full_name %></td>
                   </tr>
