@@ -8,6 +8,10 @@ class Organization < ActiveRecord::Base
     "#{self.street_address}, #{self.city}, #{self.state},  #{self.zip_code}"
   end
 
+  def display_phone
+    "#{phone[0..2]}-#{phone[3..5]}-#{phone[6..7]}"
+  end
+
   def self.search(search_input)
     #is there user with this id
     where('name LIKE ? ', "%#{search_input}%").limit(10)
