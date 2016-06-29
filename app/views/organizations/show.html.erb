@@ -1,12 +1,15 @@
 <div class="container">
   <div class="organization-info">
     <h1><%= @organization.name %></h1>
-    <!-- Org. address? -->
+    <br>
+    <p><b>hospital info:</b></p>
+    <p><%= @organization.street_address %></p>
+    <p><%= @organization.city %>, <%= @organization.zip_code %> <%= @organization.state %></p>
+    <p><%= @organization.display_phone %></p>
     <!-- Organization photo? -->
   </div>
 
   <% if logged_in? && org_admin? %>
-    <span><%= link_to 'Inbox', inbox_path(@organization) %></span>
 
 
   <!-- Account for non-pairing? -->
