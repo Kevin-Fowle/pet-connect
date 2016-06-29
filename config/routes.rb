@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   get '/inbox' => "pairings#index", :as => :inbox
   get '/login' => "sessions#new", :as => :new_session
   get '/logout' => "sessions#destroy", :as => :destroy_session
+  post '/users/text' => "users#text", :as => :user_text
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -36,10 +36,28 @@ class UsersController <  ApplicationController
     end
   end
 
+  def text
+    to = params[:to].gsub("-", "").gsub("\s", "")
+    @body = params[:body]
+    account_sid = "*********************************"
+    auth_token = "*********************************"
+    @client = Twilio::REST::Client.new account_sid, auth_token
+
+    @client.account.messages.create({
+      body: params[:textmessage],
+      to: "+#{to}",
+      from: "+12513336060",
+      media_url: "#{lion}"
+    }).status
+      redirect_to 'show'
+
+
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :street_address, :city, :zip_code, :state)
+    params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :password, :street_address, :city, :zip_code, :state)
   end
 
 end

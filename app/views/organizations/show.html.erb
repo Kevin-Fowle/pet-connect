@@ -6,7 +6,7 @@
   </div>
 
   <% if logged_in? && org_admin? %>
-    <span><%= link_to 'Inbox', organization_messages_path(@organization) %></span>
+    <span><%= link_to 'Inbox', inbox_path %></span>
 
 
   <!-- Account for non-pairing? -->
@@ -22,6 +22,24 @@
         <ul class="pet-owners-approved">
           <% @organization.approved_pairings.each do |approved_pairing| %>
             <li><%= approved_pairing.pet_owner.full_name %></li>
+            <!-- Modal Trigger -->
+            <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Text</a>
+
+            <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+              <div class="modal-content">
+                <form id="text-message" action="/users/text" method="post">
+                  <p>Send a text to <%= approved_pairing.pet_owner.first_name %></p>
+                  <input type="text" id="form3" class="form-control" name="to" value= <%= approved_pairing.pet_owner.cellphone %> >
+                  <label for="form3">Text Message</label>
+                  <input type="text" id="form3" class="form-control" name="textmessage">
+                  <div class="modal-footer">
+                    <input type="submit" value="Submit" class=" modal-action modal-close waves-effect waves-green btn-flat"></input>
+                  </div>
+                </form>
+              </div>
+            </div>
+
           <% end %>
         </ul>
       <% end %>

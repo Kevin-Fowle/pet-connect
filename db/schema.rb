@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20160627151234) do
     t.string   "city"
     t.string   "zip_code"
     t.string   "state"
+    t.string   "cellphone"
     t.integer  "organization_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
