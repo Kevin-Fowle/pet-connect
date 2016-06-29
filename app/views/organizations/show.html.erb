@@ -2,16 +2,19 @@
   <div class="organization-info">
     <h1><%= @organization.name %></h1>
     <br>
+    <br>
+    <br>
     <p><b>hospital info:</b></p>
     <p><%= @organization.street_address %></p>
     <p><%= @organization.city %>, <%= @organization.zip_code %> <%= @organization.state %></p>
     <p><%= @organization.display_phone %></p>
     <!-- Organization photo? -->
   </div>
+
   <!-- Account for non-pairing? -->
   <% if current_user.pet_owner? && current_user.paired?(@organization) %>
     <% pairing = current_user.find_pairing(@organization) %>
-    <%= link_to "Message #{@organization.name}", new_pairing_message_path(pairing) %>
+    <%= link_to "Message hospital", new_pairing_message_path(pairing) %>
   <% end %>
 
   <br>
