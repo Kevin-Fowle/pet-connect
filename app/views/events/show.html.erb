@@ -15,7 +15,7 @@
   <%= @event.end_time.strftime('%I:%M %p') %>
 </p>
 
-<% if logged_in? && current_user == @user %>
+<% if authorized? && current_user.pet_owner? && @event.organization != nil %>
   <% if @event.accepted == nil %>
     <p>
       <%= form_for [@user, @event], method: :patch, html: { class: "approve_request"} do |f| %>
@@ -29,11 +29,15 @@
         <%= f.submit "Reject" %>
       <% end %>
     </p>
+    <p>
+      <% pairing = current_user.find_pairing(@event.organization) %>
+      <%= link_to "Message #{@event.organization.name}", new_pairing_message_path(pairing) %>
+    </p>
   <% end %>
 
   <%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
   <%= link_to 'Back', user_events_path(@user) %>
-<% elsif logged_in? && current_user.organization_user? && @event.organization_id == nil %>
+<% elsif logged_in? && current_user.organization_user? && @event.organization_id == nil && current_user.paired?(@user) %>
   <%= form_for [@user, @event], method: :patch, html: { class: "request_timeslot"} do |f| %>
     <%= f.hidden_field :organization_id, value: current_user.behalf_of.id %>
     <%= f.submit "Request" %>
@@ -42,7 +46,7 @@
   <% if current_user.organization_user? && current_user.paired?(@user) %>
     <% pairing = current_user.find_pairing(@user) %>
     <div>
-      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>  
+      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
     </div>
   <% end %>
 <% end %>

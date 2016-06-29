@@ -21,7 +21,7 @@
         <h3>approved pet owners</h3>
         <ul class="pet-owners-approved">
           <% @organization.approved_pairings.each do |approved_pairing| %>
-            <li><%= approved_pairing.pet_owner.full_name %></li>
+            <li> <a href="/users/<%= approved_pairing.pet_owner.id %> "> <%= approved_pairing.pet_owner.full_name %> </li> </a>
           <% end %>
         </ul>
       <% end %>
@@ -29,7 +29,7 @@
         <% if @organization.try(:pending_pairings).try(:length) > 0 %>
           <h3>pending pet owners</h3>
           <% @organization.pending_pairings.each do |pending_pairing| %>
-            <li><%= pending_pairing.pet_owner.full_name %>
+            <li> <a href="/users/<%= pending_pairing.pet_owner.id %> "> <%= pending_pairing.pet_owner.full_name %> </a>
             <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
             <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
               <%= submit_tag 'Reject Owner' %>
@@ -59,8 +59,8 @@
 
                 <% @organization.scheduled_events.each do |scheduled_events| %>
                   <tr>
-                    <td><%= scheduled_events.date.to_s %></td>
-                    <td><%= scheduled_events.start_time.to_s %> - <%= scheduled_events.end_time.to_s %></td>
+                    <td><%= scheduled_events.date.strftime("%D")
+                    <td><%= scheduled_events.start_time.strftime('%I:%M %p') %> - <%= scheduled_events.end_time.strftime('%I:%M %p') %></td>
                     <td><%= scheduled_events.pet_owner.full_name %></td>
                   </tr>
                 <% end %>
@@ -86,8 +86,8 @@
             <tbody>
               <% @organization.requested_events.each do |requested_event| %>
                 <tr>
-                  <td><%= requested_event.date.to_s %></td>
-                  <td><%= requested_event.start_time.to_s %> - <%= requested_event.end_time.to_s %></td>
+                  <td><%= requested_event.date.strftime("%D") %></td>
+                  <td><%= requested_event.start_time.strftime('%I:%M %p') %> - <%= requested_event.end_time.strftime('%I:%M %p') %></td>
                   <td><%= requested_event.pet_owner.full_name %></td>
                   <td><%= link_to 'Show', user_event_path(requested_event.pet_owner.id, requested_event) %></td>
                 </tr>
@@ -117,8 +117,8 @@
             <tbody>
               <% @organization.approved_events.each do |approved_event| %>
                 <tr>
-                  <td><%= approved_event.date.to_s %></td>
-                  <td><%= approved_event.start_time.to_s %> - <%= approved_event.end_time.to_s %></td>
+                  <td><%= approved_event.date.strftime("%D") %></td>
+                  <td><%= approved_event.start_time.strftime('%I:%M %p') %> - <%= approved_event.end_time.strftime('%I:%M %p') %></td>
                   <td><%= approved_event.pet_owner.full_name %></td>
                   <td><%= link_to 'Show', user_event_path(approved_event.pet_owner.id, approved_event) %></td>
                 </tr>
@@ -144,8 +144,8 @@
             <tbody>
               <% @organization.pending_events.each do |pending_event| %>
                 <tr>
-                  <td><%= pending_event.date.to_s %></td>
-                  <td><%= pending_event.start_time.to_s %> - <%= pending_event.end_time %></td>
+                  <td><%= pending_event.date.strftime("%D") %></td>
+                  <td><%= pending_event.start_time.strftime('%I:%M %p') %> - <%= pending_event.end_time.strftime('%I:%M %p') %></td>
                   <td><%= pending_event.pet_owner.full_name.to_s %></td>
                   <td><%= link_to 'Show', user_event_path(pending_event.pet_owner.id, pending_event) %></td>
                 </tr>

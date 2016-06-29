@@ -64,7 +64,7 @@
     <% if @user.confirmed_events %>
       <ul>
         <% @user.confirmed_events.each do |event| %>
-          <li><%= event.start_time %></li>
+          <li><%= link_to "#{event.date.strftime("%D")} #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event)%></li>
         <% end %>
       </ul>
     <% end %>
@@ -75,7 +75,7 @@
       <% if @user.requested_events %>
         <ul>
         <% @user.requested_events.each do |event| %>
-          <li><%= link_to "#{event.start_time}", user_event_path(@user, event)%></li>
+          <li><%= link_to "#{event.date.strftime("%D")} #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event)%></li>
         <% end %>
         </ul>
       <% end %>
@@ -86,7 +86,7 @@
       <% if @user.offered_events %>
         <ul>
         <% @user.offered_events.each do |event| %>
-          <li><%= event.start_time %></li>
+          <li><<%= link_to "#{event.date.strftime("%D")} #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event)%></li>
         <% end %>
         </ul>
       <% end %>
@@ -99,7 +99,7 @@
       <% if @user.try(:pairings).length > 0 &&  @user.approved_pairings.length > 0%>
         <ul>
           <% @user.approved_organizations.each do |org| %>
-            <li> <%= org.name %> </li>
+          <li><a href="/organizations/<%= org.id %>"><%= org.name %></a></li>
           <% end %>
         </ul>
       <% end %>
@@ -111,7 +111,7 @@
       <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
         <ul>
           <% @user.pending_organizations.each do |org| %>
-            <li> <%= org.name %> </li>
+            <li><a href="/organizations/<%= org.id %>"> <%= org.name %> </a></li>
           <% end %>
         </ul>
       <% end %>

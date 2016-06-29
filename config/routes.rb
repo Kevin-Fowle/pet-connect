@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root 'welcome#index'
   get "/organizations/search" => "organizations#search", :as => :search_organizations
 
@@ -21,7 +22,8 @@ Rails.application.routes.draw do
 
   resources :sessions, except: [:index, :edit, :update, :show, :new, :delete]
 
-  get '/inbox' => "pairings#index", :as => :inbox
+  get '/inbox' =>
+   "pairings#index", :as => :inbox
   get '/login' => "sessions#new", :as => :new_session
   get '/logout' => "sessions#destroy", :as => :destroy_session
 
