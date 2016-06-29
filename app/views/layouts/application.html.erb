@@ -17,45 +17,26 @@
       <div class="nav-wrapper">
         <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li>
-            <a class="index_login" href="/">Home</a>
-          </li>
-
+          <li><a class="index_login" href="/">Home</a></li>
           <% if logged_in? %>
-            <%= link_to "Hello, #{current_user.behalf_of.name}", current_user.behalf_of %>
-            <span class="organization-inbox"><%= link_to 'Inbox', inbox_path %></span>
-            <li>
-              <a class='index_login' href="/logout">Logout</a>
-            </li>
-
+            <li><%= link_to "My Account", current_user.behalf_of %></li>
+            <li><%= link_to 'Inbox', inbox_path, class: "organization-inbox" %></li>
+            <li><a class='index_login' href="/logout">Logout</a></li>
           <% else %>
-            <li>
-              <a class='index_login' href="/users/new">Register</a>
-            </li>
-            <li>
-              <a id="login-link" class="index_login modal-trigger" href="#modal1">Login</a>
-            </li>
+            <li><a class='index_login' href="/users/new">Register</a></li>
+            <li><a id="login-link" class="index_login modal-trigger" href="#modal1">Login</a></li>
           <% end %>
         </ul>
 
         <ul class="side-nav right" id="mobile-demo">
-          <li>
-            <a class="index_login" href="/">Home</a>
-          </li>
+          <li><a class="index_login" href="/">Home</a></li>
           <% if logged_in? %>
-            <li>
-              <a class='index_login' href="/users/<%= current_user.id %>">Hello: <%= current_user.email %></a></li>
-            <li>
-              <a class='index_login' href="/logout">Logout</a>
-            </li>
-
+            <li><a class='index_login' href="/users/<%= current_user.id %>">My Account</a></li>
+            <li><%= link_to 'Inbox', inbox_path, class: "organization-inbox" %></li>
+            <li><a class='index_login' href="/logout">Logout</a></li>
           <% else %>
-            <li>
-              <a class='index_login' href="/users/new">Register</a>
-            </li>
-            <li>
-              <a class="index_login modal-trigger" href="#modal1">Login</a>
-            </li>
+            <li><a class='index_login' href="/users/new">Register</a></li>
+            <li><a class="index_login modal-trigger" href="#modal1">Login</a></li>
           <% end %>
         </ul>
       </div>
