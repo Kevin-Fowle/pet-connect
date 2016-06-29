@@ -19,7 +19,8 @@
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a class="index_login" href="/">Home</a></li>
           <% if logged_in? %>
-            <li><%= link_to "My Account", current_user.behalf_of %></li>
+            <% @account = current_user.behalf_of %>
+            <li><%= link_to "My Account", @account %></li>
             <li><%= link_to 'Inbox', inbox_path, class: "organization-inbox" %></li>
             <li><a class='index_login' href="/logout">Logout</a></li>
           <% else %>

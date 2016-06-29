@@ -72,12 +72,12 @@ class Organization < ActiveRecord::Base
   end
 
 
-  def conversations(*current_user)
+  def conversations(current_user)
     conversation_arr = []
     self.try(:pairings).each do |pairing|
       if pairing.messages && pairing.messages.length > 0
         conversation = {}
-        conversation[pairing.pet_owner.name] = pairing.messages
+        conversation[pairing.pair(current_user).name] = pairing.messages
         conversation_arr << conversation
       end
     end
