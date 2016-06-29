@@ -59,7 +59,7 @@
     <% if @user.confirmed_events %>
       <ul>
         <% @user.confirmed_events.each do |event| %>
-          <li><a href="/users/<%= @user.id %>/events"><%= event.start_time %></a></li>
+          <li><a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.start_time %></a></li>
         <% end %>
       </ul>
     <% end %>
@@ -81,7 +81,7 @@
       <% if @user.offered_events %>
         <ul>
         <% @user.offered_events.each do |event| %>
-          <li><a href="/users/<%= @user.id %>/events"><%= event.start_time %></a></li>
+          <li><a href="/users/<%= @user.id %>/events/<%= event.id %>"><%= event.start_time %></a></li>
         <% end %>
         </ul>
       <% end %>
