@@ -6,19 +6,19 @@
   </p>
   <p>
     <%= f.label :species %>
-    <%= f.text_field :species %>
+    <%= f.text_field :species, placeholder:"Cat, Dog, Reptile" %>
   </p>
   <p>
     <%= f.label :breed %>
-    <%= f.text_field :breed %>
+    <%= f.text_field :breed, placeholder:"Golden Retriever, Siamese, Ball Python" %>
   </p>
   <p>
     <%= f.label :weight %>
-    <%= f.text_field :weight %>
+    <%= f.text_field :weight, placeholder:"In pounds" %>
   </p>
   <p>
     <%= f.label :description %>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, placeholder: "Tell us a little about your best friend", id: "textarea1", class: "materialize-textarea" %>
   </p>
   <p>
   <%= f.label :avatar %>
