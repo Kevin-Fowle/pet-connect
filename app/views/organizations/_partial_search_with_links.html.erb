@@ -1,6 +1,6 @@
-<ul>
+<ul class="collection">
   <% @organizations.each do |organization| %>
-    <li>
+    <li class="collection-item">
       <% if !organization.has_representative? %>
         <h5><%= organization.name %></h5>
         <span><%= organization.full_address %></span>

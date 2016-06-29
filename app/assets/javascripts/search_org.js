@@ -9,14 +9,14 @@ $(document).ready(function(event){
   $('.add-hospital-form').on("submit", function(event){
     event.preventDefault();
     var searchForm = $(this);
- 
-  })
+
+  });
 
   $('#name').on("keyup", function(event) {
     var searchField = $(this);
     // console.log(searchField)
     var searchData = searchField.val();
-    console.log(searchData)
+    console.log(searchData);
     if (searchData.length > 4) {
        var searchRequest = $.ajax({
         url: '/organizations/search',
@@ -25,7 +25,7 @@ $(document).ready(function(event){
       });
 
        searchRequest.done(function(response) {
-         console.log(response)
+         console.log(response);
         $("#search_results").html(response);
       });
      }
@@ -38,6 +38,10 @@ $(document).ready(function(event){
     $('#submit_button').val('Select');
 
   });
+
+  $("#add-org-button").on("click", function() {
+    $("#search-field").focus();
+  });
 });
 
 $(document).ready(function(event){
@@ -45,6 +49,6 @@ $(document).ready(function(event){
   $('#approve_pet_owner').on("click", function(event){
     event.preventDefault();
 
-  })
+  });
 
-})
+});
