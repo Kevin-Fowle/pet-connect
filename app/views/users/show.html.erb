@@ -86,7 +86,7 @@
       <% if @user.offered_events %>
         <ul>
         <% @user.offered_events.each do |event| %>
-          <li><<%= link_to "#{event.date.strftime("%D")} #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event)%></li>
+          <li><%= link_to "#{event.date.strftime("%D")} #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event)%></li>
         <% end %>
         </ul>
       <% end %>

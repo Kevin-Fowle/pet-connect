@@ -17,7 +17,7 @@ module UserHelper
   end
 
   def org_admin?
-    current_user.id == @organization.representative.id
+    current_user.id == @organization.try(:representative).try(:id)
   end
 
 end
