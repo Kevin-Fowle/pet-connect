@@ -69,8 +69,7 @@
 
   <div class="events">
     <% if @user.try(:events) && @user.events.count > 0 %>
-      <h4>EVENTS</h4>
-      <br>
+      <h4>Events</h4>
     <% end %>
 
     <div class="user-confirmed-events scheduled-events">
@@ -115,7 +114,6 @@
   <div class="preferred-hospitals pairings">
     <% if @user.try(:pairings) && @user.pairings.count > 0 %>
       <h4>Preferred Hospitals</h4>
-      <br>
     <% end %>
 
     <div class="section">
@@ -148,7 +146,9 @@
   </div>
 <% end %>
 
-<a id="add-org-button" class="waves-effect waves-light btn modal-trigger" href="#modal3">Add a Hospital</a>
+
+
+<a id="add-org-button" class="waves-effect waves-light btn modal-trigger" href="#modal3">add preferred hospital</a>
 
 <div id="modal3" class="modal bottom-sheet">
   <div class= "add-hospital modal-content">

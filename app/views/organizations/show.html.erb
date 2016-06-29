@@ -8,29 +8,36 @@
     <p><%= @organization.display_phone %></p>
     <!-- Organization photo? -->
   </div>
-
-  <% if logged_in? && org_admin? %>
-
-
   <!-- Account for non-pairing? -->
   <% if current_user.pet_owner? && current_user.paired?(@organization) %>
     <% pairing = current_user.find_pairing(@organization) %>
     <%= link_to "Message #{@organization.name}", new_pairing_message_path(pairing) %>
   <% end %>
 
+  <br>
+  <br>
+  
+  <% if logged_in? && org_admin? %>
+
 
     <div class="pet-owner-list">
+      <% if @organization.try(:pairings).try(:length) > 0 %>
+        <h3>Preferred pet-owners</h3>
+      <% end %>
+
       <% if @organization.try(:approved_pairings).try(:length) > 0 %>
-        <h3>approved pet owners</h3>
+        <h4>approved:</h4>
         <ul class="pet-owners-approved">
           <% @organization.approved_pairings.each do |approved_pairing| %>
             <li> <a href="/users/<%= approved_pairing.pet_owner.id %> "> <%= approved_pairing.pet_owner.full_name %> </li> </a>
           <% end %>
         </ul>
       <% end %>
+
+
       <ul class="pet-owners-pending">
         <% if @organization.try(:pending_pairings).try(:length) > 0 %>
-          <h3>pending pet owners</h3>
+          <h4>pending:</h4>
           <% @organization.pending_pairings.each do |pending_pairing| %>
             <li> <a href="/users/<%= pending_pairing.pet_owner.id %> "> <%= pending_pairing.pet_owner.full_name %> </a>
             <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
@@ -44,9 +51,13 @@
 
   <!-- Partial these similar event lists if time allows: -->
     <div class="event-list">
+      <% if @organization.try(:events).try(:length) > 0 %>
+        <h3>Events</h3>
+      <% end %>
+
       <div class="scheduled events">
         <% if @organization.try(:scheduled_events).try(:length) > 0 %>
-          <h3>scheduled</h3>
+          <h4>scheduled:</h4>
           <table>
             <thead>
               <tr>
@@ -75,7 +86,7 @@
 
       <div class="requested-events">
         <% if @organization.try(:requested_events).try(:length) > 0 %>
-          <h3>requested</h3>
+          <h4>requested:</h4>
           <table>
             <thead>
               <tr>
@@ -100,13 +111,15 @@
         <% end %>
       </div>
 
+
+
       <% if @organization.all_available_events.length > 0 %>
         <h3>available events</h3>
       <% end %>
 
       <div class="approved-events">
         <% if @organization.try(:approved_events).try(:length) > 0 %>
-          <h3>from approved pet-owners</h3>
+          <h4>from approved pet-owners:</h4>
           <table>
             <thead>
               <tr>
@@ -133,7 +146,7 @@
 
       <div class="pending-events">
         <% if @organization.try(:pending_events).try(:length) > 0 %>
-          <h3>from pet-owners pending approval</h3>
+          <h4>from pet-owners pending approval</h4>
           <table>
             <thead>
               <tr>
@@ -158,5 +171,5 @@
         <% end %>
       </div>
     </div>
-    <% end %>
+  <% end %>
 </div>
