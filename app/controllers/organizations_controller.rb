@@ -12,6 +12,8 @@ class OrganizationsController < ApplicationController
           render partial: 'organizations/partial_user_search', :layout => false
         elsif @organizations.length > 0
           render partial: 'organizations/partial_search_with_links', :layout => false
+        else
+          render json: "No results found"
         end
       end
     end
@@ -29,7 +31,7 @@ class OrganizationsController < ApplicationController
 
   def create
     @organization = Organization.find_by(name: params['name'])
-    render partial: 'new_org_user'
+    render 'new_org_user'
   end
 
   private

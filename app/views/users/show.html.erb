@@ -19,9 +19,14 @@
       <div class="collapsible-header clear">
         <h3 class="left">
           <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
-          <div class="rating right">
-        <span><%= pet.average_rating %></span>
-      </div>
+          <div class="rating">
+            <% pet.average_rating.times do %>
+              <%= image_tag("paw.png", class: "rating-paw left") %>
+            <% end %>
+            <% (5 - pet.average_rating).times do %>
+              <%= image_tag("empty-paw.png", class: "rating-paw left") %>
+            <% end %>
+          </div>
         </h3>
           <%= image_tag pet.avatar.url(:thumb), class: "right" %>
         </div>
@@ -87,16 +92,7 @@
       <% end %>
   </div>
 
-  <div class= "add-hospital">
-    <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
-      <%= text_field_tag :name%>
-      <!-- <%= submit_tag "Search", id: "submit_button" %> -->
-    <% end %>
-  </div>
-
-  <div id="search_results">
-  </div>
-
+<div class="section">
   <div class="user-parings">
     <div class="approved-pairings">
       <h5>approved hospitals</h5>
@@ -122,3 +118,16 @@
     </div>
   </div>
 <% end %>
+
+<a id="add-org-button" class="waves-effect waves-light btn modal-trigger" href="#modal3">Add a Hospital</a>
+
+<div id="modal3" class="modal bottom-sheet">
+  <div class= "add-hospital modal-content">
+    <%= form_tag(organizations_path , :method => "post", class: "add-hospital-form", id: "search-bar") do %>
+    <%= text_field_tag :name, "", autofocus: true %>
+    <!-- <%= submit_tag "Search", id: "submit_button" %> -->
+    <% end %>
+  </div>
+  <div id="search_results"></div>
+</div>
+</div>
