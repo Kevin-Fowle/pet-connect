@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'twiliomessages/reply'
 
   root 'welcome#index'
   get "/organizations/search" => "organizations#search", :as => :search_organizations
@@ -19,12 +18,6 @@ Rails.application.routes.draw do
   resources :pairings do
     resources :messages
   end
-
-  resource :twiliomessages do
-  collection do
-    post 'reply'
-  end
-end
 
 
   resources :sessions, except: [:index, :edit, :update, :show, :new, :delete]
