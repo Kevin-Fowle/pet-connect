@@ -1,9 +1,5 @@
 <h2><%= @user.full_name %></h2>
 
-<% if logged_in? && authorized? %>
-  <span><%= link_to 'Inbox', user_messages_path(current_user) %></span>
-<% end %>
-
 
 <p class="user-rating"><%= @user.user_rating %></p>
 
@@ -47,13 +43,13 @@
   </ul>
 
   <% if authorized? %>
-  <%= link_to 'add a pet', new_user_pet_path(@user) %>
-  <%= link_to 'add an event', new_user_event_path(@user) %>
+    <p>
+      <%= link_to 'add pet', new_user_pet_path(@user) %>
+    </p>
+    <p>
+      <%= link_to 'add event', new_user_event_path(@user) %>
+    </p>
   <% end %>
-</div>
-
-<div>
-  <!-- new_event link -->
 </div>
 
 <% if logged_in? && authorized?%>

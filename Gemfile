@@ -31,6 +31,8 @@ gem 'rails_12factor'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 
+gem 'twilio-ruby', '~> 4.11.1'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
