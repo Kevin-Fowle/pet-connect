@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
     conversation_arr = []
     self.try(:pairings).each do |pairing|
       if pairing.messages && pairing.messages.length > 0
-          conversation = {}
+        conversation = {}
 
         conversation[pairing.pair(current_user).name] = pairing.messages
         conversation_arr << conversation

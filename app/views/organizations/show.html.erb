@@ -11,6 +11,7 @@
     <!-- Organization photo? -->
   </div>
 
+
   <!-- Account for non-pairing? -->
   <% if current_user.pet_owner? && current_user.paired?(@organization) %>
     <% pairing = current_user.find_pairing(@organization) %>
@@ -19,7 +20,7 @@
 
   <br>
   <br>
-  
+
   <% if logged_in? && org_admin? %>
 
 
