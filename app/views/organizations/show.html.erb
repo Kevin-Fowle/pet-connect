@@ -21,7 +21,7 @@
         <h3>approved pet owners</h3>
         <ul class="pet-owners-approved">
           <% @organization.approved_pairings.each do |approved_pairing| %>
-            <li><%= approved_pairing.pet_owner.full_name %></li>
+            <li> <a href="/users/<%= approved_pairing.pet_owner.id %> "> <%= approved_pairing.pet_owner.full_name %> </li> </a>
           <% end %>
         </ul>
       <% end %>
@@ -29,7 +29,7 @@
         <% if @organization.try(:pending_pairings).try(:length) > 0 %>
           <h3>pending pet owners</h3>
           <% @organization.pending_pairings.each do |pending_pairing| %>
-            <li><%= pending_pairing.pet_owner.full_name %>
+            <li> <a href="/users/<%= pending_pairing.pet_owner.id %> "> <%= pending_pairing.pet_owner.full_name %> </a>
             <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
             <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
               <%= submit_tag 'Reject Owner' %>
