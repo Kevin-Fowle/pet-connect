@@ -46,6 +46,8 @@ class EventsController < ApplicationController
   end
 
   def update
+    @current_user = current_user
+
     p params['event']['accepted']
     if logged_in?
       if params['event']['accepted']
@@ -55,10 +57,16 @@ class EventsController < ApplicationController
       respond_to do |format|
         if @event.update(event_params)
           if current_user.pet_owner?
-            format.html { redirect_to @user, notice: 'Event was successfully updated.' }
+
+            UserMailer.scheduled_email(@user, @event.organization.representative).deliver_now
+
+            format.html { redirect_to @user, notice: 'Event was successfully scheduled.' }
             format.json { render :index, status: :ok, location: @events }
           else
-            format.html { redirect_to current_user.organization, notice: 'Event was successfully updated.' }
+
+            UserMailer.requested_email(@user, @current_user).deliver_now
+
+            format.html { redirect_to current_user.organization, notice: 'Event was successfully requested.' }
             format.json { render :show, status: :ok, location: @user }
           end
         else
