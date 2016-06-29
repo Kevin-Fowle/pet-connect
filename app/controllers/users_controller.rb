@@ -19,7 +19,7 @@ class UsersController <  ApplicationController
 
         # Tell the UserMailer to send a welcome email after save
         UserMailer.welcome_email(@user).deliver_now
- 
+
         format.html { redirect_to(organization_path(@organization), notice: 'Organization user successfully created.') }
         format.json { render json: @organization, status: :created, location: @organization }
 
@@ -28,8 +28,8 @@ class UsersController <  ApplicationController
 
         # Tell the UserMailer to send a welcome email after save
         UserMailer.welcome_email(@user).deliver_now
- 
-        format.html { redirect_to (new_user_pet_path(@user), notice: 'User was successfully created.') }
+
+        format.html { redirect_to(new_user_pet_path(@user), notice: 'User was successfully created.') }
         format.json { render json: @user, status: :created, location: @user }
 
       else
@@ -38,6 +38,7 @@ class UsersController <  ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
+    end
   end
 
   def show
