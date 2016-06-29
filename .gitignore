@@ -12,3 +12,4 @@
 !/log/.keep
 /tmp
 /tokens.rb
+/config/local_env.yml
