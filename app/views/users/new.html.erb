@@ -15,9 +15,8 @@
   <%= render "form" %>
     <% if @errors %>
       <div class="errors">
-      <% @errors.each do |error| %>
-      <p><%= error %></p>
-      <% end %>
+        <% @steg = Cow.new({ :cow => 'turtle' }) %>
+        <%= render "errors" %>
     <% end %>
   </div>
 </div>
