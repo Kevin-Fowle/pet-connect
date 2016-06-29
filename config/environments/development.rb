@@ -18,11 +18,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
+  address:              'smtp-mail.outlook.com',
   port:                 587,
-  domain:               'example.com',
-  user_name:            '<username>',
-  password:             '<password>',
+  domain:               'outlook.com',
+  user_name:            'pet.connect@outlook.com',
+  password:             'MarleyandMe',
   authentication:       'plain',
   enable_starttls_auto: true  }
 
