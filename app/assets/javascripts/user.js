@@ -1,5 +1,7 @@
 $(function() {
 
+  SI.Files.stylizeAll();
+
   $(".pet-list").on("click", ".pet-header", function(event) {
     event.preventDefault();
   });
@@ -20,11 +22,8 @@ $(function() {
 
   $(".pet-list").on("submit", "#rating-form", function(event) {
     event.preventDefault();
-    var petId = $(".pet-review-button").attr("id");
-    console.log(petId);
-
     var url = $(this).attr('action');
-    var data = $(this).serialize() + "&ratable_id=" + petId + "&ratable_type=Pet";
+    var data = $(this).serialize() + "&ratable_type=Pet";
 
     var request = $.ajax({
       url: url,

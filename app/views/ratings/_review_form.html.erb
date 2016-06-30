@@ -1,11 +1,11 @@
 
-<div id="modal1" class="modal">
+<div id="modal<%= @pet.id %>" class="modal">
   <%= form_tag(user_pet_ratings_path(@user, @pet), method: "post", id: "rating-form") do %>
   <div class="modal-content">
     <% if @organization %>
-      <input type="hidden" name="organization_id" value="<%= @organization.id %>">
+      <input type="hidden" name="ratable_id" value="<%= @organization.id %>">
     <% elsif @user %>
-      <input type="hidden" name="pet_id" value="">
+      <input type="hidden" name="ratable_id" value="<%= @pet.id %>">
     <% end %>
     <%= label_tag :stars %>
     <%= select_tag :stars, options_for_select( [['5', 5], ['4', 4], ['3', 3], ['2', 2], ['1', 1]]) %>

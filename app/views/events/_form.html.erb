@@ -1,17 +1,21 @@
+<div class="section">
+
 <%= form_for [@user, @event] do |f| %>
   <p>
-    <%= f.label :date %>:
+    <%= f.label :date %>
     <%= date_select :event, :date %>
   </p>
   <p>
-    <%= f.label :start_time %>:
-    <%= time_select :event, :start_time %>
+    <%= f.label :start_time %>
+    <%= time_select :event, :start_time, ampm: true, minute_step: 15 %>
   </p>
   <p>
-    <%= f.label :end_time %>:
-    <%= time_select :event, :end_time %>
+    <%= f.label :end_time %>
+    <%= time_select :event, :end_time, ampm: true, minute_step: 15  %>
   </p>
   <p>
-    <%= f.submit %>
+    <%= f.submit nil, :class => "waves-effect waves-light btn modal-trigger" %>
   </p>
 <% end %>
+
+</div>
