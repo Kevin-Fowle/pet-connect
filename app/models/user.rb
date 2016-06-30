@@ -39,6 +39,10 @@ class User < ActiveRecord::Base
     self
   end
 
+  def representative
+    self
+  end
+
   def paired?(partner)
     if self.pet_owner?
       self.pairings.exists?(organization: partner.id)

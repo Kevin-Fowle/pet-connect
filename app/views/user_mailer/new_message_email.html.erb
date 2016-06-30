@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>You have a new message from <%= @from_user %></h1>
+    <p>
+      <b><%= @message.subject %></b>
+    </p>
+      <br>
+    <p>
+      <%= @message.body %>
+    </p>
+    <p>Visit and login to PETconnect to reply.</p>
+  </body>
+</html>
