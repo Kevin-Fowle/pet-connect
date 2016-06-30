@@ -1,4 +1,4 @@
-<h2><%= @user.full_name %></h2>
+<h2><%= @user.name %></h2>
 
 <div class="user details">
   <p class="user-rating"><%= @user.user_rating %></p>
@@ -131,9 +131,10 @@
         </div>
 
         <div class="pending-pairings">
-          <h5>pending:</h5>
 
           <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+            <h5>pending:</h5>
+            
             <ul>
               <% @user.pending_organizations.each do |org| %>
                 <li><a href="/organizations/<%= org.id %>"> <%= org.name %> </a></li>
