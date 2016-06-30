@@ -3,7 +3,7 @@
     <a href="#" class="collection-item"><li >
       <% if !organization.has_representative? %>
         <h5><%= organization.name %></h5>
-        <span><%= organization.full_address %></span>
+        <span class="org-address"><%= organization.full_address %></span>
         <span>
         <form name="create_pairing", action="/organizations/<%= organization.id %>/pairings" method='post'>
           <input type='hidden' value="<%= organization.id %>" name="organization_id">
