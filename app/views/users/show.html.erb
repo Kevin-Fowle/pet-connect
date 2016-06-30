@@ -1,7 +1,8 @@
-<div class="user details section">
+<div class="row section">
+<div class="user details col s10 push-s1 m12">
   <h2><%= @user.full_name %></h2>
-  <p class="user-rating"><%= @user.user_rating %></p>
   <p class="user-location"><%= @user.city %>, <%= @user.state %></p>
+</div>
 </div>
 
 <!-- Account for non-pairing? -->
@@ -19,7 +20,7 @@
         <li>
           <div class="collapsible-header clear">
             <h3 class="left">
-              <%= link_to pet.name, user_pet_path(@user, pet), class: "pet-header" %>
+              <%= link_to pet.name, user_pet_path(@user, @pet), class: "pet-header" %>
               <div class="rating">
                 <% pet.average_rating.times do %>
                   <%= image_tag("paw.png", class: "rating-paw left") %>
@@ -30,9 +31,8 @@
                 <span class="review-no">(<%= pet.ratings.length %>)</span>
               </div>
             </h3>
-            <%= image_tag pet.avatar.url(:medium), class: "right icon-img" %>
+              <%= image_tag pet.avatar.url(:medium), class: "right icon-img" %>
           </div>
-
           <div class="collapsible-body">
             <p class="pet-detail">
               <%= pet.species %>
@@ -43,7 +43,7 @@
             <p class="pet-detail">
               <%= pet.description %>
             </p>
-            <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal1">Review</a>
+            <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal<%= pet.id %>">Review</a>
           </div>
         </li>
       <% end %>
@@ -63,7 +63,7 @@
 
             <div class="collection">
               <% @user.confirmed_events.each do |event| %>
-                <%= link_to "#{event.date.strftime("%D")} -- #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event), class: "collection-item" %>
+                <%= link_to "#{event.date.strftime("%D")} | #{event.start_time.strftime('%I:%M %p')} - #{event.end_time.strftime('%I:%M %p')}", user_event_path(@user, event), class: "collection-item" %>
               <% end %>
             </div>
           <% end %>
@@ -75,7 +75,7 @@
 
               <div class="collection">
               <% @user.requested_events.each do |event| %>
-                <%= link_to "#{event.date.strftime("%D")} -- #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event), class: "collection-item" %>
+                <%= link_to "#{event.date.strftime("%D")} | #{event.start_time.strftime('%I:%M %p')} - #{event.end_time.strftime('%I:%M %p')}", user_event_path(@user, event), class: "collection-item" %>
               <% end %>
             </div>
           <% end %>
@@ -86,11 +86,14 @@
             <% if @user.try(:offered_events) && @user.offered_events.count > 0 %>
               <h5>offered:</h5>
 
-              <div class="collection">
+              <ul class="collection">
                 <% @user.offered_events.each do |event| %>
-                  <%= link_to "#{event.date.strftime("%D")} -- #{event.start_time.strftime('%I:%M %p')}", user_event_path(@user, event), class: "collection-item" %>
+                <li class="collection-item">
+                  <span><%= "#{event.date.strftime("%D")} | #{event.start_time.strftime('%I:%M %p')} - #{event.end_time.strftime('%I:%M %p')}" %></span>
+                    <%= link_to "Delete Event", user_event_path(@user, event), :method=> :delete, class: "right" %>
+                </li>
                 <% end %>
-              </div>
+              </ul>
             <% end %>
           </div>
         </div>
@@ -118,9 +121,9 @@
             </div>
 
             <div class="pending-pairings">
-              <h5>pending:</h5>
 
               <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+              <h5>pending:</h5>
                 <div class="collection">
                   <% @user.pending_organizations.each do |org| %>
                     <a href="/organizations/<%= org.id %>" class="collection-item"> <%= org.name %> </a>
