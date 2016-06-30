@@ -1,7 +1,5 @@
 $(function() {
 
-  SI.Files.stylizeAll();
-
   $(".pet-list").on("click", ".pet-header", function(event) {
     event.preventDefault();
   });
