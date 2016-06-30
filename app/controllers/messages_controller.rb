@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
     if current_user.organization_user?
       @pair = @pairing.pet_owner
     else
-      @pair = @pairing.organization.representative
+      @pair = @pairing.organization.try(:representative)
     end
 
     @message = @pairing.messages.new(message_params)
@@ -35,7 +35,9 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        UserMailer.new_message_email(@pair, current_user).deliver_later
+        if @pair != nil
+          UserMailer.new_message_email(@pair, current_user).deliver_later
+        end
 
         format.html { redirect_to pairing_messages_path(@pairing), notice: 'Message was successfully created.' }
         format.json { render :index, status: :created, location: pairing_messages_path(@pairing) }

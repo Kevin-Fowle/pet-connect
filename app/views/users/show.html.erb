@@ -118,9 +118,9 @@
             </div>
 
             <div class="pending-pairings">
-              <h5>pending:</h5>
-
               <% if @user.try(:pairings).length > 0 && @user.pending_organizations.length > 0 %>
+                <h5>pending:</h5>
+                
                 <div class="collection">
                   <% @user.pending_organizations.each do |org| %>
                     <a href="/organizations/<%= org.id %>" class="collection-item"> <%= org.name %> </a>
