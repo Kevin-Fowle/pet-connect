@@ -5,7 +5,7 @@
 </div>
 
 <!-- Account for non-pairing? -->
-<% if current_user.organization_user? && current_user.paired?(@user) %>
+<% if current_user.try(:organization_user?) && current_user.paired?(@user) %>
   <% pairing = current_user.find_pairing(@user) %>
   <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
 <% end %>

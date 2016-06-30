@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
     @pet_owner = pet_owner
     @org_user = org_user
     # @url  = 'http://example.com/login'
-    mail(to: [@user.email, @org_user.email], subject: 'Pet connect scheduled')
+    mail(to: [@pet_owner.email, @org_user.email], subject: 'Pet connect scheduled')
   end
 
 
