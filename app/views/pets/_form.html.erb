@@ -1,31 +1,34 @@
-<%= form_for :pet, url: {action: "create"}, html: {class: "form"} do |f| %>
+<div class="section">
 
-  <p>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :species %>
-    <%= f.text_field :species, placeholder:"Cat, Dog, Reptile" %>
-  </p>
-  <p>
-    <%= f.label :breed %>
-    <%= f.text_field :breed, placeholder:"Golden Retriever, Siamese, Ball Python" %>
-  </p>
-  <p>
-    <%= f.label :weight %>
-    <%= f.text_field :weight, placeholder:"In pounds" %>
-  </p>
-  <p>
-    <%= f.label :description %>
-    <%= f.text_area :description, placeholder: "Tell us a little about your best friend", id: "textarea1", class: "materialize-textarea" %>
-  </p>
-  <p>
-  <%= f.label :avatar %>
-  <%= f.file_field :avatar %>
-</p>
-  <p>
-    <%= f.submit :register %>
-  </p>
+  <%= form_for :pet, url: {action: "create"}, html: {class: "form"} do |f| %>
 
-<% end %>
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :species %>
+      <%= f.text_field :species, placeholder:"Cat, Dog, Reptile" %>
+    </p>
+    <p>
+      <%= f.label :breed %>
+      <%= f.text_field :breed, placeholder:"Golden Retriever, Siamese, Ball Python" %>
+    </p>
+    <p>
+      <%= f.label :weight %>
+      <%= f.text_field :weight, placeholder:"In pounds" %>
+    </p>
+    <p>
+      <%= f.label :description %>
+      <%= f.text_area :description, placeholder: "Tell us a little about your best friend", id: "textarea1", class: "materialize-textarea" %>
+    </p>
+    <p>
+      <%= f.label "Photo" %>
+      <%= f.file_field :avatar %>
+    </p>
+    <p>
+      <%= f.submit :register, :class => "waves-effect waves-light btn modal-trigger" %>
+    </p>
+
+  <% end %>
+</div>

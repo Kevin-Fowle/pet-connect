@@ -83,6 +83,9 @@ h3 {
   font-weight: 200;
   margin-left: 2%;
 }
+input[type="file"] {
+  font-size: 1rem;
+}
 
 
 // Override Materialize
@@ -154,10 +157,19 @@ p.pet-detail {
   margin-top: 0;
 }
 #event_start_time_4i, #event_end_time_4i,  {
-  width: 100px;
+  width: 90px;
 }
 #event_start_time_5i, #event_end_time_5i {
+  width: 55px;
+}
+#event_date_1i {
   width: 75px;
+}
+#event_date_2i {
+  width: 130px;
+}
+#event_date_3i {
+  width: 55px;
 }
 
 
@@ -175,6 +187,21 @@ p.pet-detail {
   }
   .rating {
     height: 25px;
+  }
+  #event_start_time_4i, #event_end_time_4i,  {
+    width: 110px;
+  }
+  #event_start_time_5i, #event_end_time_5i {
+    width: 70px;
+  }
+  #event_date_1i {
+    width: 95px;
+  }
+  #event_date_2i {
+    width: 160px;
+  }
+  #event_date_3i {
+    width: 65px;
   }
 }
 @media only screen and (min-width: 480px) {
