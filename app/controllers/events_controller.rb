@@ -58,13 +58,13 @@ class EventsController < ApplicationController
         if @event.update(event_params)
           if current_user.pet_owner?
 
-            UserMailer.scheduled_email(@user, @event.organization.representative).deliver_now
+            UserMailer.scheduled_email(@user, @event.organization.representative).deliver_later
 
             format.html { redirect_to @user, notice: 'Event was successfully scheduled.' }
             format.json { render :index, status: :ok, location: @events }
           else
 
-            UserMailer.requested_email(@user, @current_user).deliver_now
+            UserMailer.requested_email(@user, @current_user).deliver_later
 
             format.html { redirect_to current_user.organization, notice: 'Event was successfully requested.' }
             format.json { render :show, status: :ok, location: @user }

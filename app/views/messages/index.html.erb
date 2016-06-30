@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th>subject</th>
-        <th>body</th>
+        <!-- <th>body</th> -->
         <th>sent</th>
         <th colspan="3"></th>
       </tr>
@@ -18,7 +18,7 @@
       <% @messages.each do |message| %>
         <tr>
           <td><%= message.subject %></td>
-          <td><%= message.body %></td>
+          <!-- <td><%= message.body %></td> -->
           <td><%= message.created_at.strftime("%m/%d/%Y, %I:%M%p") %></td>
           <td><%= link_to 'Show', pairing_message_path(@pairing, message) %></td>
         </tr>

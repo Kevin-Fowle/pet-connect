@@ -24,11 +24,19 @@ class MessagesController < ApplicationController
   def create
     parent = User.find_by(id: current_user.id).behalf_of
 
+    if current_user.organization_user?
+      @pair = @pairing.pet_owner
+    else
+      @pair = @pairing.organization.representative
+    end
+
     @message = @pairing.messages.new(message_params)
     @message.messageable = parent
 
     respond_to do |format|
       if @message.save
+        UserMailer.new_message_email(@pair, current_user).deliver_later
+
         format.html { redirect_to pairing_messages_path(@pairing), notice: 'Message was successfully created.' }
         format.json { render :index, status: :created, location: pairing_messages_path(@pairing) }
       else
