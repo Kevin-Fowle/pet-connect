@@ -25,7 +25,7 @@ class UserMailer < ApplicationMailer
     @to_user = to_user
     @from_user = from_user
     @message = @from_user.find_pairing(@to_user).messages.last
-    mail(to: @to_user, subject: 'New message from #{@from_user.behalf_of.name}')
+    mail(to: @to_user.email, subject: 'New message from #{@from_user.behalf_of.name}')
   end
 
 end
