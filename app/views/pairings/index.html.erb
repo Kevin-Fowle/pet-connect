@@ -16,10 +16,9 @@
           <% @pairings.each do |pairing| %>
             <% if !!pairing.messages && pairing.messages.length > 0 %>
               <tr>
-                <td><%= pairing.pair(current_user).name %></td>
+                <td><%= link_to "#{pairing.pair(current_user).name}", pairing_messages_path(pairing) %></td>
                 <td><%= pairing.messages.last.created_at %></td>
                 <td><%= pairing.messages.count %></td>
-                <td><%= link_to 'Show', pairing_messages_path(pairing) %></td>
               </tr>
             <% end %>
           <% end %>

@@ -1,6 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h2><%= @pairing.pair(current_user).name.downcase %> conversation</h1>
+<% if @pairing.pair(current_user).try(:representative) == nil %>
+  <p>This hospital does not yet have a PETconnect presence. Contact them at your desire (hospital info on their profile page).</p>
+<% end %>
+
+<% @pair = @pairing.pair(current_user) %>
+
+<h2>conversation: <%= link_to "#{@pair.name.downcase}", @pair %></h1>
 <br>
 <% if !!@messages && @messages.length > 0 %>
   <h3>messages</h3>
