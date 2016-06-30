@@ -47,9 +47,9 @@ class EventsController < ApplicationController
 
   def update
     @current_user = current_user
-
-    p params['event']['accepted']
+    # @organization = Organization.try(:find(params["event"]["organization_id"]))
     if logged_in?
+
       if params['event']['accepted']
           @event.accepted = true
           @event.save
