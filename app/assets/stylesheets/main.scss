@@ -1,7 +1,15 @@
+h1, h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 2.2rem;
+}
+
 .container {
   height: 100%;
   width: 100%;
   margin-bottom: 75px;
+  color: #3B8183;
 }
 .header {
   color: white;
@@ -12,6 +20,12 @@
   background: -ms-linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* ie10+ */
   background: linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#3CA2A2',GradientType=1 ); /* ie6-9 */
+}
+.header:after {
+  content: "";
+  height: 8px;
+  width: 100%;
+  background: url("color-bar.png") no-repeat;
 }
 .header a {
   color: white;
@@ -24,17 +38,27 @@
   display: table;
   clear: both;
 }
-
+.action-buttons {
+  width: 100%;
+  margin-bottom: 3px;
+  line-height: 28px;
+  height: inherit;
+  padding: 10px;
+  background-color: #F5634A;
+}
+.action-buttons:hover {
+  background-color: #f8816d;
+}
 .splash {
-  background: url("therapydog2.jpg") no-repeat;
   min-width: 100%;
-  min-height: 100%;
-  -webkit-background-size: contain;
-  -moz-background-size: contain;
-  -o-background-size: contain;
-  background-size: contain;
+  height: auto;
+  max-height: calc(70vh - 85px);
+  min-height: 320px;
+  background: url("therapydog2.jpg") no-repeat;
+  background-size: cover;
 }
 .feature-text {
+  display: none;
   color: white;
   font-size: 1.2em;
   font-weight: 200;
@@ -90,34 +114,65 @@ form label {
 .side-nav {
   width: 150px;
 }
+.pet-header {
+  font-size: 2rem;
+  color: #3B8183;
+}
+p.pet-detail {
+  padding: .5rem 1rem;
+}
+.rating {
+  position: relative;
+  height: 20px;
+  margin-top: 8px;
+}
 .rating-paw {
-  width: 25px;
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   margin-right: 3px;
 }
 .org-address {
   font-size: .6em;
 }
+.icon-img {
+  height: 75px;
+}
+.review-no {
+  font-size: 1.2rem;
+  position: relative;
+  bottom: 10px;
+  left: 5px;
+  color: #707070;
+}
+.pet-list .collapsible {
+  margin-top: 0;
+}
 
-// colorful bottom nav border
-.colorful {
-  height: 8px;
-  line-height: 0;
-}
-.colorful img {
-  display: block;
-  max-width: 100%;
-  height: 8px;
-}
 
 @media only screen and (min-width: 960px) {
   .container {
     width: 70%;
-
   }
 }
-.rating right > span.pet-rating{
-
-  text-align: right
-
-
+@media only screen and (min-width: 600px) {
+  .splash {
+    min-height: 500px;
+  }
+  .container {
+    width: 90%;
+  }
+  .rating {
+    height: 25px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  .feature-text {
+    display: block;
+  }
 }

@@ -2,7 +2,7 @@
   <% @organizations.each do |organization| %>
     <li class="collection-item">
       <h5><%= organization.name %></h5>
-      <span><%= organization.full_address %></span>
+      <span class="org-address"><%= organization.full_address %></span>
     </li>
   <% end %>
 </ul>
