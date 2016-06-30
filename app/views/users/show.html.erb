@@ -43,7 +43,9 @@
             <p class="pet-detail">
               <%= pet.description %>
             </p>
-            <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal<%= pet.id %>">Review</a>
+            <% if current_user.paired?(@user) %>
+            <a id="<%= pet.id %>" class="pet-review-button waves-effect waves-light btn modal-trigger" href="#modal-pet<%= pet.id %>">Review</a>
+            <% end %>
           </div>
         </li>
       <% end %>

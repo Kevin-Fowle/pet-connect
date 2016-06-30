@@ -1,5 +1,5 @@
 
-<div id="modal<%= @pet.id %>" class="modal">
+<div id="modal-pet<%= @pet.id %>" class="modal">
   <%= form_tag(user_pet_ratings_path(@user, @pet), method: "post", id: "rating-form") do %>
   <div class="modal-content">
     <% if @organization %>
