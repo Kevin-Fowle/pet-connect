@@ -35,8 +35,7 @@
     </p>
   <% end %>
 
-  <%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
-  <%= link_to 'Back', user_events_path(@user) %>
+  
 <% elsif logged_in? && current_user.organization_user? && @event.organization_id == nil && current_user.paired?(@user) %>
   <%= form_for [@user, @event], method: :patch, html: { class: "request_timeslot"} do |f| %>
     <%= f.hidden_field :organization_id, value: current_user.behalf_of.id %>
@@ -50,3 +49,9 @@
     </div>
   <% end %>
 <% end %>
+
+<% if authorized? %>
+  <%= link_to 'Edit', edit_user_event_path(@user, @event) %> |
+<% end %>
+
+<%= link_to 'Back', current_user.behalf_of %>
