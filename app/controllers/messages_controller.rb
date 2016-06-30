@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
     if current_user.organization_user?
       @pair = @pairing.pet_owner
     else
-      @pair = @pairing.organization
+      @pair = @pairing.organization.representative
     end
 
     @message = @pairing.messages.new(message_params)
