@@ -1,2 +1,5 @@
 SENDGRID_USERNAME = "app52674241@heroku.com"
 SENDGRID_PASSWORD = "ugsylht21366"
+
+OUTLOOK_USERNAME = "pet.connect@outlook.com"
+OUTLOOK_PASSWORD = "MarleyandMe"

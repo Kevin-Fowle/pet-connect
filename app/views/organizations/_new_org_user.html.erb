@@ -1,7 +1,7 @@
 <%= form_for :user, url: {action: "create"}, html: {id: "owner-form", class: "mar-top-5"} do |f| %>
-  <% if @organization %>
-    <input type="hidden" name="organization_id" value="<%= @organization.id %>">
-  <% end %>
+
+    <input type="hidden" id='org-hidden' name="name" value="<%= @organization.id %>">
+
   <p>
     <%= f.label :first_name %>
     <%= f.text_field :first_name %>

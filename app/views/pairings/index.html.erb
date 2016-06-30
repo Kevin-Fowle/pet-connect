@@ -1,7 +1,6 @@
 <div class="container">
-  <h1>inbox</h1>
-  
-  <% if !!current_user.messages && current_user.messages.count > 0 %>
+<h1>inbox</h1>
+  <% if !!@pairings and @pairings.try(:length) > 0 %>
     <table>
       <thead>
         <tr>

@@ -11,6 +11,7 @@
     <!-- Organization photo? -->
   </div>
 
+
   <!-- Account for non-pairing? -->
   <% if current_user.pet_owner? && current_user.paired?(@organization) %>
     <% pairing = current_user.find_pairing(@organization) %>
@@ -19,7 +20,7 @@
 
   <br>
   <br>
-  
+
   <% if logged_in? && org_admin? %>
 
 
@@ -42,11 +43,17 @@
         <% if @organization.try(:pending_pairings).try(:length) > 0 %>
           <h4>pending:</h4>
           <% @organization.pending_pairings.each do |pending_pairing| %>
-            <li> <a href="/users/<%= pending_pairing.pet_owner.id %> "> <%= pending_pairing.pet_owner.full_name %> </a>
-            <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button></li>
-            <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
-              <%= submit_tag 'Reject Owner' %>
-            <% end %>
+            <li>
+              <a href="/users/<%= pending_pairing.pet_owner.id %> "> <%= pending_pairing.pet_owner.full_name %></a>
+            </li>
+            <li>
+              <button id='approve_pet_owner' onclick="location.href='/organizations/<%= @organization.id %>/pairings/<%= pending_pairing.id %>/edit';">Approve Owner</button>
+            </li>
+            <li>
+              <%= form_tag organization_pairing_path(@organization, pending_pairing), method: :delete do %>
+                <%= submit_tag 'Reject Owner' %>
+              <% end %>
+            </li>
           <% end %>
         <% end %>
       </ul>

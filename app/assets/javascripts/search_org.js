@@ -2,9 +2,11 @@ $(document).ready(function(event){
 
   $('#search-bar').on("submit", function(event){
     event.preventDefault();
+    // console.log($('#name').val())
+    $("#org-hidden").val($('#name').val())
     $("#owner-form").show();
-    $(this).hide();
-    $('#search_results').hide();
+    $(this).remove();
+    $('#search_results').remove();
 
   });
 
