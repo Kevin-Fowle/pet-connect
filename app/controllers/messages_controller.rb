@@ -35,7 +35,7 @@ class MessagesController < ApplicationController
 
     respond_to do |format|
       if @message.save
-        UserMailer.new_message_email(@pair, current_user).deliver_now
+        UserMailer.new_message_email(@pair, current_user).deliver_later
 
         format.html { redirect_to pairing_messages_path(@pairing), notice: 'Message was successfully created.' }
         format.json { render :index, status: :created, location: pairing_messages_path(@pairing) }

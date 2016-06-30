@@ -19,7 +19,7 @@ class UsersController <  ApplicationController
         redirect_to organization_path(@organization)
 
         # Tell the UserMailer to send a welcome email after save
-        UserMailer.welcome_email(@user).deliver_now
+        UserMailer.welcome_email(@user).deliver_later
 
         format.html { redirect_to(organization_path(@organization), notice: 'Organization user successfully created.') }
         format.json { render json: @organization, status: :created, location: @organization }
@@ -28,7 +28,7 @@ class UsersController <  ApplicationController
         session[:user_id] = @user.id
 
         # Tell the UserMailer to send a welcome email after save
-        UserMailer.welcome_email(@user).deliver_now
+        UserMailer.welcome_email(@user).deliver_later
 
         format.html { redirect_to(new_user_pet_path(@user), notice: 'User was successfully created.') }
         format.json { render json: @user, status: :created, location: @user }
