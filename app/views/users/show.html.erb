@@ -5,11 +5,15 @@
 </div>
 </div>
 
-<!-- Account for non-pairing? -->
-<% if current_user.try(:organization_user?) && current_user.paired?(@user) %>
-  <% pairing = current_user.find_pairing(@user) %>
-  <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
-<% end %>
+<div class="row section">
+  <div class="user details col s10 push-s1 m12">
+    <!-- Account for non-pairing? -->
+    <% if current_user.try(:organization_user?) && current_user.paired?(@user) %>
+      <% pairing = current_user.find_pairing(@user) %>
+      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
+    <% end %>
+  </div>
+</div>
 
 <div class="row">
   <div class="pet-list col s10 push-s1 m8">
@@ -54,10 +58,12 @@
     <% if logged_in? && authorized?%>
 
 
-      <div class="events">
+      <div class="events section">
+        <div class="section">
         <% if @user.try(:events) && @user.events.count > 0 %>
           <h4>Events</h4>
         <% end %>
+      </div>
 
         <div class="user-confirmed-events scheduled-events">
           <% if @user.try(:confirmed_events) && @user.confirmed_events.count > 0 %>

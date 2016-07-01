@@ -2,13 +2,12 @@
   <div class="col s10 push-s1 m12">
     <h1>inbox</h1>
       <% if !!@pairings and @pairings.try(:length) > 0 %>
-        <table class="collection collapsible" data-collapsible="accordion">
+        <table class="striped">
           <thead>
             <tr>
               <th>conversation</th>
               <th>last message</th>
               <th>messages</th>
-              <th colspan="3"></th>
             </tr>
           </thead>
 
@@ -16,7 +15,7 @@
             <tbody>
               <% @pairings.each do |pairing| %>
                 <% if !!pairing.messages && pairing.messages.length > 0 %>
-                  <tr class="collection-item">
+                  <tr>
                     <td><%= link_to "#{pairing.pair(current_user).name}", pairing_messages_path(pairing) %></td>
                     <td><%= pairing.messages.last.created_at.strftime("%b %e, %l:%M %p") %></td>
                     <td><%= pairing.messages.count %></td>

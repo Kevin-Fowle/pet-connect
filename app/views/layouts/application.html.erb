@@ -32,7 +32,7 @@
         <ul class="side-nav right" id="mobile-demo">
           <li><a class="index_login" href="/">Home</a></li>
           <% if logged_in? %>
-            <li><a class='index_login' href="/users/<%= current_user.id %>">My Account</a></li>
+            <li><%= link_to "My Account", @account %></li>
             <li><%= link_to 'Inbox', inbox_path, class: "organization-inbox" %></li>
             <li><a class='index_login' href="/logout">Logout</a></li>
           <% else %>
