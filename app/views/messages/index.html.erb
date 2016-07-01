@@ -1,40 +1,43 @@
-<p id="notice"><%= notice %></p>
+<div class="row section">
+  <div class="col s10 push-s1 m12">
+    <p id="notice"><%= notice %></p>
 
-<% if @pairing.pair(current_user).try(:representative) == nil %>
-  <p>This hospital does not yet have a PETconnect presence. Contact them at your desire (hospital info on their profile page).</p>
-<% end %>
+    <% if @pairing.pair(current_user).try(:representative) == nil %>
+      <p>This hospital does not yet have a PETconnect presence. Contact them at your desire (hospital info on their profile page).</p>
+    <% end %>
 
-<% @pair = @pairing.pair(current_user) %>
+    <% @pair = @pairing.pair(current_user) %>
 
-<h2>conversation: <%= link_to "#{@pair.name.downcase}", @pair %></h1>
-<br>
-<% if !!@messages && @messages.length > 0 %>
-  <h3>messages</h3>
-  <table>
-    <thead>
-      <tr>
-        <th>subject</th>
-        <!-- <th>body</th> -->
-        <th>sent</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+    <h2>conversation: <%= link_to "#{@pair.name.downcase}", @pair %></h1>
 
-    <tbody>
-      <% @messages.each do |message| %>
-        <tr>
-          <td><%= message.subject %></td>
-          <!-- <td><%= message.body %></td> -->
-          <td><%= message.created_at.strftime("%m/%d/%Y, %I:%M%p") %></td>
-          <td><%= link_to 'Show', pairing_message_path(@pairing, message) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>You have no messages with @pairing.pair(current_user)</p>
-<% end %>
+    <% if !!@messages && @messages.length > 0 %>
+      <h3>messages</h3>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>subject</th>
+            <!-- <th>body</th> -->
+            <th>sent</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<br>
+        <tbody>
+          <% @messages.each do |message| %>
+            <tr>
+              <td><%= message.subject %></td>
+              <!-- <td><%= message.body %></td> -->
+              <td><%= message.created_at.strftime("%m/%d/%Y, %I:%M%p") %></td>
+              <td><%= link_to 'Show', pairing_message_path(@pairing, message) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>You have no messages with @pairing.pair(current_user)</p>
+    <% end %>
 
-<%= link_to 'new message', new_pairing_message_path(@pairing) %>
+
+    <%= link_to 'new message', new_pairing_message_path(@pairing) %>
+  </div>
+</div>

@@ -31,6 +31,7 @@ $(function() {
 
     request.done(function(response){
       console.log(response);
+      location.reload();
     });
 
   });

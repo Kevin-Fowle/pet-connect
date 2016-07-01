@@ -1,27 +1,24 @@
-<div class="section row">
-  <div class="col s10 push-s1 m12">
-  <div class="organization-info">
-    <h1><%= @organization.name %></h1>
-    <br>
-    <br>
-    <br>
-    <p><b>hospital info:</b></p>
-    <p><%= @organization.street_address %></p>
-    <p><%= @organization.city %>, <%= @organization.zip_code %> <%= @organization.state %></p>
-    <p><%= @organization.display_phone %></p>
-    <!-- Organization photo? -->
+<div class="row org-splash">
+  <div class="col s10 push-s1">
+    <div class="organization-info section">
+      <h1><%= @organization.name %></h1>
+      <p><strong>hospital info:</strong></p>
+      <p><%= @organization.street_address %></p>
+      <p><%= @organization.city %>, <%= @organization.zip_code %> <%= @organization.state %></p>
+      <p><%= @organization.display_phone %></p>
+      <!-- Account for non-pairing? -->
+      <% if current_user.pet_owner? && current_user.paired?(@organization) %>
+      <% pairing = current_user.find_pairing(@organization) %>
+      <%= link_to "Message hospital", new_pairing_message_path(pairing) %>
+      <% end %>
+    </div>
   </div>
+</div>
 
 
-  <!-- Account for non-pairing? -->
-  <% if current_user.pet_owner? && current_user.paired?(@organization) %>
-    <% pairing = current_user.find_pairing(@organization) %>
-    <%= link_to "Message hospital", new_pairing_message_path(pairing) %>
-  <% end %>
 
-  <br>
-  <br>
-
+<div class="row">
+  <div class="col s10 push-s1 m12">
   <% if logged_in? && org_admin? %>
 
 

@@ -4,6 +4,9 @@ h1, h2 {
 h3 {
   font-size: 2.2rem;
 }
+input {
+  font-size: 1.5rem;
+}
 
 .container {
   height: 100%;
@@ -12,6 +15,7 @@ h3 {
   color: #3B8183;
 }
 .header {
+  position: relative;
   color: white;
   background: -moz-linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* ff3.6+ */
   background: -webkit-gradient(linear, left bottom, right top, color-stop(0%, rgba(60,162,162,1)), color-stop(100%, rgba(0,128,128,1))); /* safari4+,chrome */
@@ -20,12 +24,6 @@ h3 {
   background: -ms-linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* ie10+ */
   background: linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#3CA2A2',GradientType=1 ); /* ie6-9 */
-}
-.header:after {
-  content: "";
-  height: 8px;
-  width: 100%;
-  background: url("color-bar.png") no-repeat;
 }
 .header a {
   color: white;
@@ -49,13 +47,38 @@ h3 {
 .action-buttons:hover {
   background-color: #f8816d;
 }
-.splash {
+.splash, .org-splash {
   min-width: 100%;
   height: auto;
   max-height: calc(70vh - 85px);
   min-height: 320px;
   background: url("therapydog2.jpg") no-repeat;
   background-size: cover;
+  background-position: center;
+}
+.color-bar {
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.org-splash {
+  min-width: 100%;
+  height: auto;
+  max-height: calc(70vh - 85px);
+  min-height: 320px;
+  background: url("hospital.jpg") no-repeat;
+  background-size: cover;
+}
+.org-splash.row {
+  margin: 0;
+}
+.organization-info {
+  background-color: rgba(255, 255, 255, 0.9);
+  margin-top: 10%;
+  padding-left: 3%;
 }
 .feature-text {
   display: none;
@@ -86,6 +109,18 @@ h3 {
 input[type="file"] {
   font-size: 1rem;
 }
+.collection-item td {
+  padding: 10px 20px;
+}
+.message-details {
+  font-size: 1rem;
+}
+.text-area-ht {
+  height: 300px;
+}
+.waves-button-input {
+  outline: none;
+}
 
 
 // Override Materialize
@@ -104,6 +139,9 @@ form label {
   background: -ms-linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* ie10+ */
   background: linear-gradient(45deg, rgba(60,162,162,1) 0%, rgba(0,128,128,1) 100%); /* w3c */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#008080', endColorstr='#3CA2A2',GradientType=1 ); /* ie6-9 */
+}
+.copy {
+  line-height: 1.8rem;
 }
 .collapsible-header {
   padding: 15px;
@@ -179,7 +217,7 @@ p.pet-detail {
   }
 }
 @media only screen and (min-width: 600px) {
-  .splash {
+  .splash, .org-splash {
     min-height: 500px;
   }
   .container {
@@ -207,5 +245,8 @@ p.pet-detail {
 @media only screen and (min-width: 480px) {
   .feature-text {
     display: block;
+  }
+  .header {
+    height: 70px;
   }
 }

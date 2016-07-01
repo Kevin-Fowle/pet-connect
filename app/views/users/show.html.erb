@@ -90,9 +90,10 @@
 
               <ul class="collection">
                 <% @user.offered_events.each do |event| %>
-                <li class="collection-item">
-                  <span><%= "#{event.date.strftime("%D")} | #{event.start_time.strftime('%I:%M %p')} - #{event.end_time.strftime('%I:%M %p')}" %></span>
-                    <%= link_to "Delete Event", user_event_path(@user, event), :method=> :delete, class: "right" %>
+                <li class="valign collection-item clear">
+                    <%= "#{event.date.strftime("%D")} | #{event.start_time.strftime('%I:%M %p')} - #{event.end_time.strftime('%I:%M %p')}" %>
+                    <%= link_to '<i class="material-icons">delete</i>'.html_safe, user_event_path(@user, event), :method=> :delete, class: "right btn-floating btn-small waves-effect waves-light teal" %>
+
                 </li>
                 <% end %>
               </ul>
