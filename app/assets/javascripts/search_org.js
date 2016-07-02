@@ -31,6 +31,7 @@ $(document).ready(function(event){
        searchRequest.done(function(response) {
          console.log(response);
         $("#search_results").html(response);
+        $("#org-reg-header").html("Please Provide us with Some Details");
       });
      }
   });

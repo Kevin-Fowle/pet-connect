@@ -24,6 +24,39 @@ hospitals_json.each do |hospital|
     phone: hospital['phone_number'])
 end
 
+User.create!(
+  first_name: "Maurice",
+  last_name: "Rabb",
+  street_address: "123 Sesame St.",
+  city: "Chicago",
+  zip_code: "60001",
+  state: "IL",
+  password: "momo",
+  email: "momo@momo.org"
+)
+
+User.create!(
+  first_name: "Matt",
+  last_name: "Baker",
+  street_address: "321 ",
+  city: "Chicago",
+  zip_code: "60002",
+  state: "IL",
+  password: "unfuck",
+  email: "matt@baker.io",
+  organization_id: 1
+)
+
+Pet.create!(
+name: "Hey Jay Query",
+species: "Rabbit",
+breed: "American Sable",
+weight: 3,
+description: "I have a pet rabbit. Her name is Hey Jay Query. She is very cute. She plays with me. She hops when she is happy. We play running race. She runs very fast and wins. She loves to eat carrots. I keep her in a big and beautiful basket. Every morning when I get up, I run to the basket to greet my bunny. When I call her she shakes her ears and looks at me with her beautiful eyes. I love my pet rabbit very much.",
+user_id: User.find_by(email: "momo@momo.org").id,
+avatar: File.new("app/assets/images/momos-bunny.jpg")
+)
+
 
 
 

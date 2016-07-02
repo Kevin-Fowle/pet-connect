@@ -1,26 +1,28 @@
-<p id="notice"><%= notice %></p>
+<div class="row section">
+  <div class="col s10 push-s1 m12">
+    <p id="notice"><%= notice %></p>
 
-<h3>
-  <%= @message.subject %>
-</h3>
+    <h3><%= @message.subject %></h3>
 
-<br>
-  
-<p>
-  <%= @message.body %>
-</p>
+    <div class="section">
+      <div class="card-panel ">
+        <span><%= @message.body %></span>
+      </div>
+    </div>
 
-<br>
 
-<div class="message-details">
-  <p>
-    <%= @message.created_at.strftime("%m/%d/%Y, %I:%M%p") %>
-  </p>
-  <p>by <%= @message.author.name %></p>
+    <div class="message-details">
+      <div class="chip">
+        <%= @message.created_at.strftime("%m/%d/%Y, %I:%M%p") %>
+      </div>
+      <div class="chip">
+        by <%= @message.author.name %>
+      </div>
+    </div>
+
+
+    <% if current_user.behalf_of == @message.author %>
+      <%= link_to 'Back', pairing_messages_path(@pairing) %>
+    <% end %>
+  </div>
 </div>
-
-<br>
-
-<% if current_user.behalf_of == @message.author %>
-  <%= link_to 'Back', pairing_messages_path(@pairing) %>
-<% end %>
