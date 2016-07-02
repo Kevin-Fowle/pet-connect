@@ -5,15 +5,15 @@
 </div>
 </div>
 
-<div class="row section">
-  <div class="user details col s10 push-s1 m12">
     <!-- Account for non-pairing? -->
     <% if current_user.try(:organization_user?) && current_user.paired?(@user) %>
-      <% pairing = current_user.find_pairing(@user) %>
-      <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
+      <div class="row">
+        <div class="user details col s10 push-s1 m12">
+          <% pairing = current_user.find_pairing(@user) %>
+          <%= link_to "Message #{@user.name}", new_pairing_message_path(pairing) %>
+        </div>
+      </div>
     <% end %>
-  </div>
-</div>
 
 <div class="row">
   <div class="pet-list col s10 push-s1 m8">

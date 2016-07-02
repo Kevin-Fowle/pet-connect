@@ -72,7 +72,6 @@
                 <th>Day</th>
                 <th>Time</th>
                 <th>Pet owner</th>
-                <th colspan="3"></th>
               </tr>
             </thead>
 
@@ -101,7 +100,7 @@
                 <th>Day</th>
                 <th>Time</th>
                 <th>Pet owner</th>
-                <th colspan="3"></th>
+                <th colspan="1"></th>
               </tr>
             </thead>
 
@@ -129,13 +128,13 @@
       <div class="approved-events">
         <% if @organization.try(:approved_events).try(:length) > 0 %>
           <h5>from approved pet-owners:</h5>
-          <table>
+          <table class="striped">
             <thead>
               <tr>
                 <th>Day</th>
                 <th>Time available</th>
                 <th>Pet owner</th>
-                <th colspan="3"></th>
+                <th colspan="1"></th>
               </tr>
             </thead>
 
@@ -162,7 +161,7 @@
                 <th>Day</th>
                 <th>Time available</th>
                 <th>Pet owner</th>
-                <th colspan="3"></th>
+                <th colspan="1"></th>
               </tr>
             </thead>
 
